@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 5cd39bbc45c1df042af56a3cb21067db
+timeCreated: 1494528780
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Skater Girls Rock
+  fontNames:
+  - Skater Girls Rock
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
