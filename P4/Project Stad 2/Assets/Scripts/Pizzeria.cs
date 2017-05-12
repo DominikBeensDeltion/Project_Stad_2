@@ -10,7 +10,7 @@ public class Pizzeria : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
-        findHouses();
+        FindHouses();
         ChooseHouse();
 
     }
@@ -31,7 +31,7 @@ public class Pizzeria : MonoBehaviour {
         
     }
 
-    void findHouses()
+    void FindHouses()
     {
         GameObject[] homes = GameObject.FindGameObjectsWithTag("House");
         foreach(GameObject g in homes)
