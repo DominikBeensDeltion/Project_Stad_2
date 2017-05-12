@@ -25,6 +25,7 @@ public class Pizzeria : MonoBehaviour {
         int i = Random.Range(0, houses.Count);
         targetHouse = houses[i];
         targetHouse.GetComponent<House>().isTarget = true;
+        targetHouse.GetComponent<House>().CreateMarker();
         ui.TempHouseText(targetHouse);
         gm.timerOn = true;
         

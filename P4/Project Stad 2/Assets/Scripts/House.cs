@@ -6,6 +6,10 @@ public class House : MonoBehaviour {
     public bool isTarget;
     public UIManager ui;
     public GameManager gm;
+    public GameObject markOne;
+    public GameObject markTwo;
+    public GameObject cloneOne;
+    public GameObject cloneTwo;
 	// Use this for initialization
 	void Start () {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
@@ -40,7 +44,24 @@ public class House : MonoBehaviour {
             if (isTarget)
             {
                 isTarget = false;
+                DeleteMarker();
             }
         }
+    }
+
+    public void CreateMarker()
+    {
+        Vector3 vec =  new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        vec.y += 3;
+        cloneOne = Instantiate(markOne, vec, Quaternion.identity);
+        cloneTwo = Instantiate(markTwo, vec, Quaternion.identity);
+    }
+
+    public void DeleteMarker()
+    {
+        Destroy(cloneOne);
+        Destroy(cloneTwo);
+        cloneOne = null;
+        cloneTwo = null;
     }
 }
