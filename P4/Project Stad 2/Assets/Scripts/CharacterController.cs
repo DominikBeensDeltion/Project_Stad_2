@@ -27,9 +27,9 @@ public class CharacterController : MonoBehaviour {
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
 
-        if (Input.GetButtonDown("a"))
+        if (Input.GetButton("a"))
         {
-            transform.Rotate(0, -90, 0);
+            transform.Rotate(transform.up *- 300 * Time.deltaTime);
         }
 
         if (Input.GetButton("s"))
@@ -37,9 +37,9 @@ public class CharacterController : MonoBehaviour {
             transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
         }
 
-        if (Input.GetButtonDown("d"))
+        if (Input.GetButton("d"))
         {
-            transform.Rotate(0, +90, 0);
+            transform.Rotate(transform.up * 300 * Time.deltaTime);
         }
     }
 }
