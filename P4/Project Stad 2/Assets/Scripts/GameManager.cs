@@ -21,5 +21,10 @@ public class GameManager : MonoBehaviour
         {
             timeToCountDown -= Time.deltaTime;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && uim.canPause)
+        {
+            StartCoroutine(uim.PauseGame());
+        }
     }
 }

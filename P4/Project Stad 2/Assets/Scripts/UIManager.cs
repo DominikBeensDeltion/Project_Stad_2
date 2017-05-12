@@ -11,6 +11,11 @@ public class UIManager : MonoBehaviour
     [Header("Timer")]
     public Text timerText;
 
+    [Header("Pause Menu")]
+    public bool gamePaused;
+    public bool canPause = true;
+    public Image fadeBackground;
+
     private void Start()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
@@ -19,5 +24,39 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         timerText.text = gm.timeToCountDown.ToString("0");
+    }
+
+    public IEnumerator PauseGame()
+    {
+        if (gamePaused == false)
+        {
+            gamePaused = true;
+            canPause = false;
+
+            fadeBackground.enabled = true;
+
+            fadeBackground.canvasRenderer.SetAlpha(0.1f);
+            fadeBackground.CrossFadeAlpha(1f, 1f, false);
+
+            yield return new WaitForSeconds(1.0f);
+
+            Time.timeScale = 0;
+            canPause = true;
+        }
+        else if (gamePaused == true)
+        {
+            Time.timeScale = 1;
+            canPause = false;
+
+            fadeBackground.canvasRenderer.SetAlpha(1.0f);
+            fadeBackground.CrossFadeAlpha(0f, 1f, false);
+
+            yield return new WaitForSeconds(1.0f);
+
+            fadeBackground.enabled = false;
+
+            gamePaused = false;
+            canPause = true;
+        }
     }
 }
