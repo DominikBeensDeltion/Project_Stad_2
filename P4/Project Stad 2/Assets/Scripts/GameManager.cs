@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
 {
 
     public UIManager uim;
-
     public bool timerOn;
     public float timeToCountDown = 180f;
 
@@ -17,14 +16,26 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if(timeToCountDown <= 0)
+        {
+            GameOver();
+        }
         if (timerOn)
         {
-            timeToCountDown -= Time.deltaTime;
+            if(timeToCountDown > 0)
+            {
+                timeToCountDown -= Time.deltaTime;
+            } 
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && uim.canPause)
         {
             StartCoroutine(uim.PauseGame());
         }
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("u suck");
     }
 }

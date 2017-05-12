@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     public bool canPause = true;
     public Image fadeBackground;
 
+    public Text houseText;
+
     private void Start()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
@@ -59,4 +61,19 @@ public class UIManager : MonoBehaviour
             canPause = true;
         }
     }
+
+    public void TempHouseText(GameObject g)
+    {
+        if (g.GetComponent<House>().isTarget)
+        {
+            houseText.text = "Goal: " + g.name;
+        }
+       
+    }
+
+    public void ResetHouseText()
+    {
+        houseText.text = "Goal: Pizzeria";
+    }
+    
 }

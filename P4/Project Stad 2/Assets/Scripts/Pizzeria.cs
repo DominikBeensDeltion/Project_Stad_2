@@ -5,8 +5,11 @@ using UnityEngine;
 public class Pizzeria : MonoBehaviour {
     public List<GameObject> houses = new List<GameObject>();
     public GameObject targetHouse;
+    public UIManager ui;
+    public GameManager gm;
 	// Use this for initialization
 	void Start () {
+        gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         findHouses();
         ChooseHouse();
 
@@ -21,6 +24,10 @@ public class Pizzeria : MonoBehaviour {
     {
         int i = Random.Range(0, houses.Count);
         targetHouse = houses[i];
+        targetHouse.GetComponent<House>().isTarget = true;
+        ui.TempHouseText(targetHouse);
+        gm.timerOn = true;
+        
     }
 
     void findHouses()
@@ -29,6 +36,17 @@ public class Pizzeria : MonoBehaviour {
         foreach(GameObject g in homes)
         {
             houses.Add(g);
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            if(targetHouse.GetComponent<House>().isTarget == false)
+            {
+                ChooseHouse();
+            }
         }
     }
 }
