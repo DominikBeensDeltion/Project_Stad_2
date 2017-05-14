@@ -7,6 +7,7 @@ public class Pizzeria : MonoBehaviour {
     public GameObject targetHouse;
     public UIManager ui;
     public GameManager gm;
+    public GameObject pointer;
 	// Use this for initialization
 	void Start () {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
