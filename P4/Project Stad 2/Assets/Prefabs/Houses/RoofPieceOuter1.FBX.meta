@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 024b7149badc4364eb5b28453570094c
+guid: 11f7e055e995c7e4a9495f73e993e82a
 timeCreated: 1494768136
 licenseType: Free
 ModelImporter:
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: MuurDetails8
+    4300000: DakStukUiteinde1
   materials:
     importMaterials: 1
     materialName: 0

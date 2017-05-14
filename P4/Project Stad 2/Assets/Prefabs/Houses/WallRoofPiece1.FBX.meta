@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 6bc0fd50599c18f44956c6822ccd5d44
-timeCreated: 1494619189
+guid: 07ebee577838e804c8d217c67992f01d
+timeCreated: 1494768136
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: MuurDakStuk
+    4300000: MuurDakStuk1
   materials:
     importMaterials: 1
     materialName: 0
