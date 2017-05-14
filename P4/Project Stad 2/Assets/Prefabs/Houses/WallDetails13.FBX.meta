@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 024b7149badc4364eb5b28453570094c
-timeCreated: 1494768136
+guid: c6581e1d3afa8f94195579e969f21751
+timeCreated: 1494771244
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: MuurDetails8
+    4300000: MuurDetails13
   materials:
     importMaterials: 1
     materialName: 0
