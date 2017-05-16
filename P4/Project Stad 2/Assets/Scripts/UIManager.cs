@@ -8,6 +8,16 @@ public class UIManager : MonoBehaviour
 
     public GameManager gm;
 
+    [Header("Intro")]
+    public GameObject introPanel;
+    public Image[] introImages;
+    public Text[] introText;
+    public Animator introAnimator;
+
+    [Header("Order Panel")]
+    public Text orderText;
+    public Animator orderAnimator;
+
     [Header("Timer")]
     public Text timerText;
 
@@ -21,11 +31,44 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
+
+        introImages = introPanel.GetComponentsInChildren<Image>();
+        introText = introPanel.GetComponentsInChildren<Text>();
+        IntroMouseExit();
     }
 
     private void Update()
     {
         timerText.text = gm.timeToCountDown.ToString("0");
+    }
+
+    public void IntroMouseEnter()
+    {
+        for (int i = 0; i < introImages.Length; i++)
+        {
+            introImages[i].CrossFadeAlpha(1f, 0.3f, false);
+            introText[i].CrossFadeAlpha(1f, 0.3f, false);
+        }
+    }
+
+    public void IntroMouseExit()
+    {
+        for (int i = 0; i < introImages.Length; i++)
+        {
+            introImages[i].CrossFadeAlpha(0.25f, 0.3f, false);
+            introText[i].CrossFadeAlpha(0.25f, 0.3f, false);
+        }
+    }
+
+    public void IntroStartButton()
+    {
+        IntroStart();
+    }
+
+    public void IntroStart()
+    {
+        introAnimator.SetTrigger("SetInactive");
+        StartCoroutine(gm.StartGame());
     }
 
     public IEnumerator PauseGame()
@@ -67,13 +110,11 @@ public class UIManager : MonoBehaviour
         if (g.GetComponent<House>().isTarget)
         {
             houseText.text = "Goal: " + g.name;
-        }
-       
+        }      
     }
 
     public void ResetHouseText()
     {
         houseText.text = "Goal: Pizzeria";
-    }
-    
+    } 
 }

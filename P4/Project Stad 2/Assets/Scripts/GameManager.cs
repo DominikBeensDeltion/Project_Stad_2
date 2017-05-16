@@ -34,6 +34,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(1);
+
+        uim.orderText.text = "Picked up pizza!" + "\n\n" + "Now get delivering!";
+        uim.orderAnimator.SetBool("Order", true);
+
+        yield return new WaitForSeconds(3);
+
+        uim.orderAnimator.SetBool("Order", false);
+
+        yield return new WaitForSeconds(1);
+
+        //timerOn = true;
+    }
+
     public void GameOver()
     {
         Debug.Log("u suck");
