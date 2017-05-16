@@ -2,44 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour {
-    public float moveSpeed;
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
+public class CharacterController : MonoBehaviour
+{
+    public float moveSpeed = 5f;
+    public Transform player;
 
+    private void Start()
+    {
+        player = transform;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        Movement();
-    }
+        float horizontalMovement = (Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed);
+        float verticalMovement = (Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
+        transform.position = new Vector3(transform.position.x + horizontalMovement, 0, transform.position.z + verticalMovement);
 
-    void Movement()
-    {
-        if (Input.GetButton("w"))
-        {
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetButton("a"))
-        {
-            transform.Rotate(transform.up *- 300 * Time.deltaTime);
-        }
-
-        if (Input.GetButton("s"))
-        {
-            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetButton("d"))
-        {
-            transform.Rotate(transform.up * 300 * Time.deltaTime);
-        }
+        Vector3 direction = new Vector3(horizontalMovement, 0, verticalMovement);
+        transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
     }
 }
