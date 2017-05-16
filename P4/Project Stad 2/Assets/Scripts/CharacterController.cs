@@ -12,7 +12,7 @@ public class CharacterController : MonoBehaviour
         player = transform;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         float horizontalMovement = (Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed);
         float verticalMovement = (Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
