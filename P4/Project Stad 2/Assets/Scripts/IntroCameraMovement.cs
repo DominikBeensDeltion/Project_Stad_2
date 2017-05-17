@@ -15,6 +15,8 @@ public class IntroCameraMovement : MonoBehaviour
 
     public float moveSpeed = 5f;
     public float rotateSpeed = 10f;
+    public float moveBackSpeed = 10f;
+    public float rotateBackSpeed = 20f;
 
     public Transform mainCamStartPos;
     public Transform mainCamPos;
@@ -50,8 +52,8 @@ public class IntroCameraMovement : MonoBehaviour
             }
             else if (!followPath)
             {
-                transform.position = Vector3.MoveTowards(gameObject.transform.position, mainCamPos.position, (moveSpeed * Time.deltaTime));
-                transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, mainCamPos.localRotation, (rotateSpeed * Time.deltaTime));
+                transform.position = Vector3.MoveTowards(gameObject.transform.position, mainCamPos.position, (moveBackSpeed * Time.deltaTime));
+                transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, mainCamPos.localRotation, (rotateBackSpeed * Time.deltaTime));
 
                 if (transform.position == mainCamPos.position && transform.rotation == mainCamPos.rotation)
                 {
