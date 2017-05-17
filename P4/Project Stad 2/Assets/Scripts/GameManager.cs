@@ -6,12 +6,16 @@ public class GameManager : MonoBehaviour
 {
 
     public UIManager uim;
+
+    public GameObject mainCam;
+
     public bool timerOn;
     public float timeToCountDown = 180f;
 
     private void Start()
     {
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
+        mainCam = GameObject.FindWithTag("MainCamera");
     }
 
     private void Update()
@@ -36,6 +40,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartGame()
     {
+        mainCam.GetComponent<FollowPlayer>().canFollow = true;
         yield return new WaitForSeconds(1);
 
         uim.orderText.text = "Picked up pizza!" + "\n\n" + "Now get delivering!";

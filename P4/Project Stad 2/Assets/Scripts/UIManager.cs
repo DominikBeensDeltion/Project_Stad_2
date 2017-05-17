@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameManager gm;
 
     [Header("Intro")]
+    public IntroCameraMovement introCamScript;
     public GameObject introPanel;
     public Image[] introImages;
     public Text[] introText;
@@ -67,8 +68,8 @@ public class UIManager : MonoBehaviour
 
     public void IntroStart()
     {
+        introCamScript.followPath = false;
         introAnimator.SetTrigger("SetInactive");
-        StartCoroutine(gm.StartGame());
     }
 
     public IEnumerator PauseGame()

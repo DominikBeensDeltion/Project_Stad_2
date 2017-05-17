@@ -6,6 +6,7 @@ public class FollowPlayer : MonoBehaviour
 {
     private GameObject player;
 
+    public bool canFollow;
     public bool noLerp;
     public bool lerp;
 
@@ -20,13 +21,16 @@ public class FollowPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (noLerp)
+        if (canFollow)
         {
-            transform.position = player.transform.position + offset;
-        }
-        else if (lerp)
-        {
-            transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, (followSpeed * Time.deltaTime));
+            if (noLerp)
+            {
+                transform.position = player.transform.position + offset;
+            }
+            else if (lerp)
+            {
+                transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, (followSpeed * Time.deltaTime));
+            }
         }
     }
 }
