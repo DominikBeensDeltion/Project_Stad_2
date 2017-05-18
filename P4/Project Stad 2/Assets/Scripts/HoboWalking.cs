@@ -16,19 +16,21 @@ public class HoboWalking : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        CreateWaypoint();
-        moveToLocation = CreateWaypoint();
-        agent.SetDestination(moveToLocation);
+        SetNewPath();
     }
 
     public void Update()
     {
-        //if ()
-        //{
-        //    CreateWaypoint();
-        //    moveToLocation = CreateWaypoint();
-        //    agent.SetDestination(moveToLocation);
-        //}
+        if (Vector3.Distance(transform.position, agent.destination) < 1.0f)
+        {
+            SetNewPath();
+        }
+    }
+
+    public void SetNewPath()
+    {
+        moveToLocation = CreateWaypoint();
+        agent.SetDestination(moveToLocation);
     }
 
     public Vector3 CreateWaypoint()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float rotateSpeed = 10f;
     public Transform player;
 
     private void Start()
@@ -19,6 +20,11 @@ public class CharacterController : MonoBehaviour
         transform.position = new Vector3(transform.position.x + horizontalMovement, 0, transform.position.z + verticalMovement);
 
         Vector3 direction = new Vector3(horizontalMovement, 0, verticalMovement);
-        transform.rotation = Quaternion.LookRotation(direction, transform.up);
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
+        }
     }
 }
