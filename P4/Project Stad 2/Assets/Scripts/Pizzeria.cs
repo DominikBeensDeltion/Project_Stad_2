@@ -12,7 +12,6 @@ public class Pizzeria : MonoBehaviour {
 	void Start () {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         FindHouses();
-        ChooseHouse();
 
     }
 	

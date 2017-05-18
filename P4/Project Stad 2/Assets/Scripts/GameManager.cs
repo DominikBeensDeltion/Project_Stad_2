@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 
     public UIManager uim;
+    public Pizzeria pizzeria;
 
     public GameObject mainCam;
 
@@ -45,14 +46,11 @@ public class GameManager : MonoBehaviour
 
         uim.orderText.text = "Picked up pizza!" + "\n\n" + "Now get delivering!";
         uim.orderAnimator.SetBool("Order", true);
+        pizzeria.ChooseHouse();
 
         yield return new WaitForSeconds(3);
 
         uim.orderAnimator.SetBool("Order", false);
-
-        yield return new WaitForSeconds(1);
-
-        //timerOn = true;
     }
 
     public void GameOver()
