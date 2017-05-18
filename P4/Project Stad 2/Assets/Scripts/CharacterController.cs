@@ -19,6 +19,6 @@ public class CharacterController : MonoBehaviour
         transform.position = new Vector3(transform.position.x + horizontalMovement, 0, transform.position.z + verticalMovement);
 
         Vector3 direction = new Vector3(horizontalMovement, 0, verticalMovement);
-        transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        transform.rotation = Quaternion.LookRotation(direction, transform.up);
     }
 }
