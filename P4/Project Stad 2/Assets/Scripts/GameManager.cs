@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
         uim.orderText.text = "Picked up pizza!" + "\n\n" + "Now get delivering!";
         uim.orderAnimator.SetBool("Order", true);
-        pizzeria.ChooseHouse();
+        //pizzeria.ChooseHouse();
 
         yield return new WaitForSeconds(3);
 
