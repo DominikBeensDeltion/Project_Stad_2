@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
 
-    public GameManager gm;
+    private GameManager gm;
 
     [Header("Intro")]
     public IntroCameraMovement introCamScript;

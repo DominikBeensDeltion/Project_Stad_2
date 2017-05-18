@@ -6,11 +6,13 @@ using UnityEngine.AI;
 public class HoboWalking : MonoBehaviour
 {
 
-    public float randomX;
-    public float randomZ;
+    private float randomX;
+    private float randomZ;
+    public float locationRadius = 10f;
     public Vector3 moveToLocation;
+    public bool wandering = true;
 
-    public NavMeshAgent agent;
+    private NavMeshAgent agent;
     public float moveSpeed = 5f;
 
     private void Start()
@@ -19,24 +21,40 @@ public class HoboWalking : MonoBehaviour
         SetNewPath();
     }
 
-    public void Update()
+    private void Update()
     {
-        if (Vector3.Distance(transform.position, agent.destination) < 1.0f)
+        if (wandering)
         {
-            SetNewPath();
+            if (Vector3.Distance(transform.position, agent.destination) < 1.0f)
+            {
+                SetNewPath();
+            }
         }
     }
 
     public void SetNewPath()
     {
         moveToLocation = CreateWaypoint();
-        agent.SetDestination(moveToLocation);
+
+        RaycastHit hit;
+        if (Physics.Raycast(moveToLocation, Vector3.down, out hit, 2))
+        {
+            if (hit.transform.tag == "Road")
+            {
+                CreateWaypoint();
+                SetNewPath();
+            }
+            else
+            {
+                agent.SetDestination(moveToLocation);
+            }
+        }
     }
 
     public Vector3 CreateWaypoint()
     {
-        randomX = Random.Range(transform.position.x - 10, transform.position.x + 10);
-        randomZ = Random.Range(transform.position.z - 10, transform.position.z + 10);
+        randomX = Random.Range(transform.position.x - locationRadius, transform.position.x + locationRadius);
+        randomZ = Random.Range(transform.position.z - locationRadius, transform.position.z + locationRadius);
 
         Vector3 nextWayPoint = new Vector3(randomX, transform.position.y, randomZ);
 
