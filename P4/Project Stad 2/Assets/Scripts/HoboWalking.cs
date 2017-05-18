@@ -6,18 +6,20 @@ using UnityEngine.AI;
 public class HoboWalking : MonoBehaviour
 {
 
+    private NavMeshAgent agent;
+    private GameObject player;
+
     private float randomX;
     private float randomZ;
-    public float locationRadius = 10f;
+    public float newLocationRadius = 10f;
     public Vector3 moveToLocation;
-    public bool wandering = true;
 
-    private NavMeshAgent agent;
-    public float moveSpeed = 5f;
+    public bool wandering = true;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindWithTag("Player");
         SetNewPath();
     }
 
@@ -53,8 +55,8 @@ public class HoboWalking : MonoBehaviour
 
     public Vector3 CreateWaypoint()
     {
-        randomX = Random.Range(transform.position.x - locationRadius, transform.position.x + locationRadius);
-        randomZ = Random.Range(transform.position.z - locationRadius, transform.position.z + locationRadius);
+        randomX = Random.Range(transform.position.x - newLocationRadius, transform.position.x + newLocationRadius);
+        randomZ = Random.Range(transform.position.z - newLocationRadius, transform.position.z + newLocationRadius);
 
         Vector3 nextWayPoint = new Vector3(randomX, transform.position.y, randomZ);
 
