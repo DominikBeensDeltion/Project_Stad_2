@@ -10,6 +10,7 @@ public class House : MonoBehaviour {
     public GameObject markTwo;
     public GameObject cloneOne;
     public GameObject cloneTwo;
+    public string naam;
 	// Use this for initialization
 	void Start () {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();

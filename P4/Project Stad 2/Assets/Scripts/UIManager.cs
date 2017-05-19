@@ -110,7 +110,7 @@ public class UIManager : MonoBehaviour
     {
         if (g.GetComponent<House>().isTarget)
         {
-            houseText.text = "Goal: " + g.name;
+            houseText.text = "Goal: " + g.GetComponent<House>().naam;
         }      
     }
 
