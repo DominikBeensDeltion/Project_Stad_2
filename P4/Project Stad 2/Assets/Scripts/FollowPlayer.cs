@@ -7,8 +7,7 @@ public class FollowPlayer : MonoBehaviour
     private GameObject player;
 
     public bool canFollow;
-    public bool noLerp;
-    public bool lerp;
+    public bool lerpOrNot;
 
     public Vector3 offset;
     public float followSpeed = 3f;
@@ -23,11 +22,11 @@ public class FollowPlayer : MonoBehaviour
     {
         if (canFollow)
         {
-            if (noLerp)
+            if (!lerpOrNot)
             {
                 transform.position = player.transform.position + offset;
             }
-            else if (lerp)
+            else if (lerpOrNot)
             {
                 transform.position = Vector3.Lerp(transform.position, player.transform.position + offset, (followSpeed * Time.deltaTime));
             }
