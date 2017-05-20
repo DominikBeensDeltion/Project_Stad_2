@@ -15,6 +15,16 @@ public class HoboWalking : MonoBehaviour
     public Vector3 moveToLocation;
 
     public bool wandering = true;
+    public bool chasing = false;
+    public bool chasePlayer = false;
+
+    public float continueToWalkChance = 0.66f;
+    public float minimumStopTime = 4f;
+    public float maximumStopTime = 10f;
+
+    public GameObject sight;
+    public Vector3 spottedPlayerPos;
+    public float stopChasingDistance = 25f;
 
     private void Start()
     {
@@ -29,7 +39,41 @@ public class HoboWalking : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, agent.destination) < 1.0f)
             {
-                SetNewPath();
+                float stopOrNah = Random.value;
+
+                if (stopOrNah > continueToWalkChance)
+                {
+                    wandering = false;
+                    StartCoroutine(StandStill());
+                }
+                else
+                {
+                    SetNewPath();
+                }
+            }
+        }
+        else if (chasing)
+        {
+            if (chasePlayer)
+            {
+                agent.destination = player.transform.position;
+            }
+
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                //reduce pizza quality, make hobo slow down and start chasing again
+            }
+
+            if (Vector3.Distance(agent.transform.position, player.transform.position) >= stopChasingDistance)
+            {
+                agent.SetDestination(spottedPlayerPos);
+                chasePlayer = false;
+            }
+
+            if (agent.transform.position == spottedPlayerPos)
+            {
+                wandering = true;
+                chasing = false;
             }
         }
     }
@@ -51,6 +95,24 @@ public class HoboWalking : MonoBehaviour
                 agent.SetDestination(moveToLocation);
             }
         }
+    }
+
+    public IEnumerator StandStill()
+    {
+        yield return new WaitForSeconds(Random.Range(minimumStopTime, maximumStopTime));
+        wandering = true;
+        SetNewPath();
+    }
+
+    public void ChasePlayer()
+    {
+        print("chase player!");
+
+        spottedPlayerPos = transform.position;
+        wandering = false;
+
+        chasing = true;
+        chasePlayer = true;
     }
 
     public Vector3 CreateWaypoint()
