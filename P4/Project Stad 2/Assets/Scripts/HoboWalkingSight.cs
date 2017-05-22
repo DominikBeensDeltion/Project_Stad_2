@@ -17,9 +17,9 @@ public class HoboWalkingSight : MonoBehaviour
         if (other.tag == "Player")
         {
             RaycastHit hit;
-            if (Physics.Raycast(hoboWalking.transform.position, other.transform.position, out hit, Vector3.Distance(hoboWalking.transform.position, other.transform.position)))     //dit doet hij ergens helemaal anders naartoe.. na 30 min geef ik het op
+            if (Physics.Raycast(hoboWalking.gameObject.transform.position, other.transform.position, out hit, Vector3.Distance(hoboWalking.transform.position, other.transform.position)))     //dit doet hij ergens helemaal anders naartoe.. na 30 min geef ik het op
             {
-                //Debug.DrawRay(transform.position, other.transform.position, new Color (0,0,0));
+                Debug.DrawRay(transform.position, other.transform.position, new Color (0,0,0));
                 if (hit.transform.tag == "Player")
                 {
                     hoboWalking.ChasePlayer();
