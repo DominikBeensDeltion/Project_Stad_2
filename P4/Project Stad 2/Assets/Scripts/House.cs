@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class House : MonoBehaviour {
+public class House : MonoBehaviour
+{
     public bool isTarget;
-    public UIManager ui;
+    public UIManager uim;
     public GameManager gm;
     public GameObject markOne;
     public GameObject markTwo;
     public GameObject cloneOne;
     public GameObject cloneTwo;
     public string naam;
-	// Use this for initialization
-	void Start () {
+
+	void Start ()
+    {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
+        uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void OnTriggerEnter(Collider other)
     {
@@ -30,7 +28,7 @@ public class House : MonoBehaviour {
                 if (isTarget)
                 {
                     Debug.Log("Pizza Delivered");
-                    ui.ResetHouseText();
+                    uim.ResetHouseText();
                     gm.timerOn = false;
                     gm.timeToCountDown = 180F;
                 }

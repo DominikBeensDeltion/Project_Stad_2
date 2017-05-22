@@ -2,21 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pizzeria : MonoBehaviour {
+public class Pizzeria : MonoBehaviour
+{
+
+    public GameManager gm;
+    public UIManager uim;
+
     public List<GameObject> houses = new List<GameObject>();
     public GameObject targetHouse;
-    public UIManager ui;
-    public GameManager gm;
     public GameObject pointer;
-	// Use this for initialization
-	void Start () {
-        gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
-        FindHouses();
 
+	void Start ()
+    {
+        gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
+        uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
+
+        FindHouses();
+        ChooseHouse();
     }
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         Debug.Log(targetHouse.name);
 	}
 
@@ -26,7 +32,7 @@ public class Pizzeria : MonoBehaviour {
         targetHouse = houses[i];
         targetHouse.GetComponent<House>().isTarget = true;
         targetHouse.GetComponent<House>().CreateMarker();
-        ui.TempHouseText(targetHouse);
+        uim.TempHouseText(targetHouse);
         gm.timerOn = true;
         
     }
