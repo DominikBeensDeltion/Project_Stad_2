@@ -78,7 +78,7 @@ public class PizzaCar : MonoBehaviour {
     void GetOut()
     {
             RaycastHit hit;
-            if (Physics.Raycast(carObject.transform.position, Vector3.left, out hit, 2))
+            if (Physics.Raycast(carObject.transform.position, Vector3.left, out hit, 3))
             {
               //U suck ray
             }
