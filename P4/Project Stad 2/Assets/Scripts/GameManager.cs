@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public UIManager uim;
     public Pizzeria pizzeria;
 
+    public GameObject player;
     public GameObject mainCam;
 
     public bool timerOn;
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     {
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
         mainCam = GameObject.FindWithTag("MainCamera");
+        player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
@@ -42,15 +44,29 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartGame()
     {
         mainCam.GetComponent<FollowPlayer>().canFollow = true;
+
         yield return new WaitForSeconds(1);
+
+        player.GetComponent<CharacterController>().enabled = true;
 
         uim.orderText.text = "Picked up pizza!" + "\n\n" + "Now get delivering!";
         uim.orderAnimator.SetBool("Order", true);
-        //pizzeria.ChooseHouse();
+        pizzeria.ChooseHouse();
+        uim.canPause = true;
 
         yield return new WaitForSeconds(3);
 
         uim.orderAnimator.SetBool("Order", false);
+    }
+
+    public void ResumeButton()
+    {
+        StartCoroutine(uim.ResumeGame());
+    }
+
+    public void QuitButton()
+    {
+        Application.Quit();
     }
 
     public void GameOver()

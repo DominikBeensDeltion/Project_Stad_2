@@ -24,8 +24,9 @@ public class UIManager : MonoBehaviour
 
     [Header("Pause Menu")]
     public bool gamePaused;
-    public bool canPause = true;
-    public Image fadeBackground;
+    public bool canPause;
+    public GameObject pausePanel;
+    public Animator pauseAnimator;
 
     public Text houseText;
 
@@ -70,6 +71,9 @@ public class UIManager : MonoBehaviour
     {
         introCamScript.followPath = false;
         introAnimator.SetTrigger("SetInactive");
+
+        //zet de player visible en zijn controls aan, kon hem niet aan en uit doen met setactive omdat verschillende scripts in start de player zoeken
+        gm.player.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
     }
 
     public IEnumerator PauseGame()
@@ -79,12 +83,9 @@ public class UIManager : MonoBehaviour
             gamePaused = true;
             canPause = false;
 
-            fadeBackground.enabled = true;
+            pauseAnimator.SetTrigger("SetActive");
 
-            fadeBackground.canvasRenderer.SetAlpha(0.1f);
-            fadeBackground.CrossFadeAlpha(1f, 1f, false);
-
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.6f);
 
             Time.timeScale = 0;
             canPause = true;
@@ -94,12 +95,29 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1;
             canPause = false;
 
-            fadeBackground.canvasRenderer.SetAlpha(1.0f);
-            fadeBackground.CrossFadeAlpha(0f, 1f, false);
+            pauseAnimator.SetBool("SetInactive", true);
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.6f);
 
-            fadeBackground.enabled = false;
+            pauseAnimator.SetBool("SetInactive", false);
+
+            gamePaused = false;
+            canPause = true;
+        }
+    }
+
+    public IEnumerator ResumeGame()
+    {
+        if (gamePaused == true)
+        {
+            Time.timeScale = 1;
+            canPause = false;
+
+            pauseAnimator.SetBool("SetInactive", true);
+
+            yield return new WaitForSeconds(0.6f);
+
+            pauseAnimator.SetBool("SetInactive", false);
 
             gamePaused = false;
             canPause = true;

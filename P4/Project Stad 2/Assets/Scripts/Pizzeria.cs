@@ -18,12 +18,14 @@ public class Pizzeria : MonoBehaviour
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
 
         FindHouses();
-        ChooseHouse();
     }
 	
 	void Update ()
     {
-        Debug.Log(targetHouse.name);
+        if (targetHouse != null)
+        {
+            Debug.Log(targetHouse.name);
+        }
 	}
 
     public void ChooseHouse()
