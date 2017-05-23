@@ -36,33 +36,28 @@ public class HoboWalkingSight : MonoBehaviour
                 //Debug.DrawRay(hoboWalking.transform.position, hoboWalking.transform.position + new Vector3((300), 0), Color.red);
                 //Debug.DrawRay(hoboWalking.transform.position, hoboWalking.transform.position + new Vector3((-300), 0), Color.blue);
 
-
                 if (angle < sightAngle)
                 {
                     print("player is in sight");
 
                     //Debug.DrawRay(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, Color.yellow);
 
-                    hoboWalking.ChasePlayer();
+                    RaycastHit hit;
+                    if (Physics.Raycast(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, out hit))
+                    {
+                        //Debug.DrawRay(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, new Color(0, 0, 0));
+
+                        if (hit.transform.gameObject.tag == "Player")
+                        {
+                            if (hoboWalking.chasing == false)
+                            {
+                                print("chase player");
+                                hoboWalking.ChasePlayer();
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-
-    //public void OnTriggerStay(Collider other)
-    //{
-    //    if (other.tag == "Player")
-    //    {
-    //        RaycastHit hit;
-    //        if (Physics.Raycast(hoboWalking.transform.position, other.transform.position - hoboWalking.transform.position, out hit, Vector3.Distance(hoboWalking.transform.position, other.transform.position)))     //dit doet hij ergens helemaal anders naartoe.. na 30 min geef ik het op
-    //        {
-    //            Debug.DrawRay(hoboWalking.transform.position, other.transform.position - hoboWalking.transform.position, new Color (0,0,0));
-    //            if (hit.transform.gameObject.tag == "Player")
-    //            {
-    //                print("chase");
-    //                hoboWalking.ChasePlayer();
-    //            }
-    //        }
-    //    }
-    //}
 }

@@ -70,7 +70,7 @@ public class HoboWalking : MonoBehaviour
                 chasePlayer = false;
             }
 
-            if (agent.transform.position == spottedPlayerPos)
+            if (agent.transform.position == spottedPlayerPos && chasePlayer == false)
             {
                 wandering = true;
                 chasing = false;
@@ -106,12 +106,10 @@ public class HoboWalking : MonoBehaviour
 
     public void ChasePlayer()
     {
-        print("chase player!");
-
+        chasing = true;
         spottedPlayerPos = transform.position;
         wandering = false;
 
-        chasing = true;
         chasePlayer = true;
     }
 
