@@ -155,12 +155,12 @@ public class UIManager : MonoBehaviour
     {
         if (g.GetComponent<House>().isTarget)
         {
-            houseText.text = "Goal: " + g.GetComponent<House>().naam;
+            houseText.text = g.GetComponent<House>().naam;
         }      
     }
 
     public void ResetHouseText()
     {
-        houseText.text = "Goal: Pizzeria";
+        houseText.text = "Pizzeria";
     } 
 }
