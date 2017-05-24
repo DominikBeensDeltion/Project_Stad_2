@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class HoboRiding : MonoBehaviour
 {
+
+    private GameManager gm;
+
     public float startSpeed = 5f;
     public float currentSpeed = 5f;
+
+    private void Start()
+    {
+        gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
+    }
 
     private void FixedUpdate()
     {
@@ -14,9 +22,12 @@ public class HoboRiding : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (gm.gameState == GameManager.GameState.Playing)
         {
-            print("player diededtd");
+            if (collision.gameObject.tag == "Player")
+            {
+                print("player diededtd");
+            }
         }
     }
 }

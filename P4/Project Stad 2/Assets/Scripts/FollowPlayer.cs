@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
+    private GameManager gm;
     private GameObject player;
 
-    public bool canFollow;
     public bool lerpOrNot;
 
     public Vector3 offset;
@@ -14,13 +14,14 @@ public class FollowPlayer : MonoBehaviour
 
     private void Start()
     {
+        gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         player = GameObject.FindWithTag("Player");
         offset = transform.position - player.transform.position;
     }
 
     private void Update()
     {
-        if (canFollow)
+        if (gm.gameState == GameManager.GameState.Playing)
         {
             if (!lerpOrNot)
             {

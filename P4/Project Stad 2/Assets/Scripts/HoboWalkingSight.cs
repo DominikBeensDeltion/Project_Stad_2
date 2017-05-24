@@ -5,6 +5,7 @@ using UnityEngine;
 public class HoboWalkingSight : MonoBehaviour
 {
 
+    private GameManager gm;
     private HoboWalking hoboWalking;
     private GameObject player;
 
@@ -13,46 +14,50 @@ public class HoboWalkingSight : MonoBehaviour
 
     private void Start()
     {
+        gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         hoboWalking = GetComponentInParent<HoboWalking>();
         player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
     {
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 toPlayer = player.transform.position - hoboWalking.transform.position;
-
-        if (Vector3.Distance(hoboWalking.transform.position, player.transform.position) <= sightRange)
+        if (gm.gameState == GameManager.GameState.Playing)
         {
-            print("player is in range");
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 toPlayer = player.transform.position - hoboWalking.transform.position;
 
-            if (Vector3.Dot(forward, toPlayer) > 0)
+            if (Vector3.Distance(hoboWalking.transform.position, player.transform.position) <= sightRange)
             {
-                print("player is infront of hobo");
+                print("player is in range");
 
-                Vector3 targetDir = player.transform.position - hoboWalking.transform.position;
-                float angle = Vector3.Angle(targetDir, transform.forward);
-
-                //Debug.DrawRay(hoboWalking.transform.position, hoboWalking.transform.position + new Vector3((300), 0), Color.red);
-                //Debug.DrawRay(hoboWalking.transform.position, hoboWalking.transform.position + new Vector3((-300), 0), Color.blue);
-
-                if (angle < sightAngle)
+                if (Vector3.Dot(forward, toPlayer) > 0)
                 {
-                    print("player is in sight");
+                    print("player is infront of hobo");
 
-                    //Debug.DrawRay(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, Color.yellow);
+                    Vector3 targetDir = player.transform.position - hoboWalking.transform.position;
+                    float angle = Vector3.Angle(targetDir, transform.forward);
 
-                    RaycastHit hit;
-                    if (Physics.Raycast(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, out hit))
+                    //Debug.DrawRay(hoboWalking.transform.position, hoboWalking.transform.position + new Vector3((300), 0), Color.red);
+                    //Debug.DrawRay(hoboWalking.transform.position, hoboWalking.transform.position + new Vector3((-300), 0), Color.blue);
+
+                    if (angle < sightAngle)
                     {
-                        //Debug.DrawRay(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, new Color(0, 0, 0));
+                        print("player is in sight");
 
-                        if (hit.transform.gameObject.tag == "Player")
+                        //Debug.DrawRay(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, Color.yellow);
+
+                        RaycastHit hit;
+                        if (Physics.Raycast(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, out hit))
                         {
-                            if (hoboWalking.chasing == false)
+                            //Debug.DrawRay(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, new Color(0, 0, 0));
+
+                            if (hit.transform.gameObject.tag == "Player")
                             {
-                                print("chase player");
-                                hoboWalking.ChasePlayer();
+                                if (hoboWalking.chasing == false)
+                                {
+                                    print("chase player");
+                                    hoboWalking.ChasePlayer();
+                                }
                             }
                         }
                     }

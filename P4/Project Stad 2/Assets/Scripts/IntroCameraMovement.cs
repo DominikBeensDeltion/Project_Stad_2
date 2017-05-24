@@ -30,32 +30,35 @@ public class IntroCameraMovement : MonoBehaviour
 
     private void Update()
     {
-        if (introCamera)
+        if (gm.gameState == GameManager.GameState.Intro)
         {
-            if (followPath)
+            if (introCamera)
             {
-                transform.position = Vector3.MoveTowards(gameObject.transform.position, waypoints[currentWaypoint].transform.position, (moveSpeed * Time.deltaTime));
-                transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, waypoints[currentWaypoint].transform.localRotation, (rotateSpeed * Time.deltaTime));
-
-                if (gameObject.transform.position == waypoints[currentWaypoint].transform.position)
+                if (followPath)
                 {
-                    currentWaypoint++;
+                    transform.position = Vector3.MoveTowards(gameObject.transform.position, waypoints[currentWaypoint].transform.position, (moveSpeed * Time.deltaTime));
+                    transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, waypoints[currentWaypoint].transform.localRotation, (rotateSpeed * Time.deltaTime));
+
+                    if (gameObject.transform.position == waypoints[currentWaypoint].transform.position)
+                    {
+                        currentWaypoint++;
+                    }
+
+                    if (currentWaypoint == waypoints.Length)
+                    {
+                        currentWaypoint = 1;
+                    }
                 }
-
-                if (currentWaypoint == waypoints.Length)
+                else if (!followPath)
                 {
-                    currentWaypoint = 1;
-                }
-            }
-            else if (!followPath)
-            {
-                transform.position = Vector3.MoveTowards(gameObject.transform.position, mainCamPos.position, (moveBackSpeed * Time.deltaTime));
-                transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, mainCamPos.localRotation, (rotateBackSpeed * Time.deltaTime));
+                    transform.position = Vector3.MoveTowards(gameObject.transform.position, mainCamPos.position, (moveBackSpeed * Time.deltaTime));
+                    transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, mainCamPos.localRotation, (rotateBackSpeed * Time.deltaTime));
 
-                if (transform.position == mainCamPos.position && transform.rotation == mainCamPos.rotation)
-                {
-                    StartCoroutine(gm.StartGame());
-                    introCamera = false;
+                    if (transform.position == mainCamPos.position && transform.rotation == mainCamPos.rotation)
+                    {
+                        StartCoroutine(gm.StartGame());
+                        introCamera = false;
+                    }
                 }
             }
         }

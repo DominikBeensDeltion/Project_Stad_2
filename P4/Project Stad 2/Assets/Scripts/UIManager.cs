@@ -78,8 +78,9 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator PauseGame()
     {
-        if (gamePaused == false)
+        if (gm.gameState != GameManager.GameState.Paused)
         {
+            gm.gameState = GameManager.GameState.Paused;
             gamePaused = true;
             canPause = false;
 
@@ -90,7 +91,7 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 0;
             canPause = true;
         }
-        else if (gamePaused == true)
+        else if (gm.gameState == GameManager.GameState.Paused)
         {
             Time.timeScale = 1;
             canPause = false;
@@ -102,13 +103,14 @@ public class UIManager : MonoBehaviour
             pauseAnimator.SetBool("SetInactive", false);
 
             gamePaused = false;
+            gm.gameState = GameManager.GameState.Playing;
             canPause = true;
         }
     }
 
     public IEnumerator ResumeGame()
     {
-        if (gamePaused == true)
+        if (gm.gameState == GameManager.GameState.Paused)
         {
             Time.timeScale = 1;
             canPause = false;
@@ -120,6 +122,7 @@ public class UIManager : MonoBehaviour
             pauseAnimator.SetBool("SetInactive", false);
 
             gamePaused = false;
+            gm.gameState = GameManager.GameState.Playing;
             canPause = true;
         }
     }

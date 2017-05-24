@@ -8,6 +8,15 @@ public class GameManager : MonoBehaviour
     public UIManager uim;
     public Pizzeria pizzeria;
 
+    public enum GameState
+    {
+        Intro,
+        Playing,
+        Paused,
+        Dead
+    }
+    public GameState gameState;
+
     public GameObject player;
     public GameObject mainCam;
 
@@ -16,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        gameState = GameState.Intro;
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
         mainCam = GameObject.FindWithTag("MainCamera");
         player = GameObject.FindWithTag("Player");
@@ -43,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartGame()
     {
-        mainCam.GetComponent<FollowPlayer>().canFollow = true;
+        gameState = GameState.Playing;
 
         yield return new WaitForSeconds(1);
 
