@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class House : MonoBehaviour
 {
-    public bool isTarget;
+
     public UIManager uim;
     public GameManager gm;
+
+    public bool isTarget;
     public GameObject markOne;
     public GameObject cloneOne;
     public string naam;
@@ -29,26 +31,17 @@ public class House : MonoBehaviour
                     uim.ResetHouseText();
                     gm.timerOn = false;
                     gm.timeToCountDown = 180F;
-                }
-            }
-        }
-    }
 
-    public void OnTriggerExit(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            if (isTarget)
-            {
-                isTarget = false;
-                DeleteMarker();
+                    DeleteMarker();
+                    isTarget = false;
+                }
             }
         }
     }
 
     public void CreateMarker()
     {
-        Vector3 vec =  new Vector3(transform.position.x, 20, transform.position.z);
+        Vector3 vec = new Vector3(transform.position.x, 20, transform.position.z);
         vec.y += 3;
         cloneOne = Instantiate(markOne, vec, Quaternion.identity);
     }
