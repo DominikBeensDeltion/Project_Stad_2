@@ -19,6 +19,10 @@ public class UIManager : MonoBehaviour
     public Text orderText;
     public Animator orderAnimator;
 
+    [Header("World Map")]
+    public GameObject worldMapCam;
+    public bool mapOpen;
+
     [Header("Timer")]
     public Text timerText;
 
@@ -42,6 +46,26 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         timerText.text = gm.timeToCountDown.ToString("0");
+
+        if (gm.gameState == GameManager.GameState.Playing)
+        {
+            if (Input.GetButtonDown("m"))
+            {
+                if (!mapOpen)
+                {
+                    worldMapCam.SetActive(true);
+                    mapOpen = true;
+                }
+                else if (mapOpen)
+                {
+                    if (Input.GetButtonDown("m"))
+                    {
+                        worldMapCam.SetActive(false);
+                        mapOpen = false;
+                    }
+                }
+            }
+        }
     }
 
     public void IntroMouseEnter()
