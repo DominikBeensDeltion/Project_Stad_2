@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PizzaCar : MonoBehaviour {
+public class PizzaCar : MonoBehaviour
+{
     public bool repaired;
     public bool inCar;
     public bool canGetOut;
@@ -13,12 +14,14 @@ public class PizzaCar : MonoBehaviour {
     public float moveSpeed;
     public float rotateSpeed;
     // Use this for initialization
-    void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (inCar)
         {
             if (canGetOut)
@@ -28,7 +31,7 @@ public class PizzaCar : MonoBehaviour {
                     GetOut();
                 }
             }
-                   
+
         }
     }
 
@@ -77,21 +80,21 @@ public class PizzaCar : MonoBehaviour {
 
     void GetOut()
     {
-            RaycastHit hit;
-            if (Physics.Raycast(carObject.transform.position, Vector3.left, out hit, 3))
-            {
-              //U suck ray
-            }
-        
-            else
-            {
-                    player.SetActive(true);
-                    inCar = false;
-                    player.transform.SetParent(null);
-                    player.transform.position = new Vector3(carObject.transform.position.x - 3, carObject.transform.position.y, carObject.transform.position.z);
-                    canGetOut = false;
+        RaycastHit hit;
+        if (Physics.Raycast(carObject.transform.position, Vector3.left, out hit, 2))
+        {
+            //U suck ray
+        }
 
-            }
+        else
+        {
+            player.SetActive(true);
+            inCar = false;
+            player.transform.SetParent(null);
+            player.transform.position = new Vector3(carObject.transform.position.x - 3, carObject.transform.position.y, carObject.transform.position.z);
+            canGetOut = false;
+
+        }
         Debug.DrawRay(carObject.transform.position, Vector3.left, Color.red);
     }
 
