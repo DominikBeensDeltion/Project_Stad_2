@@ -15,8 +15,8 @@ public class HoboWalking : MonoBehaviour
     public Vector3 moveToLocation;
 
     public bool wandering = true;
-    public bool chasing = false;
-    public bool chasePlayer = false;
+    public bool chasing;
+    public bool chasePlayer;
 
     public float continueToWalkChance = 0.66f;
     public float minimumStopTime = 4f;
@@ -43,6 +43,8 @@ public class HoboWalking : MonoBehaviour
     {
         if (wandering)
         {
+            //dont set the stopping distance on the navmesh agent equal or higher than this float
+            //need to test if agent.stoppingDistance works instead of the float
             if (Vector3.Distance(transform.position, agent.destination) < 1.0f)
             {
                 float stopOrNah = Random.value;
@@ -68,8 +70,6 @@ public class HoboWalking : MonoBehaviour
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 //reduce pizza quality, make hobo slow down and start chasing again
-                
-                //IDK how your script works so here is the code it needs
                 if(PizzaQuality.quality > 0)
                 {
                     StartCoroutine(AttackCldw());
