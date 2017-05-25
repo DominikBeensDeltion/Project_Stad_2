@@ -17,6 +17,7 @@ public class HoboWalking : MonoBehaviour
     public bool wandering = true;
     public bool chasing;
     public bool chasePlayer;
+    public bool walkingBack;
 
     public float continueToWalkChance = 0.66f;
     public float minimumStopTime = 4f;
@@ -45,7 +46,7 @@ public class HoboWalking : MonoBehaviour
         {
             //dont set the stopping distance on the navmesh agent equal or higher than this float
             //need to test if agent.stoppingDistance works instead of the float
-            if (Vector3.Distance(transform.position, agent.destination) < 1.0f)
+            if (Vector3.Distance(transform.position, agent.destination) < 1.5f)
             {
                 float stopOrNah = Random.value;
 
@@ -80,11 +81,15 @@ public class HoboWalking : MonoBehaviour
             {
                 agent.SetDestination(spottedPlayerPos);
                 chasePlayer = false;
+                walkingBack = true;
+                print("test");
             }
 
-            if (agent.transform.position == spottedPlayerPos && chasePlayer == false)
+            //agent.transform.position == spottedPlayerPos <= old code
+            if (agent.pathStatus == NavMeshPathStatus.PathComplete && !chasePlayer && walkingBack)
             {
                 wandering = true;
+                walkingBack = false;
                 chasing = false;
             }
         }
