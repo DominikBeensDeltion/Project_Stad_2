@@ -13,10 +13,16 @@ public class PizzaCar : MonoBehaviour
 
     public float moveSpeed;
     public float rotateSpeed;
+
+    public AudioClip engine;
+    public AudioSource sound;
+
+    public Rigidbody rb;
     // Use this for initialization
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
+        sound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,6 +55,7 @@ public class PizzaCar : MonoBehaviour
                 if (repaired)
                 {
                     inCar = true;
+                    sound.PlayOneShot(engine);
                     player.transform.SetParent(carObject.transform);
                     player.transform.position = carObject.transform.position;
                     player.SetActive(false);
@@ -64,6 +71,10 @@ public class PizzaCar : MonoBehaviour
         {
             transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
             transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime);
+            if (rb.IsSleeping())
+            {
+                sound.Play();
+            }
             //float horizontalMovement = (Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed);
             //float verticalMovement = (Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
             //carObject.transform.position = new Vector3(transform.position.x + horizontalMovement, 0, transform.position.z + verticalMovement);
@@ -93,6 +104,7 @@ public class PizzaCar : MonoBehaviour
             player.transform.SetParent(null);
             player.transform.position = new Vector3(carObject.transform.position.x - 3, carObject.transform.position.y, carObject.transform.position.z);
             canGetOut = false;
+            sound.Stop();
 
         }
         Debug.DrawRay(carObject.transform.position, Vector3.left, Color.red);
