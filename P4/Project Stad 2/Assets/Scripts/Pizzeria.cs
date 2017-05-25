@@ -36,6 +36,7 @@ public class Pizzeria : MonoBehaviour
         targetHouse.GetComponent<House>().CreateMarker();
         uim.TempHouseText(targetHouse);
         gm.timerOn = true;
+        PizzaQuality.quality = 100F;
         
     }
 

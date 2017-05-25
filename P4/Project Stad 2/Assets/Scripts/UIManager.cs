@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     public Animator pauseAnimator;
 
     public Text houseText;
+    public Text qualityText;
 
     private void Start()
     {

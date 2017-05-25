@@ -25,6 +25,7 @@ public class HoboWalking : MonoBehaviour
     public GameObject sight;
     public Vector3 spottedPlayerPos;
     public float stopChasingDistance = 25f;
+    public float pizzaDamage = 30F;
 
     private void Start()
     {
@@ -62,6 +63,12 @@ public class HoboWalking : MonoBehaviour
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 //reduce pizza quality, make hobo slow down and start chasing again
+                
+                //IDK how your script works so here is the code it needs
+                if(PizzaQuality.quality > 0)
+                {
+                    PizzaQuality.quality -= pizzaDamage;
+                }
             }
 
             if (Vector3.Distance(agent.transform.position, player.transform.position) >= stopChasingDistance)
