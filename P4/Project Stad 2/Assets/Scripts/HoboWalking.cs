@@ -22,7 +22,6 @@ public class HoboWalking : MonoBehaviour
     public float minimumStopTime = 4f;
     public float maximumStopTime = 10f;
 
-    public GameObject sight;
     public Vector3 spottedPlayerPos;
     public float stopChasingDistance = 25f;
 
@@ -73,7 +72,7 @@ public class HoboWalking : MonoBehaviour
                 //IDK how your script works so here is the code it needs
                 if(PizzaQuality.quality > 0)
                 {
-                    StartCoroutine("attackCldwn");
+                    StartCoroutine(AttackCldw());
                 }
             }
 
@@ -136,7 +135,7 @@ public class HoboWalking : MonoBehaviour
         return nextWayPoint;
     }
 
-    public IEnumerator attackCldwn()
+    public IEnumerator AttackCldw()
     {
         if (!attackCool)
         {

@@ -32,6 +32,10 @@ public class UIManager : MonoBehaviour
     public GameObject pausePanel;
     public Animator pauseAnimator;
 
+    [Header("Game Over")]
+    public GameObject gameOverPanel;
+    public Animator gameOverAnimator;
+
     public Text houseText;
     public Text qualityText;
 
@@ -150,6 +154,15 @@ public class UIManager : MonoBehaviour
             gm.gameState = GameManager.GameState.Playing;
             canPause = true;
         }
+    }
+
+    public IEnumerator GameOver()
+    {
+        gameOverAnimator.SetTrigger("SetActive");
+
+        yield return new WaitForSeconds(0.6f);
+
+        Time.timeScale = 0;
     }
 
     public void TempHouseText(GameObject g)

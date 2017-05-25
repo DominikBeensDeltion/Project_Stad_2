@@ -53,8 +53,6 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartGame()
     {
-        gameState = GameState.Playing;
-
         yield return new WaitForSeconds(1);
 
         player.GetComponent<CharacterController>().enabled = true;
@@ -63,6 +61,7 @@ public class GameManager : MonoBehaviour
         uim.orderAnimator.SetBool("Order", true);
         pizzeria.ChooseHouse();
         uim.canPause = true;
+        gameState = GameState.Playing;
 
         yield return new WaitForSeconds(3);
 
@@ -81,6 +80,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("u suck");
+        gameState = GameState.Dead;
+
+        StartCoroutine(uim.GameOver());
     }
 }

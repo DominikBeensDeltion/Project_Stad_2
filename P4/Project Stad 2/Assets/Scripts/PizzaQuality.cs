@@ -6,18 +6,23 @@ public class PizzaQuality : MonoBehaviour {
     private GameManager gm;
     private UIManager ui;
     public static float quality;
-	// Use this for initialization
-	void Start () {
+
+	void Start ()
+    {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
         ui = GameObject.FindGameObjectWithTag("UIM").GetComponent<UIManager>();
     }
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         DisplayQual();
-        if (quality <= 0)
+
+        if (gm.gameState == GameManager.GameState.Playing)
         {
-            gm.GameOver();
+            if (quality <= 0)
+            {
+                gm.GameOver();
+            }         
         }
     }
 
