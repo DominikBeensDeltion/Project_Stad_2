@@ -23,6 +23,6 @@ public class PizzaQuality : MonoBehaviour {
 
     void DisplayQual()
     {
-        ui.qualityText.text = "" + quality;
+        ui.qualityText.text = "" + quality + "%";
     }
 }

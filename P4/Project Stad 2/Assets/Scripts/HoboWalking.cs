@@ -25,10 +25,16 @@ public class HoboWalking : MonoBehaviour
     public GameObject sight;
     public Vector3 spottedPlayerPos;
     public float stopChasingDistance = 25f;
+
     public float pizzaDamage = 30F;
+    public bool attackCool;
+    public float attackSpeed;
+
+    public AudioSource nom;
 
     private void Start()
     {
+        nom = gameObject.GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         SetNewPath();
@@ -67,7 +73,7 @@ public class HoboWalking : MonoBehaviour
                 //IDK how your script works so here is the code it needs
                 if(PizzaQuality.quality > 0)
                 {
-                    PizzaQuality.quality -= pizzaDamage;
+                    StartCoroutine("attackCldwn");
                 }
             }
 
@@ -128,5 +134,17 @@ public class HoboWalking : MonoBehaviour
         Vector3 nextWayPoint = new Vector3(randomX, transform.position.y, randomZ);
 
         return nextWayPoint;
+    }
+
+    public IEnumerator attackCldwn()
+    {
+        if (!attackCool)
+        {
+            attackCool = true;
+            yield return new WaitForSeconds(attackSpeed);
+            nom.Play();
+            PizzaQuality.quality -= pizzaDamage;
+            attackCool = false;
+        }
     }
 }
