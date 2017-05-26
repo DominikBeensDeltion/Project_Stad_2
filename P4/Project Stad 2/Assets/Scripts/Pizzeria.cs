@@ -11,6 +11,7 @@ public class Pizzeria : MonoBehaviour
     public List<GameObject> houses = new List<GameObject>();
     public GameObject targetHouse;
     public GameObject pointer;
+    public AudioSource beepBeep;
 
 	void Start ()
     {
@@ -38,6 +39,7 @@ public class Pizzeria : MonoBehaviour
         gm.timerOn = true;
         gm.onMission = true;
         PizzaQuality.quality = 100F;
+        beepBeep.Play();
         
     }
 

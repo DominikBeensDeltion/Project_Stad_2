@@ -14,6 +14,7 @@ public class House : MonoBehaviour
     public string naam;
 
     public int pointsGive = 100;
+    public int bonusPoints = 50;
 
     public AudioSource ding;
 	void Start ()
@@ -62,7 +63,11 @@ public class House : MonoBehaviour
 
     public void GivePoints()
     {
-        if (PizzaQuality.quality >= 100)
+        if (PizzaQuality.quality > 100)
+        {
+            GameManager.score += pointsGive + bonusPoints;
+        }
+       else if (PizzaQuality.quality == 100)
         {
             GameManager.score += pointsGive;
         }
@@ -85,6 +90,10 @@ public class House : MonoBehaviour
         else if (PizzaQuality.quality <= 0)
         {
             GameManager.score += pointsGive - 100;
+        }
+        if (PizzaQuality.quality > 100)
+        {
+            GameManager.score += pointsGive + bonusPoints;
         }
     }
 }
