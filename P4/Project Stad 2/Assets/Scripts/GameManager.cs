@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public bool timerOn;
     public float timeToCountDown = 180f;
 
+    public static int score;
+
     private void Start()
     {
         gameState = GameState.Intro;

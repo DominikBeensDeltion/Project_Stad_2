@@ -13,6 +13,7 @@ public class House : MonoBehaviour
     public GameObject cloneOne;
     public string naam;
 
+    public int pointsGive = 100;
 	void Start ()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
@@ -31,6 +32,8 @@ public class House : MonoBehaviour
                     uim.ResetHouseText();
                     gm.timerOn = false;
                     gm.timeToCountDown = 180F;
+                    GivePoints();
+                    gm.GetComponent<PizzaQuality>().NoPizzaText();
 
                     DeleteMarker();
                     isTarget = false;
@@ -50,5 +53,33 @@ public class House : MonoBehaviour
     {
         Destroy(cloneOne);
         cloneOne = null;
+    }
+
+    public void GivePoints()
+    {
+        if (PizzaQuality.quality >= 100)
+        {
+            GameManager.score += pointsGive;
+        }
+        else if (PizzaQuality.quality <= 80)
+        {
+            GameManager.score += pointsGive - 20;
+        }
+        else if (PizzaQuality.quality <= 60)
+        {
+            GameManager.score += pointsGive - 40;
+        }
+        else if (PizzaQuality.quality <= 40)
+        {
+            GameManager.score += pointsGive - 60;
+        }
+        else if (PizzaQuality.quality <= 20)
+        {
+            GameManager.score += pointsGive - 80;
+        }
+        else if (PizzaQuality.quality <= 0)
+        {
+            GameManager.score += pointsGive - 100;
+        }
     }
 }

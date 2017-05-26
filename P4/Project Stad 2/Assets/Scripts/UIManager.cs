@@ -39,6 +39,8 @@ public class UIManager : MonoBehaviour
     public Text houseText;
     public Text qualityText;
 
+    public Text scoreText;
+
     private void Start()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
@@ -50,6 +52,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        scoreText.text = "" + GameManager.score;
         timerText.text = gm.timeToCountDown.ToString("0");
 
         if (gm.gameState == GameManager.GameState.Playing)

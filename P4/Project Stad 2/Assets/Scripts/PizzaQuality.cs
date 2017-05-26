@@ -30,4 +30,9 @@ public class PizzaQuality : MonoBehaviour {
     {
         ui.qualityText.text = "" + quality + "%";
     }
+
+    public void NoPizzaText()
+    {
+        ui.qualityText.text = "N/A";
+    }
 }
