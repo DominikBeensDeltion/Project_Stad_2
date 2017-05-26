@@ -9,13 +9,20 @@ public class HoboWalking : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject player;
 
+    public enum State
+    {
+        Wandering,
+        Chasing,
+        Backing,
+    }
+    public State hoboState;
+
     private float randomX;
     private float randomZ;
     public float newLocationRadius = 10f;
     public Vector3 moveToLocation;
 
-    public bool wandering = true;
-    public bool chasing;
+    public bool canSetNewPath = true;
     public bool chasePlayer;
     public bool walkingBack;
 
@@ -34,6 +41,8 @@ public class HoboWalking : MonoBehaviour
 
     private void Start()
     {
+        hoboState = State.Wandering;
+
         nom = gameObject.GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
@@ -42,55 +51,59 @@ public class HoboWalking : MonoBehaviour
 
     private void Update()
     {
-        if (wandering)
+        if (hoboState == State.Wandering)
         {
-            //dont set the stopping distance on the navmesh agent equal or higher than this float
-            //need to test if agent.stoppingDistance works instead of the float
-            if (Vector3.Distance(transform.position, agent.destination) < 1.5f)
+            if (canSetNewPath)
             {
-                float stopOrNah = Random.value;
+                if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    float stopOrNah = Random.value;
 
-                if (stopOrNah > continueToWalkChance)
-                {
-                    wandering = false;
-                    StartCoroutine(StandStill());
-                }
-                else
-                {
-                    SetNewPath();
+                    if (stopOrNah > continueToWalkChance)
+                    {
+                        canSetNewPath = false;
+                        StartCoroutine(StandStill());
+                    }
+                    else
+                    {
+                        SetNewPath();
+                    }
                 }
             }
         }
-        else if (chasing)
+        else if (hoboState == State.Chasing)
         {
             if (chasePlayer)
             {
-                agent.destination = player.transform.position;
+                agent.SetDestination(player.transform.position);
             }
 
-            if (agent.remainingDistance <= agent.stoppingDistance)
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                //reduce pizza quality, make hobo slow down and start chasing again
                 if(PizzaQuality.quality > 0)
                 {
                     StartCoroutine(AttackCldw());
                 }
             }
 
-            if (Vector3.Distance(agent.transform.position, player.transform.position) >= stopChasingDistance)
+            if (agent.remainingDistance >= stopChasingDistance)
             {
-                agent.SetDestination(spottedPlayerPos);
-                chasePlayer = false;
-                walkingBack = true;
-                print("test");
+                hoboState = State.Backing;
             }
+        }
+        else if (hoboState == State.Backing)
+        {
+            agent.SetDestination(spottedPlayerPos);
+            chasePlayer = false;
+            walkingBack = true;
+            print("hobo walking back");
 
-            //agent.transform.position == spottedPlayerPos <= old code
-            if (agent.pathStatus == NavMeshPathStatus.PathComplete && !chasePlayer && walkingBack)
+            if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= agent.stoppingDistance)
             {
-                wandering = true;
+                canSetNewPath = true;
                 walkingBack = false;
-                chasing = false;
+
+                hoboState = State.Wandering;
             }
         }
     }
@@ -117,16 +130,16 @@ public class HoboWalking : MonoBehaviour
     public IEnumerator StandStill()
     {
         yield return new WaitForSeconds(Random.Range(minimumStopTime, maximumStopTime));
-        wandering = true;
+        canSetNewPath = true;
         SetNewPath();
     }
 
     public void ChasePlayer()
     {
-        chasing = true;
-        spottedPlayerPos = transform.position;
-        wandering = false;
+        hoboState = State.Chasing;
 
+        spottedPlayerPos = transform.position;
+        canSetNewPath = false;
         chasePlayer = true;
     }
 
