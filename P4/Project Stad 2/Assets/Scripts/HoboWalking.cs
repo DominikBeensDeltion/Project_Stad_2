@@ -13,7 +13,7 @@ public class HoboWalking : MonoBehaviour
     {
         Wandering,
         Chasing,
-        Backing,
+        Backing
     }
     public State hoboState;
 

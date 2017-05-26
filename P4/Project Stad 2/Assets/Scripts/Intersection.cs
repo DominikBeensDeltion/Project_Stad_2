@@ -34,7 +34,7 @@ public class Intersection : MonoBehaviour
         aHoboCanPass = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "RidingHobo")
         {
