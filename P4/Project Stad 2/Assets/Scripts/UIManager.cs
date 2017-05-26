@@ -36,10 +36,18 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverPanel;
     public Animator gameOverAnimator;
 
+    [Header("House")]
     public Text houseText;
+
+    [Header("Pizza Quality")]
     public Text qualityText;
 
+    [Header("Score")]
     public Text scoreText;
+
+    [Header("Phone")]
+    public Animator phoneAnimator;
+    public bool phoneActive;
 
     private void Start()
     {
@@ -71,6 +79,22 @@ public class UIManager : MonoBehaviour
                         worldMapCam.SetActive(false);
                         mapOpen = false;
                     }
+                }
+            }
+
+            if (Input.GetButtonDown("Shift"))
+            {
+                if (!phoneActive)
+                {
+                    phoneAnimator.SetBool("PhoneActive", true);
+                    phoneAnimator.SetBool("PhoneInActive", false);
+                    phoneActive = true;
+                }
+                else if (phoneActive)
+                {
+                    phoneAnimator.SetBool("PhoneActive", false);
+                    phoneAnimator.SetBool("PhoneInActive", true);
+                    phoneActive = false;
                 }
             }
         }

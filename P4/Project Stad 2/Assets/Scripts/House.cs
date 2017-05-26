@@ -67,7 +67,7 @@ public class House : MonoBehaviour
         {
             GameManager.score += pointsGive + bonusPoints;
         }
-       else if (PizzaQuality.quality == 100)
+        else if (PizzaQuality.quality == 100)
         {
             GameManager.score += pointsGive;
         }
@@ -95,5 +95,7 @@ public class House : MonoBehaviour
         {
             GameManager.score += pointsGive + bonusPoints;
         }
+
+        //GameManager.score += (int)PizzaQuality.quality + bonusPoints;
     }
 }
