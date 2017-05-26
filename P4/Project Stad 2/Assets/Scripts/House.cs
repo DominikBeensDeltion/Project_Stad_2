@@ -33,7 +33,8 @@ public class House : MonoBehaviour
                     gm.timerOn = false;
                     gm.timeToCountDown = 180F;
                     GivePoints();
-                    gm.GetComponent<PizzaQuality>().NoPizzaText();
+                    gm.onMission = false;
+                    PizzaQuality.quality = 0;
 
                     DeleteMarker();
                     isTarget = false;

@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     public static int score;
 
+    public bool onMission;
+
     private void Start()
     {
         gameState = GameState.Intro;

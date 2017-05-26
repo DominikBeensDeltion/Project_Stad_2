@@ -15,13 +15,23 @@ public class PizzaQuality : MonoBehaviour {
 	
 	void Update ()
     {
-        DisplayQual();
+        if(quality > 0)
+        {
+            DisplayQual();
+        }
+        else
+        {
+            NoPizzaText();
+        }
 
         if (gm.gameState == GameManager.GameState.Playing)
         {
             if (quality <= 0)
             {
-                gm.GameOver();
+                if (gm.onMission)
+                {
+                    gm.GameOver();
+                }
             }         
         }
     }
