@@ -14,8 +14,11 @@ public class House : MonoBehaviour
     public string naam;
 
     public int pointsGive = 100;
+
+    public AudioSource ding;
 	void Start ()
     {
+        ding = GetComponent<AudioSource>();
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
     }
@@ -29,6 +32,7 @@ public class House : MonoBehaviour
                 if (isTarget)
                 {
                     Debug.Log("Pizza Delivered");
+                    ding.Play();
                     uim.ResetHouseText();
                     gm.timerOn = false;
                     gm.timeToCountDown = 180F;
