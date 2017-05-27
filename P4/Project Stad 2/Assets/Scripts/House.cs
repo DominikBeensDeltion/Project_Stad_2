@@ -32,6 +32,7 @@ public class House : MonoBehaviour
             {
                 if (isTarget)
                 {
+                    StartCoroutine(DeliveredPizzaNotice());
                     Debug.Log("Pizza Delivered");
                     ding.Play();
                     uim.ResetHouseText();
@@ -93,5 +94,15 @@ public class House : MonoBehaviour
         }
 
         //GameManager.score += (int)PizzaQuality.quality + bonusPoints;
+    }
+
+    public IEnumerator DeliveredPizzaNotice()
+    {
+        uim.orderText.text = "You've successfully delivered the pizza!" + "\n\n" + "Now get back to the pizzeria and go get the next one!";
+        uim.orderAnimator.SetBool("Order", true);
+
+        yield return new WaitForSeconds(4);
+
+        uim.orderAnimator.SetBool("Order", false);
     }
 }

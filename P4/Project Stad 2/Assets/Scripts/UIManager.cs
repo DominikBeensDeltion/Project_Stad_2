@@ -19,6 +19,11 @@ public class UIManager : MonoBehaviour
     public Text orderText;
     public Animator orderAnimator;
 
+    [Header("Notice Panel")]
+    public Animator noticeAnimator;
+    public Text noticeText;
+    public bool panelIsActive;
+
     [Header("World Map")]
     public GameObject worldMapCam;
     public bool mapOpen;

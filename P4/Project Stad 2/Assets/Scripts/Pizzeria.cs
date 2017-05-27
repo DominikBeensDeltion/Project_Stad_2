@@ -43,8 +43,7 @@ public class Pizzeria : MonoBehaviour
         gm.timerOn = true;
         gm.onMission = true;
         PizzaQuality.quality = 100F;
-        beepBeep.Play();
-        
+        beepBeep.Play();        
     }
 
     void FindHouses()
@@ -62,8 +61,58 @@ public class Pizzeria : MonoBehaviour
         {
             if (targetHouse.GetComponent<House>().isTarget == false)
             {
-                ChooseHouse();
+                uim.noticeText.text = "Press E to pick up pizza";
+                uim.noticeAnimator.SetTrigger("SetActive");
+                uim.panelIsActive = true;
             }
         }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (targetHouse.GetComponent<House>().isTarget == false)
+            {
+                if (Input.GetButtonDown("e"))
+                {
+                    ChooseHouse();
+                    StartCoroutine(PizzaPickupNotice());
+                    uim.noticeAnimator.SetTrigger("SetInActive");
+                    uim.panelIsActive = false;
+                }
+            }
+            else if (targetHouse.GetComponent<House>().isTarget == true)
+            {
+                if (Input.GetButtonDown("e"))
+                {
+                    if (!uim.panelIsActive)
+                    {
+                        uim.noticeText.text = "You are already carrying a pizza!";
+                        uim.noticeAnimator.SetTrigger("SetActive");
+                        uim.panelIsActive = true;
+                    }
+                }
+            }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            uim.noticeAnimator.SetTrigger("SetInActive");
+            uim.panelIsActive = false;
+        }
+    }
+
+    public IEnumerator PizzaPickupNotice()
+    {
+        uim.orderText.text = "Picked up pizza!" + "\n\n" + "Now get delivering!";
+        uim.orderAnimator.SetBool("Order", true);
+
+        yield return new WaitForSeconds(3);
+
+        uim.orderAnimator.SetBool("Order", false);
     }
 }
