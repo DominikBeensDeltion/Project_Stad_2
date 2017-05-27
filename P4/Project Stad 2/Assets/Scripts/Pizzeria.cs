@@ -63,7 +63,7 @@ public class Pizzeria : MonoBehaviour
             {
                 uim.noticeText.text = "Press E to pick up pizza";
                 uim.noticeAnimator.SetTrigger("SetActive");
-                uim.panelIsActive = true;
+                uim.noticePanelIsActive = true;
             }
         }
     }
@@ -79,18 +79,18 @@ public class Pizzeria : MonoBehaviour
                     ChooseHouse();
                     StartCoroutine(PizzaPickupNotice());
                     uim.noticeAnimator.SetTrigger("SetInActive");
-                    uim.panelIsActive = false;
+                    uim.noticePanelIsActive = false;
                 }
             }
             else if (targetHouse.GetComponent<House>().isTarget == true)
             {
                 if (Input.GetButtonDown("e"))
                 {
-                    if (!uim.panelIsActive)
+                    if (!uim.noticePanelIsActive)
                     {
                         uim.noticeText.text = "You are already carrying a pizza!";
                         uim.noticeAnimator.SetTrigger("SetActive");
-                        uim.panelIsActive = true;
+                        uim.noticePanelIsActive = true;
                     }
                 }
             }
@@ -102,7 +102,7 @@ public class Pizzeria : MonoBehaviour
         if (other.tag == "Player")
         {
             uim.noticeAnimator.SetTrigger("SetInActive");
-            uim.panelIsActive = false;
+            uim.noticePanelIsActive = false;
         }
     }
 

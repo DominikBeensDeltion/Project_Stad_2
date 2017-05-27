@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 4153cf41cda848b4dae37a0c074c3655
+timeCreated: 1495921731
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: AFE Jen
+  fontNames:
+  - AFE Jen
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

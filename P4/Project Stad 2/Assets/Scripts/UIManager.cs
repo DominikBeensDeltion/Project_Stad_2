@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     [Header("Notice Panel")]
     public Animator noticeAnimator;
     public Text noticeText;
-    public bool panelIsActive;
+    public bool noticePanelIsActive;
 
     [Header("World Map")]
     public GameObject worldMapCam;
@@ -53,6 +53,10 @@ public class UIManager : MonoBehaviour
     [Header("Phone")]
     public Animator phoneAnimator;
     public bool phoneActive;
+
+    [Header("Goal List")]
+    public GameObject goalPanel;
+    public bool goalPanelOpen;
 
     private void Start()
     {
