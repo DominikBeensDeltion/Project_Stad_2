@@ -5,18 +5,22 @@ using UnityEngine;
 public class Pizzeria : MonoBehaviour
 {
 
-    public GameManager gm;
-    public UIManager uim;
+    private GameManager gm;
+    private UIManager uim;
+    private GameObject player;
 
     public List<GameObject> houses = new List<GameObject>();
     public GameObject targetHouse;
     public GameObject pointer;
     public AudioSource beepBeep;
 
+    public bool playerInsidePizzeria;
+
 	void Start ()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
+        player = GameObject.FindWithTag("Player");
 
         FindHouses();
     }
@@ -56,7 +60,7 @@ public class Pizzeria : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            if(targetHouse.GetComponent<House>().isTarget == false)
+            if (targetHouse.GetComponent<House>().isTarget == false)
             {
                 ChooseHouse();
             }

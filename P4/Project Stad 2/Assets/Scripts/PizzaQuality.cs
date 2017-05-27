@@ -30,6 +30,7 @@ public class PizzaQuality : MonoBehaviour {
             {
                 if (gm.onMission)
                 {
+                    gm.deathPizzaEaten = true;
                     gm.GameOver();
                 }
             }         

@@ -110,7 +110,7 @@ public class IntersectionDirection : MonoBehaviour
 
     public IEnumerator GoLeft()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
         hobo.transform.Rotate(0, -90, 0);
     }
 }

@@ -7,7 +7,7 @@ public class Intersection : MonoBehaviour
     public List<GameObject> hobosWaiting = new List<GameObject>();
 
     public bool aHoboCanPass = true;
-    public int timeToLetNextHoboPass = 2;
+    public float timeToLetNextHoboPass = 2;
 
     private void Update()
     {

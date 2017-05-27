@@ -26,6 +26,7 @@ public class HoboRiding : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
+                gm.deathHoboRiding = true;
                 gm.GameOver();
             }
         }

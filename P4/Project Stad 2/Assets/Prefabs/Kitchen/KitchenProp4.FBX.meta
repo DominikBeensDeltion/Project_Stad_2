@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 202c2cf4441d0da45a3e4f1e8dcc0747
-timeCreated: 1495302998
+guid: 746ac77cb7eb8434681de93ec906a5a8
+timeCreated: 1495888933
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cone001
+    4300000: KitchenProp4
   materials:
     importMaterials: 1
     materialName: 0
@@ -55,7 +55,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

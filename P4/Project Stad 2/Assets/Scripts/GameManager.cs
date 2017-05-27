@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,6 +37,10 @@ public class GameManager : MonoBehaviour
     public float speedToGive;
     public float moveSpeedDuration;
 
+    public bool deathHoboRiding;
+    public bool deathOutOfTime;
+    public bool deathPizzaEaten;
+
     private void Start()
     {
         gameState = GameState.Intro;
@@ -49,6 +54,7 @@ public class GameManager : MonoBehaviour
         GeneratePickups();
         if (timeToCountDown <= 0)
         {
+            deathOutOfTime = true;
             GameOver();
         }
         if (timerOn)
@@ -85,6 +91,11 @@ public class GameManager : MonoBehaviour
     public void ResumeButton()
     {
         StartCoroutine(uim.ResumeGame());
+    }
+
+    public void RestartButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitButton()

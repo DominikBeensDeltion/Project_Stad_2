@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     public Animator pauseAnimator;
 
     [Header("Game Over")]
-    public GameObject gameOverPanel;
+    public Text gameOverText;
     public Animator gameOverAnimator;
 
     [Header("House")]
@@ -185,6 +185,19 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+        if (gm.deathHoboRiding)
+        {
+            gameOverText.text = "You were ran over!";
+        }
+        else if (gm.deathPizzaEaten)
+        {
+            gameOverText.text = "Your pizza was eaten!";
+        }
+        else if (gm.deathOutOfTime)
+        {
+            gameOverText.text = "You ran out of time!";
+        }
+
         gameOverAnimator.SetTrigger("SetActive");
 
         yield return new WaitForSeconds(0.6f);
