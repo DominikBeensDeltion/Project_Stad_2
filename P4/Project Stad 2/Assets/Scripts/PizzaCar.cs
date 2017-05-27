@@ -10,6 +10,9 @@ public class PizzaCar : MonoBehaviour
 
     public GameObject player;
     public GameObject carObject;
+    public GameObject seat;
+    public GameObject seatedPlayer;
+    public GameObject playerClone;
 
     public float moveSpeed;
     public float rotateSpeed;
@@ -60,6 +63,11 @@ public class PizzaCar : MonoBehaviour
                     player.transform.position = carObject.transform.position;
                     player.SetActive(false);
                     StartCoroutine("GetOutCoolDown");
+                    if(gameObject.name == "PlayerCart")
+                    {
+                        playerClone = Instantiate(seatedPlayer, seat.transform.position, transform.rotation);
+                        playerClone.transform.SetParent(seat.transform);
+                    }
                 }
             }
         }
@@ -100,6 +108,10 @@ public class PizzaCar : MonoBehaviour
         else
         {
             player.SetActive(true);
+            if(gameObject.name == "PlayerCart")
+            {
+                Destroy(playerClone);
+            }
             inCar = false;
             player.transform.SetParent(null);
             player.transform.position = new Vector3(carObject.transform.position.x - 3, carObject.transform.position.y, carObject.transform.position.z);
