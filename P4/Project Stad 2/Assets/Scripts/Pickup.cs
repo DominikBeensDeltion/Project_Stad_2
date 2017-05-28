@@ -48,16 +48,19 @@ public class Pickup : MonoBehaviour
     {
         if (pickedUp)
         {
-                if (giveTime)
-                {
-                    gm.timeToCountDown += timeToGive;
-                    pickedUp = false;
-                }
-                else if (giveQual)
-                {
-                    PizzaQuality.quality += QualToGive;
-                    pickedUp = false;
-                }
+            if (gm.onMission)
+            {
+                    if (giveTime)
+                    {
+                        gm.timeToCountDown += timeToGive;
+                        pickedUp = false;
+                    }
+                    else if (giveQual)
+                    {
+                        PizzaQuality.quality += QualToGive;
+                        pickedUp = false;
+                    }
+            }
             //Not sure about this
             //Error = Coroutine could not be started because the game object PickupSpeed(Clone) is inactive!
             //ook al start ik de coroutine in de gamemanager
