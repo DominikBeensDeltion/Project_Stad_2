@@ -38,6 +38,7 @@ public class HoboWalking : MonoBehaviour
     public float attackSpeed;
 
     public AudioSource nom;
+    public GameObject deathParticle;
 
     private void Start()
     {
@@ -108,13 +109,6 @@ public class HoboWalking : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "PlayerCar")
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void SetNewPath()
     {
@@ -170,6 +164,14 @@ public class HoboWalking : MonoBehaviour
             nom.Play();
             PizzaQuality.quality -= pizzaDamage;
             attackCool = false;
+        }
+    }
+
+    public void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "PlayerCar")
+        {
+            Destroy(gameObject);
         }
     }
 }
