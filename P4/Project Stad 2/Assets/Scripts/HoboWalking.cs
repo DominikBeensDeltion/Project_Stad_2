@@ -108,6 +108,14 @@ public class HoboWalking : MonoBehaviour
         }
     }
 
+    public void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "PlayerCar")
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void SetNewPath()
     {
         moveToLocation = CreateWaypoint();
