@@ -16,12 +16,18 @@ public class House : MonoBehaviour
     public int pointsGive = 100;
     public int bonusPoints = 50;
 
+    public Transform particleSpawn;
+    public GameObject particlePrefab;
+    public GameObject particle;
+
     public AudioSource ding;
+
 	void Start ()
     {
-        ding = GetComponent<AudioSource>();
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
+        ding = GetComponent<AudioSource>();
+        particleSpawn = transform.FindChild(GameObject.FindWithTag("ParticleSpawn").transform.name);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -54,12 +60,15 @@ public class House : MonoBehaviour
         Vector3 vec = new Vector3(transform.position.x, 20, transform.position.z);
         vec.y += 3;
         cloneOne = Instantiate(markOne, vec, Quaternion.identity);
+        particle = Instantiate(particlePrefab, particleSpawn);
     }
 
     public void DeleteMarker()
     {
         Destroy(cloneOne);
+        Destroy(particle);
         cloneOne = null;
+        particle = null;
     }
 
     public void GivePoints()

@@ -23,15 +23,30 @@ public class GoalManager : MonoBehaviour
     private void Start()
     {
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
+
+        //AddToCurrentAmount(goal1CurrentAmount, goal1AmountToReach);
     }
 
     private void Update()
     {
-        uim.goal1.text = goal1CurrentAmount + " l " + goal1AmountToReach;
-        uim.goal2.text = goal2CurrentAmount + " l " + goal2AmountToReach;
-        uim.goal3.text = goal3CurrentAmount + " l " + goal3AmountToReach;
-        uim.goal4.text = goal4CurrentAmount + " l " + goal4AmountToReach;
-        uim.goal5.text = goal5CurrentAmount + " l " + goal5AmountToReach;
-        uim.goal6.text = goal6CurrentAmount + " l " + goal6AmountToReach;
+        uim.goal1.text = goal1CurrentAmount + "  l  " + goal1AmountToReach;
+        uim.goal2.text = goal2CurrentAmount + "  l  " + goal2AmountToReach;
+        uim.goal3.text = goal3CurrentAmount + "  l  " + goal3AmountToReach;
+        uim.goal4.text = goal4CurrentAmount + "  l  " + goal4AmountToReach;
+        uim.goal5.text = goal5CurrentAmount + "  l  " + goal5AmountToReach;
+        uim.goal6.text = goal6CurrentAmount + "  l  " + goal6AmountToReach;
     }
+
+    //public int AddToCurrentAmount(int currentAmount, int amountToReach)
+    //{
+    //    if (currentAmount < amountToReach)
+    //    {
+    //        currentAmount++;
+    //        return currentAmount;
+    //    }
+    //    else
+    //    {
+    //        return currentAmount;
+    //    }
+    //}
 }
