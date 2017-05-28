@@ -5,8 +5,9 @@ using UnityEngine;
 public class House : MonoBehaviour
 {
 
-    public UIManager uim;
-    public GameManager gm;
+    private UIManager uim;
+    private GameManager gm;
+    private GoalManager goalManager;
 
     public bool isTarget;
     public GameObject markOne;
@@ -26,6 +27,7 @@ public class House : MonoBehaviour
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
+        goalManager = GameObject.FindWithTag("GM").GetComponent<GoalManager>();
         ding = GetComponent<AudioSource>();
         particleSpawn = transform.FindChild(GameObject.FindWithTag("ParticleSpawn").transform.name);
     }
@@ -50,6 +52,11 @@ public class House : MonoBehaviour
 
                     DeleteMarker();
                     isTarget = false;
+
+                    if (goalManager.goal2CurrentAmount < goalManager.goal2AmountToReach)
+                    {
+                        goalManager.goal2CurrentAmount = goalManager.AddToCurrentAmount(goalManager.goal2CurrentAmount, goalManager.goal2AmountToReach);
+                    }
                 }
             }
         }
