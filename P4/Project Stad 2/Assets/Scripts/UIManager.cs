@@ -58,6 +58,13 @@ public class UIManager : MonoBehaviour
     public GameObject goalPanel;
     public bool goalPanelOpen;
 
+    public Text goal1;
+    public Text goal2;
+    public Text goal3;
+    public Text goal4;
+    public Text goal5;
+    public Text goal6;
+
     private void Start()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
