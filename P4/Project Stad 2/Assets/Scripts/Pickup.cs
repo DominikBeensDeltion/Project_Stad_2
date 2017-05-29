@@ -43,14 +43,14 @@ public class Pickup : MonoBehaviour
                     {
                         StartCoroutine(TimePickup());
                     }
-                    else if (giveQual)
+                    if (giveQual)
                     {
                         StartCoroutine(QualityPickup());
                     }
                     //Not sure about this
                     //Error = Coroutine could not be started because the game object PickupSpeed(Clone) is inactive!
                     //ook al start ik de coroutine in de gamemanager
-                    else if (giveSpeed)
+                    if (giveSpeed)
                     {
                         StartCoroutine(SpeedPickup());
                     }

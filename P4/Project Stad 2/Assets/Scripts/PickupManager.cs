@@ -6,6 +6,8 @@ public class PickupManager : MonoBehaviour
 {
 
     private GameObject player;
+    public GameObject quack;
+    public int listCount;
 
     public List<GameObject> pickups = new List<GameObject>();
     public int allowedPickups;
@@ -16,6 +18,7 @@ public class PickupManager : MonoBehaviour
 
     private void Start()
     {
+        listCount = pickups.Count;
         player = GameObject.FindWithTag("Player");
     }
 
@@ -31,6 +34,15 @@ public class PickupManager : MonoBehaviour
             pickupSpawnLoc = GenerateSpawn();
 
             int i = Random.Range(0, pickups.Count);
+            if (Random.value > 0.9F)
+            {
+                if(pickups.Count <= listCount)
+                {
+                        pickups.Add(quack);
+                        i = pickups.IndexOf(quack);
+
+                }
+            }
 
             RaycastHit hit;
             if (Physics.Raycast(pickupSpawnLoc, Vector3.down, out hit))
