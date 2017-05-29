@@ -31,7 +31,7 @@ public class Pickup : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "PlayerCar")
         {
-            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
             //pickedUp = true;
             AudioSource.PlayClipAtPoint(ding, transform.position);
 
