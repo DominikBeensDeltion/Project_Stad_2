@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    public GameManager gm;
+    private GameManager gm;
+    private PickupManager pm;
     public AudioClip ding;
     public CharacterController cr;
 
@@ -23,8 +24,9 @@ public class Pickup : MonoBehaviour
     {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
         cr = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
-        gm.speedToGive = speedToGive;
-        gm.moveSpeedDuration = moveSpeedDuration;
+        pm = GameObject.FindGameObjectWithTag("GM").GetComponent<PickupManager>();
+        pm.speedToGive = speedToGive;
+        pm.moveSpeedDuration = moveSpeedDuration;
 
     }
 
@@ -73,7 +75,7 @@ public class Pickup : MonoBehaviour
             //}
 
         }
-        GameManager.currentPickups -= 1;
+        PickupManager.currentPickups -= 1;
         
     }
 }

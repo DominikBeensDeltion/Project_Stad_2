@@ -31,4 +31,20 @@ public class HoboRiding : MonoBehaviour
             }
         }
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "RidingHobo")
+        {
+            currentSpeed = 0;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "RidingHobo")
+        {
+            currentSpeed = startSpeed;
+        }
+    }
 }

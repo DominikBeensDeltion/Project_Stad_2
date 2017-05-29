@@ -16,6 +16,12 @@ public class Pizzeria : MonoBehaviour
 
     public bool playerInsidePizzeria;
 
+    public bool canSpawnParticle;
+    public bool particleSpawned;
+    public Transform pizzeriaParticleSpawn;
+    public GameObject particlePrefab;
+    public GameObject particle;
+
 	void Start ()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
@@ -31,7 +37,13 @@ public class Pizzeria : MonoBehaviour
         {
             Debug.Log(targetHouse.name);
         }
-	}
+
+        if (!particleSpawned && canSpawnParticle)
+        {
+            particle = Instantiate(particlePrefab, pizzeriaParticleSpawn);
+            particleSpawned = true;
+        }
+    }
 
     public void ChooseHouse()
     {
@@ -43,7 +55,12 @@ public class Pizzeria : MonoBehaviour
         gm.timerOn = true;
         gm.onMission = true;
         PizzaQuality.quality = 100F;
-        beepBeep.Play();        
+        beepBeep.Play();
+
+        Destroy(particle);
+        particle = null;
+        particleSpawned = false;
+        canSpawnParticle = false;
     }
 
     void FindHouses()
@@ -101,8 +118,11 @@ public class Pizzeria : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            uim.noticeAnimator.SetTrigger("SetInActive");
-            uim.noticePanelIsActive = false;
+            if (uim.noticePanelIsActive)
+            {
+                uim.noticeAnimator.SetTrigger("SetInActive");
+                uim.noticePanelIsActive = false;
+            }
         }
     }
 

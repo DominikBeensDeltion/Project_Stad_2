@@ -23,10 +23,10 @@ public class CharacterController : MonoBehaviour
         float horizontalMovement = (Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed);
         float verticalMovement = (Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
         //oude manier lopen waarbij je door stoepen enz gaat
-        transform.position = new Vector3(transform.position.x + horizontalMovement, 0, transform.position.z + verticalMovement);
+        //transform.position = new Vector3(transform.position.x + horizontalMovement, 0, transform.position.z + verticalMovement);
 
         //nieuwe rigidbody movement
-        //rb.velocity = new Vector3(horizontalMovement, 0, verticalMovement);
+        rb.velocity = new Vector3(horizontalMovement, 0, verticalMovement);
 
         Vector3 direction = new Vector3(horizontalMovement, 0, verticalMovement);
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PizzeriaEntrance : MonoBehaviour
 {
 
+    private UIManager uim;
     private GameObject player;
     public Pizzeria pizzeriaScript;
 
@@ -15,7 +16,18 @@ public class PizzeriaEntrance : MonoBehaviour
 
     private void Start()
     {
+        uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
         player = GameObject.FindWithTag("Player");
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            uim.noticeText.text = "Press E to enter/exit pizzeria";
+            uim.noticeAnimator.SetTrigger("SetActive");
+            uim.noticePanelIsActive = true;
+        }
     }
 
     public void OnTriggerStay(Collider other)
@@ -38,6 +50,18 @@ public class PizzeriaEntrance : MonoBehaviour
                     playerCam.SetActive(false);
                     pizzeriaScript.playerInsidePizzeria = true;
                 }
+            }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (uim.noticePanelIsActive)
+            {
+                uim.noticeAnimator.SetTrigger("SetInActive");
+                uim.noticePanelIsActive = false;
             }
         }
     }
