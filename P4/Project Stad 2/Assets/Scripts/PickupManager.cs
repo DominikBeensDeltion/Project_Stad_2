@@ -12,6 +12,7 @@ public class PickupManager : MonoBehaviour
     public static int currentPickups;
     public float xRad;
     public float zRad;
+    public Vector3 pickupSpawnLoc;
 
     public float speedToGive;
     public float moveSpeedDuration;
@@ -30,24 +31,35 @@ public class PickupManager : MonoBehaviour
     {
         if (currentPickups < allowedPickups)
         {
+            pickupSpawnLoc = GenerateSpawn();
+
             int i = Random.Range(0, pickups.Count);
-            float rndX = Random.Range(0, xRad);
-            float rndZ = Random.Range(0, zRad);
-            Vector3 spawnPos = new Vector3(rndX, 1, rndZ);
+
             RaycastHit hit;
-            if (Physics.Raycast(spawnPos, Vector3.down, out hit))
+            if (Physics.Raycast(pickupSpawnLoc, Vector3.down, out hit))
             {
                 if (hit.transform.tag == "Road")
                 {
-                    Instantiate(pickups[i], hit.transform.position, Quaternion.identity);
+                    Instantiate(pickups[i], pickupSpawnLoc, Quaternion.identity);
                     currentPickups += 1;
                 }
                 else
                 {
+                    GenerateSpawn();
                     GeneratePickups();
                 }
             }
         }
+    }
+
+    public Vector3 GenerateSpawn()
+    {
+        float rndX = Random.Range(-xRad, xRad);
+        float rndZ = Random.Range(-zRad, zRad);
+
+        Vector3 spawnPos = new Vector3(rndX, 1, rndZ);
+
+        return spawnPos;
     }
 
     public IEnumerator RemoveSpeed()
