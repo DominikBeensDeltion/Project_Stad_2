@@ -54,7 +54,7 @@ public class PickupManager : MonoBehaviour
         float rndX = Random.Range(-xRad, xRad);
         float rndZ = Random.Range(-zRad, zRad);
 
-        Vector3 spawnPos = new Vector3(rndX, 1, rndZ);
+        Vector3 spawnPos = new Vector3(rndX, 1.5f, rndZ);
 
         return spawnPos;
     }
