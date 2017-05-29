@@ -14,9 +14,6 @@ public class PickupManager : MonoBehaviour
     public float zRad;
     public Vector3 pickupSpawnLoc;
 
-    public float speedToGive;
-    public float moveSpeedDuration;
-
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -60,11 +57,5 @@ public class PickupManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(rndX, 1, rndZ);
 
         return spawnPos;
-    }
-
-    public IEnumerator RemoveSpeed()
-    {
-        yield return new WaitForSeconds(moveSpeedDuration);
-        player.GetComponent<CharacterController>().moveSpeed -= speedToGive;
     }
 }

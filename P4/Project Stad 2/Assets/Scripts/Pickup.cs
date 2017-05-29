@@ -19,63 +19,82 @@ public class Pickup : MonoBehaviour
     public float QualToGive;
 
     public int moveSpeedDuration;
-    // Use this for initialization
+
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
         cr = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         pm = GameObject.FindGameObjectWithTag("GM").GetComponent<PickupManager>();
-        pm.speedToGive = speedToGive;
-        pm.moveSpeedDuration = moveSpeedDuration;
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void OnCollisionEnter(Collision col)
+    public void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "PlayerCar")
         {
-            pickedUp = true;
+            GetComponent<MeshRenderer>().enabled = false;
+            //pickedUp = true;
             AudioSource.PlayClipAtPoint(ding, transform.position);
-            Destroy(gameObject);
+
+            //if (pickedUp)
+            //{
+                if (gm.onMission)
+                {
+                    if (giveTime)
+                    {
+                        StartCoroutine(TimePickup());
+                    }
+                    else if (giveQual)
+                    {
+                        StartCoroutine(QualityPickup());
+                    }
+                    //Not sure about this
+                    //Error = Coroutine could not be started because the game object PickupSpeed(Clone) is inactive!
+                    //ook al start ik de coroutine in de gamemanager
+                    else if (giveSpeed)
+                    {
+                        StartCoroutine(SpeedPickup());
+                    }
+             //}
+            }
         }
+    }
+
+    public IEnumerator TimePickup()
+    {
+        gm.timeToCountDown += timeToGive;
+        //pickedUp = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(gameObject);
+    }
+
+    public IEnumerator QualityPickup()
+    {
+        PizzaQuality.quality += QualToGive;
+        //pickedUp = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(gameObject);
+    }
+
+    public IEnumerator SpeedPickup()
+    {
+        cr.moveSpeed += speedToGive;
+        //pickedUp = false;
+
+        yield return new WaitForSeconds(moveSpeedDuration);
+
+        cr.moveSpeed -= speedToGive;
+
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(gameObject);
     }
 
     void OnDestroy()
     {
-        if (pickedUp)
-        {
-            if (gm.onMission)
-            {
-                    if (giveTime)
-                    {
-                        gm.timeToCountDown += timeToGive;
-                        pickedUp = false;
-                    }
-                    else if (giveQual)
-                    {
-                        PizzaQuality.quality += QualToGive;
-                        pickedUp = false;
-                    }
-            }
-            //Not sure about this
-            //Error = Coroutine could not be started because the game object PickupSpeed(Clone) is inactive!
-            //ook al start ik de coroutine in de gamemanager
-
-            //else if (giveSpeed)
-            //{
-            //    cr.moveSpeed += speedToGive;
-            //    StartCoroutine(gm.RemoveSpeed());
-            //    pickedUp = false;
-            //}
-
-        }
-        PickupManager.currentPickups -= 1;
-        
+        PickupManager.currentPickups -= 1;       
     }
 }
