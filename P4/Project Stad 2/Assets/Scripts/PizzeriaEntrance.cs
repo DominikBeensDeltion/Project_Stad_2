@@ -36,19 +36,19 @@ public class PizzeriaEntrance : MonoBehaviour
         {
             if (Input.GetButtonDown("e"))
             {
-                if (pizzeriaScript.playerInsidePizzeria)
+                if (Pizzeria.playerInsidePizzeria)
                 {
                     player.transform.position = outsidePizzeriaSpawn.transform.position;
                     pizzeriaCam.SetActive(false);
                     playerCam.SetActive(true);
-                    pizzeriaScript.playerInsidePizzeria = false;
+                    Pizzeria.playerInsidePizzeria = false;
                 }
-                else if (!pizzeriaScript.playerInsidePizzeria)
+                else if (!Pizzeria.playerInsidePizzeria)
                 {
                     player.transform.position = insidePizzeriaSpawn.transform.position;
                     pizzeriaCam.SetActive(true);
                     playerCam.SetActive(false);
-                    pizzeriaScript.playerInsidePizzeria = true;
+                    Pizzeria.playerInsidePizzeria = true;
                 }
             }
         }

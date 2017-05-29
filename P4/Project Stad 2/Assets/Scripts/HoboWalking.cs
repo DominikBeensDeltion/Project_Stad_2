@@ -87,7 +87,7 @@ public class HoboWalking : MonoBehaviour
                 }
             }
 
-            if (agent.remainingDistance >= stopChasingDistance)
+            if (agent.remainingDistance >= stopChasingDistance || Pizzeria.playerInsidePizzeria)
             {
                 hoboState = State.Backing;
             }
@@ -160,9 +160,9 @@ public class HoboWalking : MonoBehaviour
         if (!attackCool)
         {
             attackCool = true;
-            yield return new WaitForSeconds(attackSpeed);
             nom.Play();
             PizzaQuality.quality -= pizzaDamage;
+            yield return new WaitForSeconds(attackSpeed);
             attackCool = false;
         }
     }

@@ -14,7 +14,7 @@ public class Pizzeria : MonoBehaviour
     public GameObject pointer;
     public AudioSource beepBeep;
 
-    public bool playerInsidePizzeria;
+    public static bool playerInsidePizzeria;
 
     public bool canSpawnParticle;
     public bool particleSpawned;

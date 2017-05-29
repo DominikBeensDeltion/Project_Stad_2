@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     {
         Intro,
         Playing,
+        InPizzeria,
         Paused,
         Dead
     }
