@@ -25,8 +25,8 @@ public class UIManager : MonoBehaviour
     public bool noticePanelIsActive;
 
     [Header("World Map")]
-    public GameObject worldMapCam;
-    public bool mapOpen;
+    public GameObject worldmapPanel;
+    public bool worldmapOpen;
 
     [Header("Timer")]
     public Text timerText;
@@ -83,17 +83,17 @@ public class UIManager : MonoBehaviour
         {
             if (Input.GetButtonDown("m"))
             {
-                if (!mapOpen)
+                if (!worldmapOpen)
                 {
-                    worldMapCam.SetActive(true);
-                    mapOpen = true;
+                    worldmapPanel.SetActive(true);
+                    worldmapOpen = true;
                 }
-                else if (mapOpen)
+                else if (worldmapOpen)
                 {
                     if (Input.GetButtonDown("m"))
                     {
-                        worldMapCam.SetActive(false);
-                        mapOpen = false;
+                        worldmapPanel.SetActive(false);
+                        worldmapOpen = false;
                     }
                 }
             }
