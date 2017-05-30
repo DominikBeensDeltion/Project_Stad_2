@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PizzaQuality : MonoBehaviour {
     private GameManager gm;
-    private UIManager ui;
+    private UIManager uim;
     public static float quality;
 
 	void Start ()
     {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
-        ui = GameObject.FindGameObjectWithTag("UIM").GetComponent<UIManager>();
+        uim = GameObject.FindGameObjectWithTag("UIM").GetComponent<UIManager>();
     }
 	
 	void Update ()
@@ -39,11 +39,11 @@ public class PizzaQuality : MonoBehaviour {
 
     void DisplayQual()
     {
-        ui.qualityText.text = "" + quality + "%";
+        uim.qualityText.text = "" + quality + "%";
     }
 
     public void NoPizzaText()
     {
-        ui.qualityText.text = "N/A";
+        uim.qualityText.text = "N/A";
     }
 }
