@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    private GameManager gm;
     public Transform player;
     public Rigidbody rb;
     public Animator anim;
@@ -14,6 +15,7 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
         player = transform;
         rb = player.GetComponent<Rigidbody>();
         anim = player.GetComponent<Animator>();
@@ -38,7 +40,7 @@ public class CharacterController : MonoBehaviour
         }
 
 
-        //temp animator om shit te testen
+        //Animations
         float speed = horizontalMovement + verticalMovement;
         anim.SetFloat("MoveSpeed", speed);
 
@@ -49,6 +51,15 @@ public class CharacterController : MonoBehaviour
         else
         {
             anim.SetBool("Running", false);
+        }
+
+        if (gm.onMission)
+        {
+            anim.SetBool("HoldingPizza", true);
+        }
+        else if (!gm.onMission)
+        {
+            anim.SetBool("HoldingPizza", false);
         }
     }
 }
