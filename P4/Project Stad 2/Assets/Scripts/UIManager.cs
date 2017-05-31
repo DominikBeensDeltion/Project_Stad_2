@@ -24,9 +24,13 @@ public class UIManager : MonoBehaviour
     public Text noticeText;
     public bool noticePanelIsActive;
 
-    [Header("World Map")]
-    public GameObject worldmapPanel;
-    public bool worldmapOpen;
+    [Header("Mini/World Map")]
+    public Animator worldmapAnimator;
+    public bool worldmapActive;
+    public bool canToggleMap;
+
+    public Animator minimapAnimator;
+    public bool minimapActive = true;
 
     [Header("Timer")]
     public Text timerText;
@@ -81,20 +85,15 @@ public class UIManager : MonoBehaviour
 
         if (gm.gameState == GameManager.GameState.Playing)
         {
-            if (Input.GetButtonDown("m"))
+            if (Input.GetButtonDown("m") && canToggleMap)
             {
-                if (!worldmapOpen)
+                if (!worldmapActive)
                 {
-                    worldmapPanel.SetActive(true);
-                    worldmapOpen = true;
+                    StartCoroutine(OpenWorldmap());
                 }
-                else if (worldmapOpen)
+                else if (worldmapActive)
                 {
-                    if (Input.GetButtonDown("m"))
-                    {
-                        worldmapPanel.SetActive(false);
-                        worldmapOpen = false;
-                    }
+                    StartCoroutine(CloseWorldmap());
                 }
             }
 
@@ -114,6 +113,36 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public IEnumerator OpenWorldmap()
+    {
+        canToggleMap = false;
+        if (minimapActive)
+        {
+            minimapAnimator.SetTrigger("SetInactive");
+            minimapActive = false;
+        }
+        yield return new WaitForSeconds(0.3f);
+        worldmapAnimator.SetTrigger("SetActive");
+        yield return new WaitForSeconds(0.3f);
+        worldmapActive = true;
+        canToggleMap = true;
+    }
+
+    public IEnumerator CloseWorldmap()
+    {
+        canToggleMap = false;
+        worldmapAnimator.SetTrigger("SetInactive");
+        yield return new WaitForSeconds(0.3f);
+        if (!minimapActive)
+        {
+            minimapAnimator.SetTrigger("SetActive");
+            minimapActive = true;
+        }
+        yield return new WaitForSeconds(0.3f);
+        worldmapActive = false;
+        canToggleMap = true;
     }
 
     public void IntroMouseEnter()

@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
         uim.orderAnimator.SetBool("Order", true);
         pizzeria.ChooseHouse();
         uim.canPause = true;
+        uim.canToggleMap = true;
         gameState = GameState.Playing;
 
         yield return new WaitForSeconds(3);
