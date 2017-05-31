@@ -16,7 +16,7 @@ public class Grave : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            uim.orderText.text = "Here lies: s" + transform.name + "\n\nLost but not forgotten";
+            uim.orderText.text = "Here lies: " + transform.name + "\n\nLost but not forgotten";
             uim.orderAnimator.SetBool("Order", true);
         }
     }

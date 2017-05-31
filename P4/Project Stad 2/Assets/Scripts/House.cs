@@ -83,36 +83,39 @@ public class House : MonoBehaviour
 
     public void GivePoints()
     {
+        //if (PizzaQuality.quality > 100)
+        //{
+        //    GameManager.score += pointsGive + bonusPoints;
+        //}
+        //else if (PizzaQuality.quality == 100)
+        //{
+        //    GameManager.score += pointsGive;
+        //}
+        //else if (PizzaQuality.quality <= 80)
+        //{
+        //    GameManager.score += pointsGive - 20;
+        //}
+        //else if (PizzaQuality.quality <= 60)
+        //{
+        //    GameManager.score += pointsGive - 40;
+        //}
+        //else if (PizzaQuality.quality <= 40)
+        //{
+        //    GameManager.score += pointsGive - 60;
+        //}
+        //else if (PizzaQuality.quality <= 20)
+        //{
+        //    GameManager.score += pointsGive - 80;
+        //}
+
         if (PizzaQuality.quality > 100)
         {
-            GameManager.score += pointsGive + bonusPoints;
+            GameManager.score += (int)PizzaQuality.quality + bonusPoints;
         }
-        else if (PizzaQuality.quality == 100)
+        else
         {
-            GameManager.score += pointsGive;
+            GameManager.score += (int)PizzaQuality.quality;
         }
-        else if (PizzaQuality.quality <= 80)
-        {
-            GameManager.score += pointsGive - 20;
-        }
-        else if (PizzaQuality.quality <= 60)
-        {
-            GameManager.score += pointsGive - 40;
-        }
-        else if (PizzaQuality.quality <= 40)
-        {
-            GameManager.score += pointsGive - 60;
-        }
-        else if (PizzaQuality.quality <= 20)
-        {
-            GameManager.score += pointsGive - 80;
-        }
-        else if (PizzaQuality.quality <= 0)
-        {
-            GameManager.score += pointsGive - 100;
-        }
-
-        //GameManager.score += (int)PizzaQuality.quality + bonusPoints;
     }
 
     public IEnumerator DeliveredPizzaNotice()
