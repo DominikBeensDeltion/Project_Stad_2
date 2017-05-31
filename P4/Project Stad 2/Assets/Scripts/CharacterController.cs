@@ -10,6 +10,7 @@ public class CharacterController : MonoBehaviour
 
     public float moveSpeed = 5f;
     public float rotateSpeed = 10f;
+    public float gravity = 1f;
 
     private void Start()
     {
@@ -26,7 +27,7 @@ public class CharacterController : MonoBehaviour
         //transform.position = new Vector3(transform.position.x + horizontalMovement, 0, transform.position.z + verticalMovement);
 
         //nieuwe rigidbody movement
-        rb.velocity = new Vector3(horizontalMovement, 0, verticalMovement);
+        rb.velocity = new Vector3(horizontalMovement, -gravity, verticalMovement);
 
         Vector3 direction = new Vector3(horizontalMovement, 0, verticalMovement);
 
