@@ -7,7 +7,6 @@ public class Pizzeria : MonoBehaviour
 
     private GameManager gm;
     private UIManager uim;
-    private GameObject player;
 
     public List<GameObject> houses = new List<GameObject>();
     public GameObject targetHouse;
@@ -26,7 +25,6 @@ public class Pizzeria : MonoBehaviour
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
-        player = GameObject.FindWithTag("Player");
 
         FindHouses();
     }

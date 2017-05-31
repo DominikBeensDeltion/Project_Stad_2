@@ -5,7 +5,6 @@ using UnityEngine;
 public class PickupManager : MonoBehaviour
 {
 
-    private GameObject player;
     public GameObject quack;
     public int listCount;
 
@@ -19,7 +18,6 @@ public class PickupManager : MonoBehaviour
     private void Start()
     {
         listCount = pickups.Count;
-        player = GameObject.FindWithTag("Player");
     }
 
     private void Update()

@@ -20,11 +20,12 @@ public class Pickup : MonoBehaviour
 
     public int moveSpeedDuration;
 
+    public GameObject particlePrefab;
+    public GameObject spawnedParticle;
+
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
-        cr = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
-        pm = GameObject.FindGameObjectWithTag("GM").GetComponent<PickupManager>();
     }
 
     public void OnTriggerEnter(Collider col)
@@ -32,29 +33,23 @@ public class Pickup : MonoBehaviour
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "PlayerCar")
         {
             GetComponent<SpriteRenderer>().enabled = false;
-            //pickedUp = true;
             AudioSource.PlayClipAtPoint(ding, transform.position);
+            spawnedParticle = Instantiate(particlePrefab, transform.position, Quaternion.identity);
 
-            //if (pickedUp)
-            //{
-                if (gm.onMission)
+            if (gm.onMission)
+            {
+                if (giveTime)
                 {
-                    if (giveTime)
-                    {
-                        StartCoroutine(TimePickup());
-                    }
-                    if (giveQual)
-                    {
-                        StartCoroutine(QualityPickup());
-                    }
-                    //Not sure about this
-                    //Error = Coroutine could not be started because the game object PickupSpeed(Clone) is inactive!
-                    //ook al start ik de coroutine in de gamemanager
-                    if (giveSpeed)
-                    {
-                        StartCoroutine(SpeedPickup());
-                    }
-             //}
+                    StartCoroutine(TimePickup());
+                }
+                if (giveQual)
+                {
+                    StartCoroutine(QualityPickup());
+                }
+                if (giveSpeed)
+                {
+                    StartCoroutine(SpeedPickup());
+                }
             }
         }
     }
@@ -62,35 +57,45 @@ public class Pickup : MonoBehaviour
     public IEnumerator TimePickup()
     {
         gm.timeToCountDown += timeToGive;
-        //pickedUp = false;
 
         yield return new WaitForSeconds(0.5f);
 
+        Destroy(spawnedParticle);
         Destroy(gameObject);
     }
 
     public IEnumerator QualityPickup()
     {
         PizzaQuality.quality += QualToGive;
-        //pickedUp = false;
 
         yield return new WaitForSeconds(0.5f);
 
+        Destroy(spawnedParticle);
         Destroy(gameObject);
     }
 
     public IEnumerator SpeedPickup()
     {
-        cr.moveSpeed += speedToGive;
-        //pickedUp = false;
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            cr = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
 
-        yield return new WaitForSeconds(moveSpeedDuration);
+            cr.moveSpeed += speedToGive;
 
-        cr.moveSpeed -= speedToGive;
+            yield return new WaitForSeconds(moveSpeedDuration);
 
-        yield return new WaitForSeconds(0.5f);
+            cr.moveSpeed -= speedToGive;
 
-        Destroy(gameObject);
+            yield return new WaitForSeconds(0.5f);
+
+            Destroy(spawnedParticle);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(spawnedParticle);
+            Destroy(gameObject);
+        }
     }
 
     void OnDestroy()
