@@ -187,7 +187,7 @@ public class UIManager : MonoBehaviour
 
             pauseAnimator.SetTrigger("SetActive");
 
-            yield return new WaitForSeconds(0.6f);
+            yield return new WaitForSeconds(0.3f);
 
             Time.timeScale = 0;
             canPause = true;
@@ -199,7 +199,7 @@ public class UIManager : MonoBehaviour
 
             pauseAnimator.SetBool("SetInactive", true);
 
-            yield return new WaitForSeconds(0.6f);
+            yield return new WaitForSeconds(0.3f);
 
             pauseAnimator.SetBool("SetInactive", false);
 

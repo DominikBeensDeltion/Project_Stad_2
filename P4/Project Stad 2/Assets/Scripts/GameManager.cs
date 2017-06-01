@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
     public bool deathOutOfTime;
     public bool deathPizzaEaten;
 
+    public PizzaCar carScript;
+    public string[] carCheat;
+    public int carCheatIndex;
+    public bool canInputCheat = true;
+
     private void Start()
     {
         gameState = GameState.Intro;
@@ -59,6 +64,22 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && uim.canPause)
         {
             StartCoroutine(uim.PauseGame());
+        }
+
+        if (gameState == GameState.Paused && canInputCheat)
+        {
+            if (Input.GetKeyDown(carCheat[carCheatIndex]))
+            {
+                if (carCheatIndex != carCheat.Length - 1)
+                {
+                    carCheatIndex++;
+                }
+                else if (carCheatIndex == carCheat.Length - 1)
+                {
+                    carScript.repaired = true;
+                    canInputCheat = false;
+                }
+            }
         }
     }
 
