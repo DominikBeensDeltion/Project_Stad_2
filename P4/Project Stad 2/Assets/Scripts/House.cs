@@ -18,7 +18,6 @@ public class House : MonoBehaviour
     public int pointsGive = 100;
     public int bonusPoints = 50;
 
-    public Transform outsidePizzeriaSpawn;
     public Transform particleSpawn;
     public GameObject particlePrefab;
     public GameObject particle;
