@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Mini/World Map")]
     public Animator worldmapAnimator;
+    public GameObject worldmapObject;
     public bool worldmapActive;
     public bool canToggleMap;
 
@@ -89,6 +90,7 @@ public class UIManager : MonoBehaviour
             {
                 if (!worldmapActive)
                 {
+                    StartCoroutine(WorldMapRefresh());
                     StartCoroutine(OpenWorldmap());
                 }
                 else if (worldmapActive)
@@ -145,6 +147,13 @@ public class UIManager : MonoBehaviour
         canToggleMap = true;
     }
 
+    public IEnumerator WorldMapRefresh()
+    {
+        worldmapObject.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        worldmapObject.SetActive(false);
+    }
+
     public void IntroMouseEnter()
     {
         for (int i = 0; i < introImages.Length; i++)
@@ -170,9 +179,9 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator IntroStart()
     {
+        Time.timeScale = 1;
         introCamScript.followPath = false;
         introAnimator.SetTrigger("SetInactive");
-        Time.timeScale = 1;
         //zet de player visible en zijn controls aan, kon hem niet aan en uit doen met setactive omdat verschillende scripts in start de player zoeken
         gm.player.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 
