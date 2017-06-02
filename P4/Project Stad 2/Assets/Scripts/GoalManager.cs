@@ -6,6 +6,7 @@ public class GoalManager : MonoBehaviour
 {
     public UIManager uim;
 
+    [Header("Current Goal Amounts")]
     public int goal1CurrentAmount;
     public int goal2CurrentAmount;
     public int goal3CurrentAmount;
@@ -13,12 +14,16 @@ public class GoalManager : MonoBehaviour
     public int goal5CurrentAmount;
     public int goal6CurrentAmount;
 
+    [Header("Goal To Reach Amounts")]
     public int goal1AmountToReach = 1000;
     public int goal2AmountToReach = 25;
     public int goal3AmountToReach = 15;
     public int goal4AmountToReach = 1;
     public int goal5AmountToReach = 2;
     public int goal6AmountToReach = 50;
+
+    [Header("Rest")]
+    public bool goal3OnGoing = true;
 
     private void Start()
     {

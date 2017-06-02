@@ -165,16 +165,19 @@ public class UIManager : MonoBehaviour
 
     public void IntroStartButton()
     {
-        IntroStart();
+        StartCoroutine(IntroStart());
     }
 
-    public void IntroStart()
+    public IEnumerator IntroStart()
     {
         introCamScript.followPath = false;
         introAnimator.SetTrigger("SetInactive");
 
         //zet de player visible en zijn controls aan, kon hem niet aan en uit doen met setactive omdat verschillende scripts in start de player zoeken
         gm.player.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+
+        yield return new WaitForSeconds(0.5f);
+        introPanel.SetActive(false);
     }
 
     public IEnumerator PauseGame()

@@ -110,6 +110,11 @@ public class House : MonoBehaviour
         if (PizzaQuality.quality > 100)
         {
             GameManager.score += (int)PizzaQuality.quality + bonusPoints;
+
+            if (PizzaQuality.quality >= 150)
+            {
+
+            }
         }
         else
         {
