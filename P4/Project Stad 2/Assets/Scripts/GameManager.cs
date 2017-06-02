@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
     public void RestartButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 
     public void QuitButton()

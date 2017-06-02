@@ -172,7 +172,7 @@ public class UIManager : MonoBehaviour
     {
         introCamScript.followPath = false;
         introAnimator.SetTrigger("SetInactive");
-
+        Time.timeScale = 1;
         //zet de player visible en zijn controls aan, kon hem niet aan en uit doen met setactive omdat verschillende scripts in start de player zoeken
         gm.player.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 
