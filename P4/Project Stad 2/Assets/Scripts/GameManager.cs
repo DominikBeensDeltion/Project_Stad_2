@@ -36,7 +36,11 @@ public class GameManager : MonoBehaviour
     public PizzaCar carScript;
     public string[] carCheat;
     public int carCheatIndex;
-    public bool canInputCheat = true;
+    public bool canInputCarCheat = true;
+
+    public string[] speedCheat;
+    public int speedCheatIndex;
+    public bool canInputSpeedCheat = true;
 
     private void Start()
     {
@@ -66,18 +70,37 @@ public class GameManager : MonoBehaviour
             StartCoroutine(uim.PauseGame());
         }
 
-        if (gameState == GameState.Paused && canInputCheat)
+        if (gameState == GameState.Paused)
         {
-            if (Input.GetKeyDown(carCheat[carCheatIndex]))
+            if (canInputCarCheat)
             {
-                if (carCheatIndex != carCheat.Length - 1)
+                if (Input.GetKeyDown(carCheat[carCheatIndex]))
                 {
-                    carCheatIndex++;
+                    if (carCheatIndex != carCheat.Length - 1)
+                    {
+                        carCheatIndex++;
+                    }
+                    else if (carCheatIndex == carCheat.Length - 1)
+                    {
+                        carScript.repaired = true;
+                        canInputCarCheat = false;
+                    }
                 }
-                else if (carCheatIndex == carCheat.Length - 1)
+            }
+
+            if (canInputSpeedCheat)
+            {
+                if (Input.GetKeyDown(speedCheat[speedCheatIndex]))
                 {
-                    carScript.repaired = true;
-                    canInputCheat = false;
+                    if (speedCheatIndex != speedCheat.Length - 1)
+                    {
+                        speedCheatIndex++;
+                    }
+                    else if (speedCheatIndex == speedCheat.Length - 1)
+                    {
+                        player.GetComponent<CharacterController>().moveSpeed = 2500;
+                        canInputSpeedCheat = false;
+                    }
                 }
             }
         }

@@ -81,7 +81,7 @@ public class HoboWalking : MonoBehaviour
 
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                if(PizzaQuality.quality > 0)
+                if (PizzaQuality.quality > 0)
                 {
                     StartCoroutine(AttackCldw());
                 }
@@ -171,6 +171,7 @@ public class HoboWalking : MonoBehaviour
     {
         if (col.gameObject.tag == "PlayerCar")
         {
+            Instantiate(deathParticle, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

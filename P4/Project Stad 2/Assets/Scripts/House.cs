@@ -22,6 +22,8 @@ public class House : MonoBehaviour
     public GameObject particlePrefab;
     public GameObject particle;
 
+    public GameObject goalCompleteParticle;
+
     public AudioSource ding;
 
 	void Start ()
@@ -53,6 +55,7 @@ public class House : MonoBehaviour
                     PizzaQuality.quality = 0;
                     pizzeriaScript.canSpawnParticle = true;
                     DeleteMarker();
+                    Instantiate(goalCompleteParticle, particleSpawn);
                     isTarget = false;
 
                     if (goalManager.goal2CurrentAmount < goalManager.goal2AmountToReach)
@@ -113,7 +116,8 @@ public class House : MonoBehaviour
 
             if (PizzaQuality.quality >= 150)
             {
-
+                goalManager.goal4CurrentAmount = goalManager.AddToCurrentAmount(goalManager.goal4CurrentAmount, goalManager.goal4AmountToReach);
+                goalManager.goal4OnGoing = false;
             }
         }
         else

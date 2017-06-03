@@ -23,7 +23,7 @@ public class GoalManager : MonoBehaviour
     public int goal6AmountToReach = 50;
 
     [Header("Rest")]
-    public bool goal3OnGoing = true;
+    public bool goal4OnGoing = true;
 
     private void Start()
     {

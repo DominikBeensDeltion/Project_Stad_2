@@ -6,13 +6,14 @@ public class Pickup : MonoBehaviour
 {
     private GameManager gm;
     private PickupManager pm;
+    private CharacterController cr;
     public AudioClip ding;
-    public CharacterController cr;
+
+    public bool pickedUp;
 
     public bool giveTime;
     public bool giveQual;
     public bool giveSpeed;
-    public bool pickedUp;
 
     public float timeToGive;
     public float speedToGive;
@@ -21,7 +22,6 @@ public class Pickup : MonoBehaviour
     public int moveSpeedDuration;
 
     public GameObject particlePrefab;
-    public GameObject spawnedParticle;
 
     void Start()
     {
@@ -32,23 +32,27 @@ public class Pickup : MonoBehaviour
     {
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "PlayerCar")
         {
-            GetComponent<SpriteRenderer>().enabled = false;
-            AudioSource.PlayClipAtPoint(ding, transform.position);
-            spawnedParticle = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-
-            if (gm.onMission)
+            if (!pickedUp)
             {
-                if (giveTime)
+                pickedUp = true;
+                GetComponent<SpriteRenderer>().enabled = false;
+                AudioSource.PlayClipAtPoint(ding, transform.position);
+                Instantiate(particlePrefab, transform.position, Quaternion.identity);
+
+                if (gm.onMission)
                 {
-                    StartCoroutine(TimePickup());
-                }
-                if (giveQual)
-                {
-                    StartCoroutine(QualityPickup());
-                }
-                if (giveSpeed)
-                {
-                    StartCoroutine(SpeedPickup());
+                    if (giveTime)
+                    {
+                        StartCoroutine(TimePickup());
+                    }
+                    if (giveQual)
+                    {
+                        StartCoroutine(QualityPickup());
+                    }
+                    if (giveSpeed)
+                    {
+                        StartCoroutine(SpeedPickup());
+                    }
                 }
             }
         }
@@ -60,7 +64,6 @@ public class Pickup : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        Destroy(spawnedParticle);
         Destroy(gameObject);
     }
 
@@ -70,7 +73,6 @@ public class Pickup : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        Destroy(spawnedParticle);
         Destroy(gameObject);
     }
 
@@ -88,12 +90,10 @@ public class Pickup : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
 
-            Destroy(spawnedParticle);
             Destroy(gameObject);
         }
         else
         {
-            Destroy(spawnedParticle);
             Destroy(gameObject);
         }
     }
