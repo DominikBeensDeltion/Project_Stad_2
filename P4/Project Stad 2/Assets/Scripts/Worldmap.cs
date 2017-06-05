@@ -1,30 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Worldmap : MonoBehaviour
 {
     public Camera worldmapCam;
-    public GameObject wm;
+    public RectTransform worldmapTransform;
 
-    public int scrollSpeed = 2;
-    public int minZoom;
-    public int maxZoom;
+    public float scrollSpeed = 2;
+    public float minZoom;
+    public float maxZoom;
 
     private void Update()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && (Input.GetAxis("Mouse ScrollWheel") + GetComponent<Camera>().orthographicSize) > minZoom)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            for (int sensitivityOfScrolling = 3; sensitivityOfScrolling > 0; sensitivityOfScrolling--)
+            if (worldmapTransform.localScale.x < maxZoom && worldmapTransform.localScale.y < maxZoom)
             {
-                GetComponent<Camera>().orthographicSize -= scrollSpeed;
+                worldmapTransform.localScale += new Vector3(scrollSpeed, scrollSpeed, 0);
             }
         }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0 && (Input.GetAxis("Mouse ScrollWheel") + GetComponent<Camera>().orthographicSize) < maxZoom)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            for (int sensitivityOfScrolling = 3; sensitivityOfScrolling > 0; sensitivityOfScrolling--)
+            if (worldmapTransform.localScale.x > minZoom && worldmapTransform.localScale.y > minZoom)
             {
-                GetComponent<Camera>().orthographicSize += scrollSpeed;
+                worldmapTransform.localScale -= new Vector3(scrollSpeed, scrollSpeed, 0);
             }
         }
     }
