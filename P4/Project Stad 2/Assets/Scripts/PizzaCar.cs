@@ -14,21 +14,23 @@ public class PizzaCar : MonoBehaviour
     public GameObject seatedPlayer;
     public GameObject playerClone;
 
-    public float moveSpeed;
+    public float currentMoveSpeed;
     public float rotateSpeed;
+
+    public float forwardSpeed;
+    public float backwardSpeed;
 
     public AudioClip engine;
     public AudioSource sound;
 
     public Rigidbody rb;
-    // Use this for initialization
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         sound = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (inCar)
@@ -77,12 +79,23 @@ public class PizzaCar : MonoBehaviour
     {
         if (inCar)
         {
-            transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime);
             transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime);
+
+            if (Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime < 0)
+            {
+                currentMoveSpeed = backwardSpeed;
+            }
+            else if (Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime > 0)
+            {
+                currentMoveSpeed = forwardSpeed;
+            }
+
             if (rb.IsSleeping())
             {
                 sound.Play();
             }
+
             //float horizontalMovement = (Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed);
             //float verticalMovement = (Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed);
             //carObject.transform.position = new Vector3(transform.position.x + horizontalMovement, 0, transform.position.z + verticalMovement);
