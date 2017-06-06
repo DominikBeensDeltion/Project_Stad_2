@@ -84,17 +84,17 @@ public class PizzaCar : MonoBehaviour
     {
         if (inCar)
         {
-            transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime);
-            transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime);
+            //transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime);
+            //transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime);
 
-            if (Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime < 0)
-            {
-                currentMoveSpeed = backwardSpeed;
-            }
-            else if (Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime > 0)
-            {
-                currentMoveSpeed = forwardSpeed;
-            }
+            //if (Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime < 0)
+            //{
+            //    currentMoveSpeed = backwardSpeed;
+            //}
+            //else if (Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime > 0)
+            //{
+            //    currentMoveSpeed = forwardSpeed;
+            //}
 
             if (rb.IsSleeping())
             {
@@ -102,19 +102,19 @@ public class PizzaCar : MonoBehaviour
             }
 
             //working player-like movement
-            //float horizontalMovement = (Input.GetAxis("Horizontal") * Time.deltaTime * currentMoveSpeed);
-            //float verticalMovement = (Input.GetAxis("Vertical") * Time.deltaTime * currentMoveSpeed);
-            //carObject.transform.position = new Vector3(transform.position.x + horizontalMovement, 0, transform.position.z + verticalMovement);
+            float horizontalMovement = (Input.GetAxis("Horizontal") * Time.deltaTime * currentMoveSpeed);
+            float verticalMovement = (Input.GetAxis("Vertical") * Time.deltaTime * currentMoveSpeed);
+            carObject.transform.position = new Vector3(transform.position.x + horizontalMovement, 0, transform.position.z + verticalMovement);
 
-            //rb.velocity = new Vector3(horizontalMovement, -gravity, verticalMovement);
+            rb.velocity = new Vector3(horizontalMovement, -gravity, verticalMovement);
 
-            //Vector3 direction = new Vector3(horizontalMovement, 0, verticalMovement);
+            Vector3 direction = new Vector3(horizontalMovement, 0, verticalMovement);
 
-            //if (direction != Vector3.zero)
-            //{
-            //    Quaternion rotation = Quaternion.LookRotation(direction);
-            //    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
-            //}
+            if (direction != Vector3.zero)
+            {
+                Quaternion rotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
+            }
         }
     }
 
