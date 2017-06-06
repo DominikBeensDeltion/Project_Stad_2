@@ -76,6 +76,7 @@ public class PizzaCar : MonoBehaviour
     {
         if (inCar)
         {
+            //collider ignoring movement
             //transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * currentMoveSpeed * Time.deltaTime);
             //transform.Rotate(Vector3.up * Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime);
 
