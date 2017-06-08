@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ed5120c402fc62746807a0d5a32fe676
-timeCreated: 1496669203
+guid: e417c4eb3ee2f0a49a1b72b620305882
+timeCreated: 1496924535
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -85,10 +85,11 @@ ModelImporter:
     400074: Bip001 Spine1
     400076: Character
     400078: //RootNode
+    2300000: Character
+    3300000: Character
     4300000: Character
     7400000: Take 001
     9500000: //RootNode
-    13700000: Character
   materials:
     importMaterials: 1
     materialName: 0
