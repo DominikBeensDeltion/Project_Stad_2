@@ -34,7 +34,10 @@ public class House : MonoBehaviour
         pizzeriaScript = GameObject.FindWithTag("Pizzeria").GetComponent<Pizzeria>();
         ding = GetComponent<AudioSource>();
         particleSpawn = transform.FindChild(GameObject.FindWithTag("ParticleSpawn").transform.name);
-        naam = GameObject.FindGameObjectWithTag("GM").GetComponent<RandomNameGen>().Name();
+        if(gameObject.name != "Church")
+        {
+            naam = GameObject.FindGameObjectWithTag("GM").GetComponent<RandomNameGen>().Name();
+        }
     }
 
     public void OnTriggerEnter(Collider other)
