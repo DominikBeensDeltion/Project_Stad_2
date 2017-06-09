@@ -24,6 +24,7 @@ public class GoalManager : MonoBehaviour
 
     [Header("Rest")]
     public bool goal4OnGoing = true;
+    public PizzaCar pizzacar;
 
     private void Start()
     {
@@ -42,6 +43,11 @@ public class GoalManager : MonoBehaviour
         if (int.Parse(uim.scoreText.text) <= goal1AmountToReach)
         {
             goal1CurrentAmount = int.Parse(uim.scoreText.text);
+        }
+
+        if (int.Parse(uim.scoreText.text) >= goal1AmountToReach && !pizzacar.repaired)
+        {
+            pizzacar.UnlockCar();
         }
     }
 

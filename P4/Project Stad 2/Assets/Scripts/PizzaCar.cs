@@ -28,6 +28,7 @@ public class PizzaCar : MonoBehaviour
     public float cameraZoomSpeed = 3;
     public GameObject mainCam;
 
+    public ParticleSystem brokenParticle;
 
     void Start()
     {
@@ -142,5 +143,11 @@ public class PizzaCar : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         canGetOut = true;
+    }
+
+    public void UnlockCar()
+    {
+        repaired = true;
+        brokenParticle.Stop();
     }
 }

@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
                     }
                     else if (carCheatIndex == carCheat.Length - 1)
                     {
-                        carScript.repaired = true;
+                        carScript.UnlockCar();
                         canInputCarCheat = false;
                     }
                 }
