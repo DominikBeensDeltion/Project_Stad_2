@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PizzaCar : MonoBehaviour
 {
     public bool repaired;
@@ -24,9 +24,14 @@ public class PizzaCar : MonoBehaviour
 
     public Rigidbody rb;
 
+    private Vector3 defCamPos;
+    public float cameraZoomSpeed = 3;
+    public GameObject mainCam;
+
 
     void Start()
     {
+        mainCam = GameObject.FindGameObjectWithTag("MainCamera");
         rb = GetComponent<Rigidbody>();
         sound = GetComponent<AudioSource>();
     }
@@ -65,6 +70,9 @@ public class PizzaCar : MonoBehaviour
                     sound.PlayOneShot(engine);
                     player.transform.SetParent(carObject.transform);
                     player.transform.position = carObject.transform.position;
+                    defCamPos = mainCam.transform.position;
+                    Vector3 camDrivPos = new Vector3(transform.position.x, transform.position.y +50, transform.position.z);
+                    mainCam.transform.position = Vector3.MoveTowards(mainCam.transform.position , camDrivPos, cameraZoomSpeed * Time.deltaTime);
                     player.SetActive(false);
                     StartCoroutine("GetOutCoolDown");
                 }
@@ -114,13 +122,14 @@ public class PizzaCar : MonoBehaviour
     void GetOut()
     {
         RaycastHit hit;
-        if (Physics.Raycast(new Vector3(carObject.transform.position.x, carObject.transform.position.y + 0.5f, carObject.transform.position.z), transform.TransformDirection(Vector3.left), out hit, 2))
+        if (Physics.Raycast(new Vector3(carObject.transform.position.x, carObject.transform.position.y + 0.5f, carObject.transform.position.z), transform.TransformDirection(Vector3.left), out hit, 1.5F))
         {
             //U suck ray
         }
         else
         {
             player.SetActive(true);
+            mainCam.transform.position = Vector3.MoveTowards(Camera.main.transform.position, defCamPos, cameraZoomSpeed * Time.deltaTime);
             player.transform.position = carObject.transform.position - (transform.right * 2);
             player.transform.SetParent(null);
             inCar = false;
