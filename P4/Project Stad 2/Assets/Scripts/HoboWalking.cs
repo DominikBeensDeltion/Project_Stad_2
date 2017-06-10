@@ -42,6 +42,8 @@ public class HoboWalking : MonoBehaviour
 
     public GameObject spawnerISpawnedFrom;
 
+    public Animator anim;
+
     private void Start()
     {
         hoboState = State.Wandering;
@@ -49,6 +51,7 @@ public class HoboWalking : MonoBehaviour
         nom = gameObject.GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
+        anim = GetComponentInChildren<Animator>();
         SetNewPath();
     }
 
