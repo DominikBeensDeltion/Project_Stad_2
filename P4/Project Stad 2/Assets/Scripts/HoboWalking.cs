@@ -40,6 +40,8 @@ public class HoboWalking : MonoBehaviour
     public AudioSource nom;
     public GameObject deathParticle;
 
+    public GameObject spawnerISpawnedFrom;
+
     private void Start()
     {
         hoboState = State.Wandering;
@@ -97,7 +99,6 @@ public class HoboWalking : MonoBehaviour
             agent.SetDestination(spottedPlayerPos);
             chasePlayer = false;
             walkingBack = true;
-            print("hobo walking back");
 
             if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -171,6 +172,7 @@ public class HoboWalking : MonoBehaviour
     {
         if (col.gameObject.tag == "PlayerCar")
         {
+            spawnerISpawnedFrom.GetComponent<HoboSpawner>().currentHobos.Remove(gameObject);
             Instantiate(deathParticle, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

@@ -49,7 +49,7 @@ public class House : MonoBehaviour
                 if (isTarget)
                 {
                     StartCoroutine(DeliveredPizzaNotice());
-                    Debug.Log("Pizza Delivered");
+                    //Debug.Log("Pizza Delivered");
                     ding.Play();
                     uim.ResetHouseText();
                     gm.timerOn = false;

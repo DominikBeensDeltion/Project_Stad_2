@@ -24,8 +24,6 @@ public class PizzaCar : MonoBehaviour
 
     public Rigidbody rb;
 
-    private Vector3 defCamPos;
-    public float cameraZoomSpeed = 3;
     public GameObject mainCam;
 
     public ParticleSystem brokenParticle;
@@ -71,9 +69,7 @@ public class PizzaCar : MonoBehaviour
                     sound.PlayOneShot(engine);
                     player.transform.SetParent(carObject.transform);
                     player.transform.position = carObject.transform.position;
-                    defCamPos = mainCam.transform.position;
-                    Vector3 camDrivPos = new Vector3(transform.position.x, transform.position.y +50, transform.position.z);
-                    mainCam.transform.position = Vector3.MoveTowards(mainCam.transform.position , camDrivPos, cameraZoomSpeed * Time.deltaTime);
+                    mainCam.GetComponent<FollowPlayer>().posY += 10;
                     player.SetActive(false);
                     StartCoroutine("GetOutCoolDown");
                 }
@@ -130,7 +126,7 @@ public class PizzaCar : MonoBehaviour
         else
         {
             player.SetActive(true);
-            mainCam.transform.position = Vector3.MoveTowards(Camera.main.transform.position, defCamPos, cameraZoomSpeed * Time.deltaTime);
+            mainCam.GetComponent<FollowPlayer>().posY -= 10;
             player.transform.position = carObject.transform.position - (transform.right * 2);
             player.transform.SetParent(null);
             inCar = false;

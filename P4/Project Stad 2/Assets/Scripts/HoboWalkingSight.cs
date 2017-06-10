@@ -21,18 +21,18 @@ public class HoboWalkingSight : MonoBehaviour
 
     private void Update()
     {
-        if (gm.gameState == GameManager.GameState.Playing)
+        if (gm.gameState == GameManager.GameState.Playing && player != null)
         {
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 toPlayer = player.transform.position - hoboWalking.transform.position;
 
             if (Vector3.Distance(hoboWalking.transform.position, player.transform.position) <= sightRange)
             {
-                print("player is in range");
+                //print("player is in range");
 
                 if (Vector3.Dot(forward, toPlayer) > 0)
                 {
-                    print("player is infront of hobo");
+                    //print("player is infront of hobo");
 
                     Vector3 targetDir = player.transform.position - hoboWalking.transform.position;
                     float angle = Vector3.Angle(targetDir, transform.forward);
@@ -42,7 +42,7 @@ public class HoboWalkingSight : MonoBehaviour
 
                     if (angle < sightAngle)
                     {
-                        print("player is in sight");
+                        //print("player is in sight");
 
                         //Debug.DrawRay(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, Color.yellow);
 
@@ -55,7 +55,7 @@ public class HoboWalkingSight : MonoBehaviour
                             {
                                 if (hoboWalking.hoboState == HoboWalking.State.Wandering)
                                 {
-                                    print("chase player");
+                                    //print("chase player");
                                     hoboWalking.ChasePlayer();
                                 }
                             }
