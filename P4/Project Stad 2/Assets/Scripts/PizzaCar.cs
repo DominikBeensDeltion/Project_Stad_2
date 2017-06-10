@@ -27,12 +27,14 @@ public class PizzaCar : MonoBehaviour
     public GameObject mainCam;
 
     public ParticleSystem brokenParticle;
+    public ParticleSystem carEngineParticle;
 
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera");
         rb = GetComponent<Rigidbody>();
         sound = GetComponent<AudioSource>();
+        //carEngineParticle.Stop();
     }
 
     void Update()
@@ -71,6 +73,7 @@ public class PizzaCar : MonoBehaviour
                     player.transform.position = carObject.transform.position;
                     mainCam.GetComponent<FollowPlayer>().posY += 10;
                     player.SetActive(false);
+                    //carEngineParticle.Play();
                     StartCoroutine("GetOutCoolDown");
                 }
             }
@@ -131,6 +134,7 @@ public class PizzaCar : MonoBehaviour
             player.transform.SetParent(null);
             inCar = false;
             canGetOut = false;
+            //carEngineParticle.Stop();
             sound.Stop();
         }
     }
