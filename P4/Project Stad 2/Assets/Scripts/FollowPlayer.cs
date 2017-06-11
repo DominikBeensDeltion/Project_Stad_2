@@ -9,16 +9,17 @@ public class FollowPlayer : MonoBehaviour
 
     public bool lerpOrNot;
 
+    public Vector3 startOffset;
     public Vector3 offset;
     public float followSpeed = 30f;
-    public float posY;
 
     private void Start()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         player = GameObject.FindWithTag("Player");
-        posY = player.transform.position.y;
+        //posY = player.transform.position.y;
         offset = transform.position - player.transform.position;
+        startOffset = offset;
     }
 
     private void Update()
@@ -27,8 +28,7 @@ public class FollowPlayer : MonoBehaviour
         {
             if (!lerpOrNot)
             {
-                //transform.position = player.transform.position + offset;
-                Vector3 position = new Vector3(player.transform.position.x, posY, player.transform.position.z) + offset;
+                Vector3 position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) + offset;
                 transform.position = Vector3.MoveTowards(transform.position, position, (followSpeed * Time.deltaTime));
             }
             else if (lerpOrNot)

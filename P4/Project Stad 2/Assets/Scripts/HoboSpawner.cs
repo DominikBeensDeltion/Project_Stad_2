@@ -5,11 +5,15 @@ using UnityEngine;
 public class HoboSpawner : MonoBehaviour
 {
 
+    public GameObject player;
+    public GameObject pizzacar;
+
     public bool canSpawn = true;
     public bool ableToSpawn;
     public int maxSpawnAmount = 5;
     public int currentSpawnAmount;
     public float spawnInterval = 1;
+    public float canSpawnDistance = 25f;
 
     public List<GameObject> currentHobos = new List<GameObject>();
     public GameObject hoboPrefab;
@@ -30,7 +34,10 @@ public class HoboSpawner : MonoBehaviour
 
         if (ableToSpawn && canSpawn)
         {
-            StartCoroutine(SpawnHobo());
+            if (Vector3.Distance(transform.position, player.transform.position) >= canSpawnDistance || Vector3.Distance(transform.position, pizzacar.transform.position) >= canSpawnDistance)
+            {
+                StartCoroutine(SpawnHobo());
+            }
         }
     }
 

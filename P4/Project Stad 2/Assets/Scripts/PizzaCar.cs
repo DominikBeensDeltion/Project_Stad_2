@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class PizzaCar : MonoBehaviour
 {
     public bool repaired;
@@ -24,6 +25,7 @@ public class PizzaCar : MonoBehaviour
 
     public Rigidbody rb;
 
+    private FollowPlayer mainCamFollowScript;
     public GameObject mainCam;
 
     public ParticleSystem brokenParticle;
@@ -34,6 +36,7 @@ public class PizzaCar : MonoBehaviour
         mainCam = GameObject.FindGameObjectWithTag("MainCamera");
         rb = GetComponent<Rigidbody>();
         sound = GetComponent<AudioSource>();
+        mainCamFollowScript = mainCam.GetComponent<FollowPlayer>();
         //carEngineParticle.Stop();
     }
 
@@ -71,7 +74,8 @@ public class PizzaCar : MonoBehaviour
                     sound.PlayOneShot(engine);
                     player.transform.SetParent(carObject.transform);
                     player.transform.position = carObject.transform.position;
-                    mainCam.GetComponent<FollowPlayer>().posY += 10;
+                    mainCamFollowScript.offset.y += 10;
+                    mainCamFollowScript.offset.z -= 4;
                     player.SetActive(false);
                     //carEngineParticle.Play();
                     StartCoroutine("GetOutCoolDown");
@@ -129,7 +133,7 @@ public class PizzaCar : MonoBehaviour
         else
         {
             player.SetActive(true);
-            mainCam.GetComponent<FollowPlayer>().posY -= 10;
+            mainCamFollowScript.offset = mainCamFollowScript.startOffset;
             player.transform.position = carObject.transform.position - (transform.right * 2);
             player.transform.SetParent(null);
             inCar = false;

@@ -59,6 +59,15 @@ public class HoboWalking : MonoBehaviour
     {
         if (hoboState == State.Wandering)
         {
+            if (agent.velocity != Vector3.zero)
+            {
+                //anim.SetBool("Walking", true);
+            }
+            else
+            {
+                //anim.SetBool("Walking", false);
+            }
+
             if (canSetNewPath)
             {
                 if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
@@ -79,6 +88,9 @@ public class HoboWalking : MonoBehaviour
         }
         else if (hoboState == State.Chasing)
         {
+            //anim.SetBool("Running", true);
+            //anim.SetBool("Walking", false);
+
             if (chasePlayer)
             {
                 agent.SetDestination(player.transform.position);
@@ -99,6 +111,9 @@ public class HoboWalking : MonoBehaviour
         }
         else if (hoboState == State.Backing)
         {
+            //anim.SetBool("Walking", true);
+            //anim.SetBool("Running", false);
+
             agent.SetDestination(spottedPlayerPos);
             chasePlayer = false;
             walkingBack = true;
@@ -175,9 +190,12 @@ public class HoboWalking : MonoBehaviour
     {
         if (col.gameObject.tag == "PlayerCar")
         {
-            spawnerISpawnedFrom.GetComponent<HoboSpawner>().currentHobos.Remove(gameObject);
-            Instantiate(deathParticle, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            if (col.gameObject.GetComponent<PizzaCar>().inCar)
+            {
+                spawnerISpawnedFrom.GetComponent<HoboSpawner>().currentHobos.Remove(gameObject);
+                Instantiate(deathParticle, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
         }
     }
 }
