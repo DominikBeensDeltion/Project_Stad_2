@@ -100,7 +100,7 @@ public class HoboWalking : MonoBehaviour
             {
                 if (PizzaQuality.quality > 0)
                 {
-                    StartCoroutine(AttackCldw());
+                    //StartCoroutine(AttackCldw());
                 }
             }
 
@@ -113,6 +113,8 @@ public class HoboWalking : MonoBehaviour
         {
             //anim.SetBool("Walking", true);
             //anim.SetBool("Running", false);
+
+            print("hobo walking back");
 
             agent.SetDestination(spottedPlayerPos);
             chasePlayer = false;

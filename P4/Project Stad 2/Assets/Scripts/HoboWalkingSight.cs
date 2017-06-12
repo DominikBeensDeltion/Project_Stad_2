@@ -15,7 +15,7 @@ public class HoboWalkingSight : MonoBehaviour
     private void Start()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
-        hoboWalking = GetComponentInParent<HoboWalking>();
+        hoboWalking = GetComponent<HoboWalking>();
         player = GameObject.FindWithTag("Player");
     }
 
@@ -28,11 +28,11 @@ public class HoboWalkingSight : MonoBehaviour
 
             if (Vector3.Distance(hoboWalking.transform.position, player.transform.position) <= sightRange)
             {
-                //print("player is in range");
+                print("player is in range");
 
                 if (Vector3.Dot(forward, toPlayer) > 0)
                 {
-                    //print("player is infront of hobo");
+                    print("player is infront of hobo");
 
                     Vector3 targetDir = player.transform.position - hoboWalking.transform.position;
                     float angle = Vector3.Angle(targetDir, transform.forward);
@@ -42,21 +42,29 @@ public class HoboWalkingSight : MonoBehaviour
 
                     if (angle < sightAngle)
                     {
-                        //print("player is in sight");
+                        print("player is in sight");
 
                         //Debug.DrawRay(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, Color.yellow);
 
                         RaycastHit hit;
-                        if (Physics.Raycast(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, out hit))
+                        if (Physics.Raycast(new Vector3(hoboWalking.transform.position.x, hoboWalking.transform.position.y + 1, hoboWalking.transform.position.z), player.transform.position - hoboWalking.transform.position, out hit))
                         {
-                            //Debug.DrawRay(hoboWalking.transform.position, player.transform.position - hoboWalking.transform.position, new Color(0, 0, 0));
+                            //Debug.DrawRay(new Vector3(hoboWalking.transform.position.x, hoboWalking.transform.position.y + 1, hoboWalking.transform.position.z), player.transform.position - hoboWalking.transform.position, new Color(0, 0, 0));
 
                             if (hit.transform.gameObject.tag == "Player")
                             {
                                 if (hoboWalking.hoboState == HoboWalking.State.Wandering)
                                 {
-                                    //print("chase player");
-                                    hoboWalking.ChasePlayer();
+                                    print("chase player");
+
+                                    //if (!hoboWalking.canSetNewPath)
+                                    //{
+                                    //    StopCoroutine(hoboWalking.StandStill());
+                                    //}
+                                    //else
+                                    //{
+                                        hoboWalking.ChasePlayer();
+                                    //}
                                 }
                             }
                         }
