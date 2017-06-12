@@ -27,6 +27,7 @@ public class PizzaCar : MonoBehaviour
 
     private FollowPlayer mainCamFollowScript;
     public GameObject mainCam;
+    public GameObject minimapCam;
 
     public ParticleSystem brokenParticle;
     public ParticleSystem carEngineParticle;
@@ -81,6 +82,7 @@ public class PizzaCar : MonoBehaviour
                     player.transform.position = carObject.transform.position;
                     mainCamFollowScript.offset.y += 10;
                     mainCamFollowScript.offset.z -= 4;
+                    minimapCam.GetComponent<Camera>().orthographicSize += 5;
                     player.SetActive(false);
                     //carEngineParticle.Play();
                     StartCoroutine("GetOutCoolDown");
@@ -139,6 +141,7 @@ public class PizzaCar : MonoBehaviour
         {
             player.SetActive(true);
             mainCamFollowScript.offset = mainCamFollowScript.startOffset;
+            minimapCam.GetComponent<Camera>().orthographicSize -= 5;
             player.transform.position = carObject.transform.position - (transform.right * 2);
             player.transform.SetParent(null);
             inCar = false;
