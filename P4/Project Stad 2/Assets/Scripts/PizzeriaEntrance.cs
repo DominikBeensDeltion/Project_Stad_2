@@ -25,8 +25,11 @@ public class PizzeriaEntrance : MonoBehaviour
         if (other.tag == "Player")
         {
             uim.noticeText.text = "Press E to enter/exit pizzeria";
-            uim.noticeAnimator.SetTrigger("SetActive");
-            uim.noticePanelIsActive = true;
+            if (!uim.noticeAnimator.GetCurrentAnimatorStateInfo(0).IsName("NoticeActive"))
+            {
+                uim.noticeAnimator.SetTrigger("SetActive");
+                uim.noticePanelIsActive = true;
+            }
         }
     }
 
@@ -58,7 +61,7 @@ public class PizzeriaEntrance : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            if (uim.noticePanelIsActive)
+            if (uim.noticePanelIsActive && !uim.noticeAnimator.GetCurrentAnimatorStateInfo(0).IsName("NoticeInActive"))
             {
                 uim.noticeAnimator.SetTrigger("SetInActive");
                 uim.noticePanelIsActive = false;

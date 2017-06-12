@@ -49,7 +49,7 @@ public class Pizzeria : MonoBehaviour
         targetHouse = houses[i];
         targetHouse.GetComponent<House>().isTarget = true;
         targetHouse.GetComponent<House>().CreateMarker();
-        uim.TempHouseText(targetHouse);
+        uim.HouseText(targetHouse);
         gm.timerOn = true;
         gm.onMission = true;
         PizzaQuality.quality = 100F;

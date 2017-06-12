@@ -47,6 +47,7 @@ public class GoalManager : MonoBehaviour
 
         if (int.Parse(uim.scoreText.text) >= goal1AmountToReach && !pizzacar.repaired)
         {
+            uim.orderText.text = "You've successfully delivered the pizza!" + "\n" + "You've also unlocked the car!" + "\n\n" + "Now get back to the pizzeria and go get the next one!";
             pizzacar.UnlockCar();
         }
     }

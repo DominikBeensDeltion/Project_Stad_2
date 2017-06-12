@@ -262,7 +262,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    public void TempHouseText(GameObject g)
+    public void HouseText(GameObject g)
     {
         if (g.GetComponent<House>().isTarget)
         {
