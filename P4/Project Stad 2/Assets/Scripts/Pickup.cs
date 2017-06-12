@@ -59,6 +59,10 @@ public class Pickup : MonoBehaviour
                         StartCoroutine(CarRepairPickup());
                     }
                 }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
