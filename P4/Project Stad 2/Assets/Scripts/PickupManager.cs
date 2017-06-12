@@ -36,9 +36,8 @@ public class PickupManager : MonoBehaviour
             {
                 if(pickups.Count <= listCount)
                 {
-                        pickups.Add(quack);
-                        i = pickups.IndexOf(quack);
-
+                    pickups.Add(quack);
+                    i = pickups.IndexOf(quack);
                 }
             }
 

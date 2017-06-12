@@ -203,20 +203,21 @@ public class PizzaCar : MonoBehaviour
         if (durability < 30)
         {
             currentMoveSpeed = 7;
+            brokenParticle.Play();
         }
         if (durability < 10)
         {
             currentMoveSpeed = 4F;
-            brokenParticle.Play();
         }
     }
 
-    void Repair()
-    {
-        durability = 100F;
-        currentMoveSpeed = 16F;
-        brokenParticle.Stop();
-    }
+    //werkt niet vanaf de pickup
+    //public void Repair()
+    //{
+    //    durability = 100F;
+    //    currentMoveSpeed = 16F;
+    //    brokenParticle.Stop();
+    //}
 
     IEnumerator WaitForCollide()
     {

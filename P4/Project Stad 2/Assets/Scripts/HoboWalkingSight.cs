@@ -57,14 +57,7 @@ public class HoboWalkingSight : MonoBehaviour
                                 {
                                     print("chase player");
 
-                                    //if (!hoboWalking.canSetNewPath)
-                                    //{
-                                    //    StopCoroutine(hoboWalking.StandStill());
-                                    //}
-                                    //else
-                                    //{
-                                        hoboWalking.ChasePlayer();
-                                    //}
+                                    hoboWalking.ChasePlayer();
                                 }
                             }
                         }

@@ -14,6 +14,7 @@ public class Pickup : MonoBehaviour
     public bool giveTime;
     public bool giveQual;
     public bool giveSpeed;
+    public bool giveCarRepair;
 
     public float timeToGive;
     public float speedToGive;
@@ -52,6 +53,10 @@ public class Pickup : MonoBehaviour
                     if (giveSpeed)
                     {
                         StartCoroutine(SpeedPickup());
+                    }
+                    if (giveCarRepair)
+                    {
+                        StartCoroutine(CarRepairPickup());
                     }
                 }
             }
@@ -96,6 +101,18 @@ public class Pickup : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public IEnumerator CarRepairPickup()
+    {
+        GameObject car = GameObject.FindWithTag("PlayerCar");
+        car.GetComponent<PizzaCar>().durability = 100f;
+        car.GetComponent<PizzaCar>().currentMoveSpeed = 16f;
+        car.GetComponent<PizzaCar>().brokenParticle.Stop();
+
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(gameObject);
     }
 
     void OnDestroy()
