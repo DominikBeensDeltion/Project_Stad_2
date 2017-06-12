@@ -178,6 +178,11 @@ public class PizzaCar : MonoBehaviour
                 {
                     Damage(otherDam);
                 }
+
+                if (durability > 30)
+                {
+                    StartCoroutine(CarCollision());
+                }
                 UpdateMoveSpeed();
                 StartCoroutine(WaitForCollide());
             }
@@ -203,7 +208,7 @@ public class PizzaCar : MonoBehaviour
         {
             currentMoveSpeed = 10F;
         }
-        if (durability < 30)
+        if (durability <= 30)
         {
             currentMoveSpeed = 7;
             brokenParticle.Play();
@@ -226,5 +231,12 @@ public class PizzaCar : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         collided = false;
+    }
+
+    IEnumerator CarCollision()
+    {
+        brokenParticle.Play();
+        yield return new WaitForSeconds(0.5f);
+        brokenParticle.Stop();
     }
 }
