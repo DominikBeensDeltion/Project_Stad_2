@@ -31,6 +31,11 @@ public class PizzaCar : MonoBehaviour
     public ParticleSystem brokenParticle;
     public ParticleSystem carEngineParticle;
 
+    public float durability = 100F;
+    public float houseDam = 5F;
+    public float otherDam = 2.5F;
+    public bool collided;
+
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera");
@@ -153,5 +158,69 @@ public class PizzaCar : MonoBehaviour
     {
         repaired = true;
         brokenParticle.Stop();
+    }
+
+    public void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.tag != "Sidewalk" && col.gameObject.tag != "Ground" && col.gameObject.tag != "Road" && col.gameObject.tag != "Player")
+        {
+            if (!collided)
+            {
+                collided = true;
+                if (col.gameObject.tag == "House")
+                {
+                    Damage(houseDam);
+                }
+                else
+                {
+                    Damage(otherDam);
+                }
+                UpdateMoveSpeed();
+                StartCoroutine(WaitForCollide());
+            }
+        }
+    }
+
+    void Damage(float i)
+    {
+        if(durability > 0)
+        {
+            durability -= i;
+            Debug.Log("POTVIS");
+        }
+    }
+
+    void UpdateMoveSpeed()
+    {
+        if(durability < 70)
+        {
+            currentMoveSpeed = 13F;
+        }
+        if (durability < 50)
+        {
+            currentMoveSpeed = 10F;
+        }
+        if (durability < 30)
+        {
+            currentMoveSpeed = 7;
+        }
+        if (durability < 10)
+        {
+            currentMoveSpeed = 4F;
+            brokenParticle.Play();
+        }
+    }
+
+    void Repair()
+    {
+        durability = 100F;
+        currentMoveSpeed = 16F;
+        brokenParticle.Stop();
+    }
+
+    IEnumerator WaitForCollide()
+    {
+        yield return new WaitForSeconds(1);
+        collided = false;
     }
 }
