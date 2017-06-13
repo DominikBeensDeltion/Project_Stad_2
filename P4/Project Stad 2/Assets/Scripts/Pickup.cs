@@ -59,9 +59,16 @@ public class Pickup : MonoBehaviour
                         StartCoroutine(CarRepairPickup());
                     }
                 }
-                else
+                else if (!gm.onMission)
                 {
-                    Destroy(gameObject);
+                    if (giveCarRepair)
+                    {
+                        StartCoroutine(CarRepairPickup());
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }
         }

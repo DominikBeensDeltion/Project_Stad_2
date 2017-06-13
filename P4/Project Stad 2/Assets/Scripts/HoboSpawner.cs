@@ -17,7 +17,7 @@ public class HoboSpawner : MonoBehaviour
 
     public List<GameObject> currentHobos = new List<GameObject>();
     public GameObject hoboPrefab;
-    public GameObject hobo;
+    private GameObject hobo;
 
     private void Update()
     {

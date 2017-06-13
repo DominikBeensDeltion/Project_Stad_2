@@ -159,6 +159,7 @@ public class HoboWalking : MonoBehaviour
 
     public void ChasePlayer()
     {
+        print(gameObject.name);
         hoboState = State.Chasing;
 
         spottedPlayerPos = transform.position;
