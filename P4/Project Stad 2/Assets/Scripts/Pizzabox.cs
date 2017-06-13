@@ -5,8 +5,15 @@ using UnityEngine;
 public class Pizzabox : MonoBehaviour
 {
 
+    public GameObject hands;
     public GameObject pizzabox;
+    public float speed = 15;
     public ParticleSystem getPizzaParticle;
+
+    private void Update()
+    {
+        pizzabox.transform.position = Vector3.Lerp(pizzabox.transform.transform.position, hands.transform.position, (speed * Time.deltaTime));
+    }
 
     public IEnumerator Active()
     {
