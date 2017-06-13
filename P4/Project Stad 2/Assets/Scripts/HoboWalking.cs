@@ -72,14 +72,14 @@ public class HoboWalking : MonoBehaviour
 
     public void StateWandering()
     {
-        if (agent.velocity != Vector3.zero)
-        {
-            //anim.SetBool("Walking", true);
-        }
-        else
-        {
-            //anim.SetBool("Walking", false);
-        }
+        //if (agent.velocity != Vector3.zero)
+        //{
+        //    anim.SetBool("Walking", true);
+        //}
+        //else
+        //{
+        //    anim.SetBool("Walking", false);
+        //}
 
         if (canSetNewPath)
         {

@@ -55,7 +55,7 @@ public class Pizzeria : MonoBehaviour
         gm.onMission = true;
         PizzaQuality.quality = 100F;
         beepBeep.Play();
-        pizzabox.Active();
+        StartCoroutine(pizzabox.Active());
 
         Destroy(particle);
         particle = null;
