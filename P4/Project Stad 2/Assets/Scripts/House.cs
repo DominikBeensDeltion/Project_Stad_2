@@ -9,6 +9,7 @@ public class House : MonoBehaviour
     private GameManager gm;
     private GoalManager goalManager;
     private Pizzeria pizzeriaScript;
+    public Pizzabox pizzabox;
 
     public bool isTarget;
     public GameObject markOne;
@@ -61,6 +62,7 @@ public class House : MonoBehaviour
                     DeleteMarker();
                     Instantiate(goalCompleteParticle, particleSpawn);
                     isTarget = false;
+                    pizzabox.Inactive();
 
                     if (goalManager.goal2CurrentAmount < goalManager.goal2AmountToReach)
                     {

@@ -7,6 +7,7 @@ public class Pizzeria : MonoBehaviour
 
     private GameManager gm;
     private UIManager uim;
+    public Pizzabox pizzabox;
 
     public List<GameObject> houses = new List<GameObject>();
     public GameObject targetHouse;
@@ -54,6 +55,7 @@ public class Pizzeria : MonoBehaviour
         gm.onMission = true;
         PizzaQuality.quality = 100F;
         beepBeep.Play();
+        pizzabox.Active();
 
         Destroy(particle);
         particle = null;
