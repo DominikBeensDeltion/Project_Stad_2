@@ -37,7 +37,8 @@ public class IntroCameraMovement : MonoBehaviour
                 if (followPath)
                 {
                     transform.position = Vector3.MoveTowards(gameObject.transform.position, waypoints[currentWaypoint].transform.position, (moveSpeed * Time.deltaTime));
-                    transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, waypoints[currentWaypoint].transform.localRotation, (rotateSpeed * Time.deltaTime));
+                    //transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, waypoints[currentWaypoint].transform.localRotation, (rotateSpeed * Time.deltaTime));
+                    transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, waypoints[currentWaypoint].transform.localRotation, (rotateSpeed * Time.deltaTime));
 
                     if (gameObject.transform.position == waypoints[currentWaypoint].transform.position)
                     {

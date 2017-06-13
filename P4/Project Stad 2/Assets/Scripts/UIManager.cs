@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public GameObject introPanel;
     public Image[] introImages;
     public Text[] introText;
+    public Image[] minimapImages;
     public Animator introAnimator;
 
     [Header("Order Panel")]
@@ -30,8 +31,10 @@ public class UIManager : MonoBehaviour
     public bool worldmapActive;
     public bool canToggleMap;
 
+    public GameObject minimapPanel;
     public Animator minimapAnimator;
     public bool minimapActive = true;
+    public RawImage minimapImage;
 
     [Header("Timer")]
     public Text timerText;
@@ -76,6 +79,7 @@ public class UIManager : MonoBehaviour
 
         introImages = introPanel.GetComponentsInChildren<Image>();
         introText = introPanel.GetComponentsInChildren<Text>();
+        minimapImages = minimapPanel.GetComponentsInChildren<Image>();
         IntroMouseExit();
     }
 
@@ -156,19 +160,43 @@ public class UIManager : MonoBehaviour
 
     public void IntroMouseEnter()
     {
-        for (int i = 0; i < introImages.Length; i++)
+        if (gm.gameState == GameManager.GameState.Intro)
         {
-            introImages[i].CrossFadeAlpha(1f, 0.3f, false);
-            introText[i].CrossFadeAlpha(1f, 0.3f, false);
+            for (int i = 0; i < introImages.Length; i++)
+            {
+                introImages[i].CrossFadeAlpha(1f, 0.3f, false);
+            }
+            for (int i = 0; i < introText.Length; i++)
+            {
+                introText[i].CrossFadeAlpha(1f, 0.3f, false);
+            }
+            for (int i = 0; i < minimapImages.Length; i++)
+            {
+                minimapImages[i].CrossFadeAlpha(1f, 0.3f, false);
+            }
+
+            minimapImage.CrossFadeAlpha(1f, 0.3f, false);
         }
     }
 
     public void IntroMouseExit()
     {
-        for (int i = 0; i < introImages.Length; i++)
+        if (gm.gameState == GameManager.GameState.Intro)
         {
-            introImages[i].CrossFadeAlpha(0.25f, 0.3f, false);
-            introText[i].CrossFadeAlpha(0.25f, 0.3f, false);
+            for (int i = 0; i < introImages.Length; i++)
+            {
+                introImages[i].CrossFadeAlpha(0.15f, 0.3f, false);
+            }
+            for (int i = 0; i < introText.Length; i++)
+            {
+                introText[i].CrossFadeAlpha(0.15f, 0.3f, false);
+            }
+            for (int i = 0; i < minimapImages.Length; i++)
+            {
+                minimapImages[i].CrossFadeAlpha(0.15f, 0.3f, false);
+            }
+
+            minimapImage.CrossFadeAlpha(0.15f, 0.3f, false);
         }
     }
 
