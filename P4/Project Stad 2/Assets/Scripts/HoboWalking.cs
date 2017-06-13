@@ -24,7 +24,6 @@ public class HoboWalking : MonoBehaviour
 
     public bool canSetNewPath = true;
     public bool chasePlayer;
-    public bool walkingBack;
 
     public float continueToWalkChance = 0.66f;
     public float minimumStopTime = 4f;
@@ -57,76 +56,88 @@ public class HoboWalking : MonoBehaviour
 
     private void Update()
     {
-        if (hoboState == State.Wandering)
+        switch (hoboState)
         {
-            if (agent.velocity != Vector3.zero)
-            {
-                //anim.SetBool("Walking", true);
-            }
-            else
-            {
-                //anim.SetBool("Walking", false);
-            }
-
-            if (canSetNewPath)
-            {
-                if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    float stopOrNah = Random.value;
-
-                    if (stopOrNah > continueToWalkChance)
-                    {
-                        canSetNewPath = false;
-                        StartCoroutine(StandStill());
-                    }
-                    else
-                    {
-                        SetNewPath();
-                    }
-                }
-            }
+            case State.Wandering:
+                StateWandering();
+                break;
+            case State.Chasing:
+                StateChasing();
+                break;
+            case State.Backing:
+                StateBacking();
+                break;
         }
-        else if (hoboState == State.Chasing)
-        {
-            //anim.SetBool("Running", true);
-            //anim.SetBool("Walking", false);
+    }
 
-            if (chasePlayer)
-            {
-                agent.SetDestination(player.transform.position);
-            }
-
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-            {
-                if (PizzaQuality.quality > 0)
-                {
-                    //StartCoroutine(AttackCldw());
-                }
-            }
-
-            if (agent.remainingDistance >= stopChasingDistance || Pizzeria.playerInsidePizzeria)
-            {
-                hoboState = State.Backing;
-            }
-        }
-        else if (hoboState == State.Backing)
+    public void StateWandering()
+    {
+        if (agent.velocity != Vector3.zero)
         {
             //anim.SetBool("Walking", true);
-            //anim.SetBool("Running", false);
+        }
+        else
+        {
+            //anim.SetBool("Walking", false);
+        }
 
-            print("hobo walking back");
-
-            agent.SetDestination(spottedPlayerPos);
-            chasePlayer = false;
-            walkingBack = true;
-
-            if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= agent.stoppingDistance)
+        if (canSetNewPath)
+        {
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
-                canSetNewPath = true;
-                walkingBack = false;
+                float stopOrNah = Random.value;
 
-                hoboState = State.Wandering;
+                if (stopOrNah > continueToWalkChance)
+                {
+                    canSetNewPath = false;
+                    StartCoroutine(StandStill());
+                }
+                else
+                {
+                    SetNewPath();
+                }
             }
+        }
+    }
+
+    public void StateChasing()
+    {
+        //anim.SetBool("Running", true);
+        //anim.SetBool("Walking", false);
+
+        if (chasePlayer)
+        {
+            agent.SetDestination(player.transform.position);
+        }
+
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            if (PizzaQuality.quality > 0)
+            {
+                //StartCoroutine(AttackCldw());
+            }
+        }
+
+        if (agent.remainingDistance >= stopChasingDistance || Pizzeria.playerInsidePizzeria)
+        {
+            hoboState = State.Backing;
+        }
+    }
+
+    public void StateBacking()
+    {
+        //anim.SetBool("Walking", true);
+        //anim.SetBool("Running", false);
+
+        print("hobo walking back");
+
+        agent.SetDestination(spottedPlayerPos);
+        chasePlayer = false;
+
+        if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            canSetNewPath = true;
+            hoboState = State.Wandering;
         }
     }
 
@@ -159,7 +170,6 @@ public class HoboWalking : MonoBehaviour
 
     public void ChasePlayer()
     {
-        print(gameObject.name);
         hoboState = State.Chasing;
 
         spottedPlayerPos = transform.position;
