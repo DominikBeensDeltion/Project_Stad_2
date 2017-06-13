@@ -61,6 +61,10 @@ public class Pickup : MonoBehaviour
                 }
                 else if (!gm.onMission)
                 {
+                    if (giveSpeed)
+                    {
+                        StartCoroutine(SpeedPickup());
+                    }
                     if (giveCarRepair)
                     {
                         StartCoroutine(CarRepairPickup());
