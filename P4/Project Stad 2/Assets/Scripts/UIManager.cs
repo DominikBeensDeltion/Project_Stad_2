@@ -215,6 +215,13 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         introPanel.SetActive(false);
+
+        for (int i = 0; i < minimapImages.Length; i++)
+        {
+            minimapImages[i].CrossFadeAlpha(1f, 0.3f, false);
+        }
+
+        minimapImage.CrossFadeAlpha(1f, 0.3f, false);
     }
 
     public IEnumerator PauseGame()

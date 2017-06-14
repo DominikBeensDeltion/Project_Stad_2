@@ -51,6 +51,7 @@ public class HoboWalking : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         anim = GetComponentInChildren<Animator>();
+        NavMesh.pathfindingIterationsPerFrame = 800;
         SetNewPath();
     }
 
@@ -72,14 +73,16 @@ public class HoboWalking : MonoBehaviour
 
     public void StateWandering()
     {
-        //if (agent.velocity != Vector3.zero)
-        //{
-        //    anim.SetBool("Walking", true);
-        //}
-        //else
-        //{
-        //    anim.SetBool("Walking", false);
-        //}
+        if (agent.velocity != Vector3.zero)
+        {
+            anim.SetBool("Walking", true);
+        }
+        else
+        {
+            anim.SetBool("Walking", false);
+        }
+
+        agent.speed = 2;
 
         if (canSetNewPath)
         {
@@ -102,8 +105,9 @@ public class HoboWalking : MonoBehaviour
 
     public void StateChasing()
     {
-        //anim.SetBool("Running", true);
-        //anim.SetBool("Walking", false);
+        anim.SetBool("Running", true);
+
+        agent.speed = 5;
 
         if (chasePlayer)
         {
@@ -126,10 +130,12 @@ public class HoboWalking : MonoBehaviour
 
     public void StateBacking()
     {
-        //anim.SetBool("Walking", true);
-        //anim.SetBool("Running", false);
+        anim.SetBool("Walking", true);
+        anim.SetBool("Running", false);
 
         print("hobo walking back");
+
+        agent.speed = 2;
 
         agent.SetDestination(spottedPlayerPos);
         chasePlayer = false;
