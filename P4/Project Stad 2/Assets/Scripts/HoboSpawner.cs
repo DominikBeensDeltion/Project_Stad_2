@@ -16,6 +16,7 @@ public class HoboSpawner : MonoBehaviour
     public float canSpawnDistance = 25f;
 
     public List<GameObject> currentHobos = new List<GameObject>();
+    public List<Material> materials = new List<Material>();
     public GameObject hoboPrefab;
     private GameObject hobo;
 
@@ -46,6 +47,7 @@ public class HoboSpawner : MonoBehaviour
         canSpawn = false;
         hobo = Instantiate(hoboPrefab, transform.position, Quaternion.identity);
         hobo.GetComponent<HoboWalking>().spawnerISpawnedFrom = gameObject;
+        hobo.transform.GetChild(0).GetChild(1).GetComponent<Renderer>().material = materials[Random.Range(0, materials.Count)];
         currentHobos.Add(hobo);
         yield return new WaitForSeconds(spawnInterval);
         canSpawn = true;
