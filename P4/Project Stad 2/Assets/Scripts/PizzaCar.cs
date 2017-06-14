@@ -167,7 +167,7 @@ public class PizzaCar : MonoBehaviour
     {
         if(col.gameObject.tag != "Sidewalk" && col.gameObject.tag != "Ground" && col.gameObject.tag != "Road" && col.gameObject.tag != "Player")
         {
-            if (!collided)
+            if (!collided && inCar)
             {
                 collided = true;
                 if (col.gameObject.tag == "House")
