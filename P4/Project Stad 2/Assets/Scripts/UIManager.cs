@@ -90,16 +90,19 @@ public class UIManager : MonoBehaviour
 
         if (gm.gameState == GameManager.GameState.Playing)
         {
-            if (Input.GetButtonDown("m") && canToggleMap)
+            if (Input.GetButtonDown("m") || Input.GetButtonDown("Tab"))
             {
-                if (!worldmapActive)
+                if (canToggleMap)
                 {
-                    StartCoroutine(WorldMapRefresh());
-                    StartCoroutine(OpenWorldmap());
-                }
-                else if (worldmapActive)
-                {
-                    StartCoroutine(CloseWorldmap());
+                    if (!worldmapActive)
+                    {
+                        StartCoroutine(WorldMapRefresh());
+                        StartCoroutine(OpenWorldmap());
+                    }
+                    else if (worldmapActive)
+                    {
+                        StartCoroutine(CloseWorldmap());
+                    }
                 }
             }
 
