@@ -6,6 +6,7 @@ public class Pickup : MonoBehaviour
 {
     private GameManager gm;
     private PickupManager pm;
+    private GoalManager goalManager;
     private CharacterController cr;
     public AudioClip ding;
 
@@ -27,6 +28,7 @@ public class Pickup : MonoBehaviour
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameManager>();
+        goalManager = gm.GetComponent<GoalManager>();
     }
 
     public void OnTriggerEnter(Collider col)
@@ -36,6 +38,10 @@ public class Pickup : MonoBehaviour
             if (!pickedUp)
             {
                 pickedUp = true;
+                if (goalManager.goal3CurrentAmount < goalManager.goal3AmountToReach)
+                {
+                    goalManager.AddToCurrentAmount(goalManager.goal3CurrentAmount, goalManager.goal3AmountToReach);
+                }
                 GetComponent<SpriteRenderer>().enabled = false;
                 AudioSource.PlayClipAtPoint(ding, transform.position);
                 Instantiate(particlePrefab, transform.position, Quaternion.identity);

@@ -8,6 +8,7 @@ public class HoboWalking : MonoBehaviour
 
     private NavMeshAgent agent;
     private GameObject player;
+    private GoalManager goalManager;
 
     public enum State
     {
@@ -51,6 +52,7 @@ public class HoboWalking : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         anim = GetComponentInChildren<Animator>();
+        goalManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GoalManager>();
         NavMesh.pathfindingIterationsPerFrame = 800;
         SetNewPath();
     }
@@ -75,11 +77,11 @@ public class HoboWalking : MonoBehaviour
     {
         if (agent.velocity != Vector3.zero)
         {
-            anim.SetBool("Walking", true);
+            //anim.SetBool("Walking", true);
         }
         else
         {
-            anim.SetBool("Walking", false);
+            //anim.SetBool("Walking", false);
         }
 
         agent.speed = 2;
@@ -105,7 +107,7 @@ public class HoboWalking : MonoBehaviour
 
     public void StateChasing()
     {
-        anim.SetBool("Running", true);
+        //anim.SetBool("Running", true);
 
         agent.speed = 5;
 
@@ -130,8 +132,8 @@ public class HoboWalking : MonoBehaviour
 
     public void StateBacking()
     {
-        anim.SetBool("Walking", true);
-        anim.SetBool("Running", false);
+        //anim.SetBool("Walking", true);
+        //anim.SetBool("Running", false);
 
         print("hobo walking back");
 
@@ -211,6 +213,10 @@ public class HoboWalking : MonoBehaviour
         {
             if (col.gameObject.GetComponent<PizzaCar>().inCar)
             {
+                if (goalManager.goal6CurrentAmount < goalManager.goal6AmountToReach)
+                {
+                    goalManager.AddToCurrentAmount(goalManager.goal6CurrentAmount, goalManager.goal6AmountToReach);
+                }
                 spawnerISpawnedFrom.GetComponent<HoboSpawner>().currentHobos.Remove(gameObject);
                 Instantiate(deathParticle, transform.position, Quaternion.identity);
                 Destroy(gameObject);
