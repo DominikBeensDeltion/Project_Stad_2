@@ -215,7 +215,7 @@ public class HoboWalking : MonoBehaviour
             {
                 if (goalManager.goal6CurrentAmount < goalManager.goal6AmountToReach)
                 {
-                    goalManager.AddToCurrentAmount(goalManager.goal6CurrentAmount, goalManager.goal6AmountToReach);
+                    goalManager.goal6CurrentAmount = goalManager.AddToCurrentAmount(goalManager.goal6CurrentAmount, goalManager.goal6AmountToReach);
                 }
                 spawnerISpawnedFrom.GetComponent<HoboSpawner>().currentHobos.Remove(gameObject);
                 Instantiate(deathParticle, transform.position, Quaternion.identity);

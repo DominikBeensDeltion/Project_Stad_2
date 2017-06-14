@@ -71,7 +71,7 @@ public class House : MonoBehaviour
 
                     if (gameObject.name == "Church" && goalManager.goal5CurrentAmount < goalManager.goal5AmountToReach)
                     {
-                        goalManager.AddToCurrentAmount(goalManager.goal5CurrentAmount, goalManager.goal5AmountToReach);
+                        goalManager.goal5CurrentAmount = goalManager.AddToCurrentAmount(goalManager.goal5CurrentAmount, goalManager.goal5AmountToReach);
                     }
                 }
             }

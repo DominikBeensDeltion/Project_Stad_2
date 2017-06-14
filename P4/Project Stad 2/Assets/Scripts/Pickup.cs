@@ -40,7 +40,7 @@ public class Pickup : MonoBehaviour
                 pickedUp = true;
                 if (goalManager.goal3CurrentAmount < goalManager.goal3AmountToReach)
                 {
-                    goalManager.AddToCurrentAmount(goalManager.goal3CurrentAmount, goalManager.goal3AmountToReach);
+                    goalManager.goal3CurrentAmount = goalManager.AddToCurrentAmount(goalManager.goal3CurrentAmount, goalManager.goal3AmountToReach);
                 }
                 GetComponent<SpriteRenderer>().enabled = false;
                 AudioSource.PlayClipAtPoint(ding, transform.position);
