@@ -9,7 +9,7 @@ public class House : MonoBehaviour
     private GameManager gm;
     private GoalManager goalManager;
     private Pizzeria pizzeriaScript;
-    public Pizzabox pizzabox;
+    private Pizzabox pizzabox;
 
     public bool isTarget;
     public GameObject markOne;
@@ -31,8 +31,9 @@ public class House : MonoBehaviour
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
-        goalManager = GameObject.FindWithTag("GM").GetComponent<GoalManager>();
+        goalManager = gm.GetComponent<GoalManager>();
         pizzeriaScript = GameObject.FindWithTag("Pizzeria").GetComponent<Pizzeria>();
+        pizzabox = gm.GetComponent<Pizzabox>();
         ding = GetComponent<AudioSource>();
         particleSpawn = transform.Find(GameObject.FindWithTag("ParticleSpawn").name);
         if(gameObject.name != "Church")

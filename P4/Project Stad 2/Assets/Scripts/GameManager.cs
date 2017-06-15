@@ -42,12 +42,19 @@ public class GameManager : MonoBehaviour
     public int speedCheatIndex;
     public bool canInputSpeedCheat = true;
 
+    public Shader defaultShader;
+    public Shader silhouetteShader;
+    public Renderer playerRenderer;
+    public Renderer pizzaboxRenderer;
+
     private void Start()
     {
         gameState = GameState.Intro;
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
         mainCam = GameObject.FindWithTag("MainCamera");
         player = GameObject.FindWithTag("Player");
+
+        defaultShader = player.GetComponentInChildren<Renderer>().material.shader;
     }
 
     private void Update()
@@ -145,5 +152,21 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Dead;
 
         StartCoroutine(uim.GameOver());
+    }
+
+    public void ChangeShaderButton()
+    {
+        if (playerRenderer.material.shader == defaultShader && pizzaboxRenderer.material.shader == defaultShader)
+        {
+            playerRenderer.material.shader = silhouetteShader;
+            pizzaboxRenderer.materials[0].shader = silhouetteShader;
+            pizzaboxRenderer.materials[1].shader = silhouetteShader;
+        }
+        else
+        {
+            playerRenderer.material.shader = defaultShader;
+            pizzaboxRenderer.materials[0].shader = defaultShader;
+            pizzaboxRenderer.materials[1].shader = defaultShader;
+        }
     }
 }
