@@ -7,6 +7,9 @@ public class HoboRiding : MonoBehaviour
 
     private GameManager gm;
 
+    public Vector3 currentPosition;
+    public Vector3 lastPosition;
+
     public float startSpeed = 5f;
     public float currentSpeed = 5f;
 
@@ -18,6 +21,7 @@ public class HoboRiding : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Translate(Vector3.forward * (Time.deltaTime * currentSpeed));
+        currentPosition = transform.position;
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -45,6 +49,20 @@ public class HoboRiding : MonoBehaviour
         if (other.tag == "RidingHobo")
         {
             currentSpeed = startSpeed;
+        }
+    }
+
+    public void TurnLeft()
+    {
+        lastPosition = currentPosition;
+
+        if (lastPosition.x != currentPosition.x)
+        {
+
+        }
+        else if (lastPosition.z != currentPosition.z)
+        {
+
         }
     }
 }

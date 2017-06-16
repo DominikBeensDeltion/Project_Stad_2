@@ -127,9 +127,13 @@ public class Pickup : MonoBehaviour
     public IEnumerator CarRepairPickup()
     {
         GameObject car = GameObject.FindWithTag("PlayerCar");
-        car.GetComponent<PizzaCar>().durability = 100f;
-        car.GetComponent<PizzaCar>().currentMoveSpeed = 16f;
-        car.GetComponent<PizzaCar>().brokenParticle.Stop();
+
+        if (car.GetComponent<PizzaCar>().repaired)
+        {
+            car.GetComponent<PizzaCar>().durability = 100f;
+            car.GetComponent<PizzaCar>().currentMoveSpeed = 16f;
+            car.GetComponent<PizzaCar>().brokenParticle.Stop();
+        }
 
         yield return new WaitForSeconds(0.5f);
 
