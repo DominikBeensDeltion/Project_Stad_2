@@ -6,9 +6,7 @@ public class HoboRiding : MonoBehaviour
 {
 
     private GameManager gm;
-
-    public Vector3 currentPosition;
-    public Vector3 lastPosition;
+    public bool waitingAtIntersection;
 
     public float startSpeed = 5f;
     public float currentSpeed = 5f;
@@ -21,7 +19,27 @@ public class HoboRiding : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Translate(Vector3.forward * (Time.deltaTime * currentSpeed));
-        currentPosition = transform.position;
+
+        RaycastHit hit;
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), transform.forward, out hit, 2))
+        {
+            print("test");
+            if (hit.transform.tag == "RidingHobo")
+            {
+                currentSpeed = 0;
+            }
+            else if (hit.transform.tag != "RidingHobo")
+            {
+                if (waitingAtIntersection)
+                {
+                    return;
+                }
+                else if (!waitingAtIntersection)
+                {
+                    currentSpeed = startSpeed;
+                }
+            }
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -33,36 +51,6 @@ public class HoboRiding : MonoBehaviour
                 gm.deathHoboRiding = true;
                 gm.GameOver();
             }
-        }
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "RidingHobo")
-        {
-            currentSpeed = 0;
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "RidingHobo")
-        {
-            currentSpeed = startSpeed;
-        }
-    }
-
-    public void TurnLeft()
-    {
-        lastPosition = currentPosition;
-
-        if (lastPosition.x != currentPosition.x)
-        {
-
-        }
-        else if (lastPosition.z != currentPosition.z)
-        {
-
         }
     }
 }

@@ -27,6 +27,7 @@ public class Intersection : MonoBehaviour
         int hoboWhoMayContinue = Random.Range(0, hobosWaiting.Count);
 
         hobosWaiting[hoboWhoMayContinue].GetComponent<HoboRiding>().currentSpeed = hobosWaiting[hoboWhoMayContinue].GetComponent<HoboRiding>().startSpeed;
+        hobosWaiting[hoboWhoMayContinue].GetComponent<HoboRiding>().waitingAtIntersection = false;
         hobosWaiting.Remove(hobosWaiting[hoboWhoMayContinue]);
 
         yield return new WaitForSeconds(timeToLetNextHoboPass);
@@ -40,6 +41,7 @@ public class Intersection : MonoBehaviour
         {
             hobosWaiting.Add(other.gameObject);
             other.GetComponent<HoboRiding>().currentSpeed = 0f;
+            other.GetComponent<HoboRiding>().waitingAtIntersection = true;
         }
     }
 }
