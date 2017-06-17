@@ -33,7 +33,7 @@ public class House : MonoBehaviour
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
         goalManager = gm.GetComponent<GoalManager>();
         pizzeriaScript = GameObject.FindWithTag("Pizzeria").GetComponent<Pizzeria>();
-        pizzabox = gm.GetComponent<Pizzabox>();
+        pizzabox = GameObject.FindWithTag("Player").GetComponent<Pizzabox>();
         ding = GetComponent<AudioSource>();
         particleSpawn = transform.Find(GameObject.FindWithTag("ParticleSpawn").name);
         if(gameObject.name != "Church")

@@ -11,7 +11,6 @@ public class Pizzeria : MonoBehaviour
 
     public List<GameObject> houses = new List<GameObject>();
     public GameObject targetHouse;
-    public GameObject pointer;
     public AudioSource beepBeep;
 
     public static bool playerInsidePizzeria;

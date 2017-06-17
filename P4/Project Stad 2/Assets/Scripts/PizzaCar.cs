@@ -11,6 +11,7 @@ public class PizzaCar : MonoBehaviour
 
     public GameObject player;
     public GameObject carObject;
+    public MeshRenderer playerMapMark;
 
     public float currentMoveSpeed;
     public float rotateSpeed;
@@ -84,6 +85,7 @@ public class PizzaCar : MonoBehaviour
                     mainCamFollowScript.offset.z -= 4;
                     minimapCam.GetComponent<Camera>().orthographicSize += 5;
                     player.SetActive(false);
+                    playerMapMark.enabled = false;
                     //carEngineParticle.Play();
                     StartCoroutine("GetOutCoolDown");
                 }
@@ -140,6 +142,7 @@ public class PizzaCar : MonoBehaviour
         else
         {
             player.SetActive(true);
+            playerMapMark.enabled = true;
             mainCamFollowScript.offset = mainCamFollowScript.startOffset;
             minimapCam.GetComponent<Camera>().orthographicSize -= 5;
             player.transform.position = carObject.transform.position - (transform.right * 2);

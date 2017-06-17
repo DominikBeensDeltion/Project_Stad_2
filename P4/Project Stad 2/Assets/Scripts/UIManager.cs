@@ -48,6 +48,8 @@ public class UIManager : MonoBehaviour
     [Header("Game Over")]
     public Text gameOverText;
     public Animator gameOverAnimator;
+    public Text endScoreText;
+    public Text highScoreText;
 
     [Header("House")]
     public Text houseText;
@@ -280,6 +282,13 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+        if (phoneActive)
+        {
+            phoneAnimator.SetBool("PhoneActive", false);
+            phoneAnimator.SetBool("PhoneInActive", true);
+            phoneActive = false;
+        }
+
         if (gm.deathHoboRiding)
         {
             gameOverText.text = "You were ran over!";
@@ -292,6 +301,8 @@ public class UIManager : MonoBehaviour
         {
             gameOverText.text = "You ran out of time!";
         }
+
+        endScoreText.text = "" + GameManager.score;
 
         gameOverAnimator.SetTrigger("SetActive");
 

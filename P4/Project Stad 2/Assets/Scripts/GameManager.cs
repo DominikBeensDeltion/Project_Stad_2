@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
                     }
                     else if (speedCheatIndex == speedCheat.Length - 1)
                     {
-                        player.GetComponent<CharacterController>().moveSpeed = 2500;
+                        player.GetComponent<CharacterController>().moveSpeed = 1500;
                         canInputSpeedCheat = false;
                     }
                 }
