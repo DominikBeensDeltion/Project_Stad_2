@@ -14,7 +14,7 @@ public class HoboRidingStop : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
      {
-         if (other.tag == "RidingHobo")
+         if (other.tag == "RidingHobo" || other.tag == "PlayerCar")
          {
             hoboriding.currentSpeed = 0;
          }
@@ -22,7 +22,7 @@ public class HoboRidingStop : MonoBehaviour
  
     public void OnTriggerExit(Collider other)
     {
-         if (other.tag == "RidingHobo")
+         if (other.tag == "RidingHobo" || other.tag == "PlayerCar")
          {
             hoboriding.currentSpeed = hoboriding.startSpeed;
          }

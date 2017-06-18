@@ -53,7 +53,7 @@ public class HoboWalkingSight : MonoBehaviour
 
                             if (hit.transform.gameObject.tag == "Player")
                             {
-                                if (hoboWalking.hoboState == HoboWalking.State.Wandering)
+                                if (hoboWalking.hoboState == HoboWalking.State.Wandering && gm.onMission)
                                 {
                                     print("chase player");
 

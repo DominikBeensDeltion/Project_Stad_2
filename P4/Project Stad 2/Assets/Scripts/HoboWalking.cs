@@ -53,7 +53,7 @@ public class HoboWalking : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         anim = GetComponentInChildren<Animator>();
         goalManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GoalManager>();
-        NavMesh.pathfindingIterationsPerFrame = 800;
+        NavMesh.pathfindingIterationsPerFrame = 2000;
         SetNewPath();
     }
 
@@ -120,7 +120,7 @@ public class HoboWalking : MonoBehaviour
         {
             if (PizzaQuality.quality > 0)
             {
-                //StartCoroutine(AttackCldw());
+                StartCoroutine(AttackCldw());
             }
         }
 
