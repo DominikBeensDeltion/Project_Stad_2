@@ -33,7 +33,7 @@ public class Pizzeria : MonoBehaviour
     {
         if (targetHouse != null)
         {
-            Debug.Log(targetHouse.name);
+            //Debug.Log(targetHouse.name);
         }
 
         if (!particleSpawned && canSpawnParticle)

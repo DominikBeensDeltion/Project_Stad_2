@@ -135,7 +135,7 @@ public class HoboWalking : MonoBehaviour
         //anim.SetBool("Walking", true);
         //anim.SetBool("Running", false);
 
-        print("hobo walking back");
+        //print("hobo walking back");
 
         agent.speed = 2;
 

@@ -16,7 +16,11 @@ public class HoboRidingStop : MonoBehaviour
      {
          if (other.tag == "RidingHobo" || other.tag == "PlayerCar")
          {
-            hoboriding.currentSpeed = 0;
+            if (!hoboriding.ignoringOthers && !hoboriding.stopped)
+            {
+                hoboriding.currentSpeed = 0;
+                hoboriding.stopped = true;
+            }
          }
      }
  
@@ -24,7 +28,11 @@ public class HoboRidingStop : MonoBehaviour
     {
          if (other.tag == "RidingHobo" || other.tag == "PlayerCar")
          {
-            hoboriding.currentSpeed = hoboriding.startSpeed;
+            if (hoboriding.stopped)
+            {
+                hoboriding.currentSpeed = hoboriding.startSpeed;
+                hoboriding.stopped = false;
+            }
          }
      }
 }
