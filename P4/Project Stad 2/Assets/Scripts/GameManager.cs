@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public float timeToCountDown = 180f;
 
     public static int score;
+    public static int highScore;
 
     public bool onMission;
 

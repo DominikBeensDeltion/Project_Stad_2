@@ -29,13 +29,13 @@ public class House : MonoBehaviour
 
 	void Start ()
     {
+        particleSpawn = transform.Find(GameObject.FindWithTag("ParticleSpawn").name);
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
         goalManager = gm.GetComponent<GoalManager>();
         pizzeriaScript = GameObject.FindWithTag("Pizzeria").GetComponent<Pizzeria>();
         pizzabox = GameObject.FindWithTag("Player").GetComponent<Pizzabox>();
         ding = GetComponent<AudioSource>();
-        particleSpawn = transform.Find(GameObject.FindWithTag("ParticleSpawn").name);
         if(gameObject.name != "Church")
         {
             naam = GameObject.FindGameObjectWithTag("GM").GetComponent<RandomNameGen>().Name();

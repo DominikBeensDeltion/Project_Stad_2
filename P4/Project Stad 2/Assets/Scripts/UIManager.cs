@@ -308,15 +308,16 @@ public class UIManager : MonoBehaviour
 
         endScoreText.text = "" + GameManager.score;
 
-        if (GameManager.score > saveManager.saveData.highScore)
+        if (GameManager.score > GameManager.highScore)
         {
-            saveManager.saveData.highScore = GameManager.score;
-            highScoreText.text = "" + saveManager.saveData.highScore + "\nNew High Score!";
+            GameManager.highScore = GameManager.score;
+            saveManager.saveData.highScore = GameManager.highScore;
+            highScoreText.text = "" + GameManager.highScore + "\nNew High Score!";
             saveManager.Save(saveManager.saveData);
         }
         else
         {
-            highScoreText.text = "" + saveManager.saveData.highScore;
+            highScoreText.text = "" + GameManager.highScore;
         }
 
         gameOverAnimator.SetTrigger("SetActive");

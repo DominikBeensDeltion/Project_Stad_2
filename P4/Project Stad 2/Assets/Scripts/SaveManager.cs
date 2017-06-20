@@ -7,18 +7,14 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour 
 {
 
-    private UIManager uim;
     public SaveData saveData;
 
-    private void Start()
+    public void Start()
     {
-        uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
-
         if (System.IO.File.Exists("SaveData.xml"))
         {
             saveData = Load();
-            uim.highScoreText.text = "" + saveData.highScore;
-
+            GameManager.highScore = saveData.highScore;
         }
         else
         { 
