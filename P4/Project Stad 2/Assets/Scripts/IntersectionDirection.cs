@@ -37,7 +37,8 @@ public class IntersectionDirection : MonoBehaviour
                 else if (direction == 2)
                 {
                     hobo = other.gameObject;
-                    StartCoroutine(GoLeft());
+                    hobo.GetComponent<HoboRiding>().GoLeft();
+                    //StartCoroutine(GoLeft());
                 }
             }
         }
@@ -54,7 +55,8 @@ public class IntersectionDirection : MonoBehaviour
                 else if (direction == 1)
                 {
                     hobo = other.gameObject;
-                    StartCoroutine(GoLeft());
+                    hobo.GetComponent<HoboRiding>().GoLeft();
+                    //StartCoroutine(GoLeft());
                 }
             }
         }
@@ -63,7 +65,8 @@ public class IntersectionDirection : MonoBehaviour
             if (other.tag == "RidingHobo")
             {
                 hobo = other.gameObject;
-                StartCoroutine(GoLeft());
+                hobo.GetComponent<HoboRiding>().GoLeft();
+                //StartCoroutine(GoLeft());
             }
         }
         else if (intersectionDirection == State.Right)
@@ -102,7 +105,8 @@ public class IntersectionDirection : MonoBehaviour
                 else if (direction == 1)
                 {
                     hobo = other.gameObject;
-                    StartCoroutine(GoLeft());
+                    hobo.GetComponent<HoboRiding>().GoLeft();
+                    //StartCoroutine(GoLeft());
                 }
             }
         }

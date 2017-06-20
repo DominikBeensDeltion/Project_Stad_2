@@ -14,6 +14,10 @@ public class HoboRiding : MonoBehaviour
     public float startSpeed = 5f;
     public float currentSpeed = 5f;
 
+    public bool goLeft;
+    public bool canTurn;
+    public Vector3 position;
+
     private void Start()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
@@ -23,6 +27,28 @@ public class HoboRiding : MonoBehaviour
     private void FixedUpdate()
     {
         myTransform.Translate(Vector3.forward * (Time.deltaTime * currentSpeed));
+
+        if (goLeft)
+        {
+            if (myTransform.position.x >= position.x + 2 || myTransform.position.x <= position.x - 2)
+            {
+                if (canTurn)
+                {
+                    myTransform.Rotate(0, -90, 0);
+                    canTurn = false;
+                    goLeft = false;
+                }
+            }
+            else if (myTransform.position.z >= position.z + 2 || myTransform.position.z <= position.z - 2)
+            {
+                if (canTurn)
+                {
+                    myTransform.Rotate(0, -90, 0);
+                    canTurn = false;
+                    goLeft = false;
+                }
+            }
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -35,5 +61,12 @@ public class HoboRiding : MonoBehaviour
                 gm.GameOver();
             }
         }
+    }
+
+    public void GoLeft()
+    {
+        position = myTransform.position;
+        goLeft = true;
+        canTurn = true;
     }
 }
