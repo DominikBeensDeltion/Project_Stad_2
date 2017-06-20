@@ -51,6 +51,8 @@ public class UIManager : MonoBehaviour
     public Text endScoreText;
     public Text highScoreText;
 
+    private SaveManager saveManager;
+
     [Header("House")]
     public Text houseText;
 
@@ -78,6 +80,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
+        saveManager = gm.GetComponent<SaveManager>();
 
         introImages = introPanel.GetComponentsInChildren<Image>();
         introText = introPanel.GetComponentsInChildren<Text>();
@@ -213,6 +216,7 @@ public class UIManager : MonoBehaviour
     public IEnumerator IntroStart()
     {
         Time.timeScale = 1;
+        GameManager.score = 0;
         introCamScript.followPath = false;
         introAnimator.SetTrigger("SetInactive");
         //zet de player visible en zijn controls aan, kon hem niet aan en uit doen met setactive omdat verschillende scripts in start de player zoeken
@@ -303,6 +307,17 @@ public class UIManager : MonoBehaviour
         }
 
         endScoreText.text = "" + GameManager.score;
+
+        if (GameManager.score > saveManager.saveData.highScore)
+        {
+            saveManager.saveData.highScore = GameManager.score;
+            highScoreText.text = "" + saveManager.saveData.highScore + "\nNew High Score!";
+            saveManager.Save(saveManager.saveData);
+        }
+        else
+        {
+            highScoreText.text = "" + saveManager.saveData.highScore;
+        }
 
         gameOverAnimator.SetTrigger("SetActive");
 
