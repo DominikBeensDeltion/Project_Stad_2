@@ -28,7 +28,7 @@ public class HoboWalkingSight : MonoBehaviour
 
             if (Vector3.Distance(hoboWalking.transform.position, player.transform.position) <= sightRange)
             {
-                print("player is in range");
+                //print("player is in range");
 
                 if (Vector3.Dot(forward, toPlayer) > 0)
                 {

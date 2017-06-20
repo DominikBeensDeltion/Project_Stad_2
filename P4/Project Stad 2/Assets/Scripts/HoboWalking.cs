@@ -9,6 +9,8 @@ public class HoboWalking : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject player;
     private GoalManager goalManager;
+    private GameManager gm;
+    private Pizzabox pizzabox;
 
     public enum State
     {
@@ -53,6 +55,8 @@ public class HoboWalking : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         anim = GetComponentInChildren<Animator>();
         goalManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GoalManager>();
+        gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
+        pizzabox = player.GetComponent<Pizzabox>();
         NavMesh.pathfindingIterationsPerFrame = 2000;
         SetNewPath();
     }
@@ -77,11 +81,11 @@ public class HoboWalking : MonoBehaviour
     {
         if (agent.velocity != Vector3.zero)
         {
-            //anim.SetBool("Walking", true);
+            anim.SetBool("Walking", true);
         }
         else
         {
-            //anim.SetBool("Walking", false);
+            anim.SetBool("Walking", false);
         }
 
         agent.speed = 2;
@@ -107,9 +111,9 @@ public class HoboWalking : MonoBehaviour
 
     public void StateChasing()
     {
-        //anim.SetBool("Running", true);
+        anim.SetBool("Running", true);
 
-        agent.speed = 5;
+        agent.speed = 4.5f;
 
         if (chasePlayer)
         {
@@ -124,7 +128,7 @@ public class HoboWalking : MonoBehaviour
             }
         }
 
-        if (agent.remainingDistance >= stopChasingDistance || Pizzeria.playerInsidePizzeria)
+        if (agent.remainingDistance >= stopChasingDistance || Pizzeria.playerInsidePizzeria || !gm.onMission)
         {
             hoboState = State.Backing;
         }
@@ -132,8 +136,8 @@ public class HoboWalking : MonoBehaviour
 
     public void StateBacking()
     {
-        //anim.SetBool("Walking", true);
-        //anim.SetBool("Running", false);
+        anim.SetBool("Walking", true);
+        anim.SetBool("Running", false);
 
         //print("hobo walking back");
 
@@ -202,6 +206,7 @@ public class HoboWalking : MonoBehaviour
             attackCool = true;
             nom.Play();
             PizzaQuality.quality -= pizzaDamage;
+            pizzabox.GetHit();
             yield return new WaitForSeconds(attackSpeed);
             attackCool = false;
         }

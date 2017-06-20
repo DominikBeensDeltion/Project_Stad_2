@@ -8,7 +8,10 @@ public class Pizzabox : MonoBehaviour
     public GameObject hands;
     public GameObject pizzabox;
     public float speed = 15;
-    public ParticleSystem getPizzaParticle;
+
+    public Transform particleSpawn;
+    public GameObject getPizzaParticle;
+    public GameObject getHitPizzaParticle;
 
     private void Update()
     {
@@ -19,11 +22,16 @@ public class Pizzabox : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         pizzabox.SetActive(true);
-        getPizzaParticle.Play();
+        Instantiate(getPizzaParticle, particleSpawn.position, particleSpawn.rotation).transform.SetParent(particleSpawn);
     }
 
     public void Inactive()
     {
         pizzabox.SetActive(false);
+    }
+
+    public void GetHit()
+    {
+        Instantiate(getHitPizzaParticle, particleSpawn.position, particleSpawn.rotation).transform.SetParent(particleSpawn);
     }
 }
