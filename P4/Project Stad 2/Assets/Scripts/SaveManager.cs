@@ -11,13 +11,13 @@ public class SaveManager : MonoBehaviour
 
     public void Start()
     {
-        if (System.IO.File.Exists("SaveData.xml"))
+        if (System.IO.File.Exists(Application.dataPath + "/SaveData.xml"))
         {
             saveData = Load();
             GameManager.highScore = saveData.highScore;
         }
         else
-        { 
+        {
             saveData = new SaveData();
         }
     }

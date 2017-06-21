@@ -113,10 +113,9 @@ public class HoboWalking : MonoBehaviour
     {
         anim.SetBool("Running", true);
 
-        agent.speed = 4.5f;
-
         if (chasePlayer)
         {
+            agent.speed = 4.5f;
             agent.SetDestination(player.transform.position);
         }
 
