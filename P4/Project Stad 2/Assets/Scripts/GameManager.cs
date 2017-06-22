@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-    public UIManager uim;
+    private UIManager uim;
     public Pizzeria pizzeria;
 
     public enum GameState
@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
     public string[] speedCheat;
     public int speedCheatIndex;
     public bool canInputSpeedCheat = true;
+
+    public string[] repairCarCheat;
+    public int repairCarCheatIndex;
 
     public Shader defaultShader;
     public Shader silhouetteShader;
@@ -109,6 +112,22 @@ public class GameManager : MonoBehaviour
                         player.GetComponent<CharacterController>().moveSpeed = 1500;
                         canInputSpeedCheat = false;
                     }
+                }
+            }
+
+            if (Input.GetKeyDown(repairCarCheat[repairCarCheatIndex]))
+            {
+                if (repairCarCheatIndex != repairCarCheat.Length -1)
+                {
+                    repairCarCheatIndex++;
+                }
+                else if (repairCarCheatIndex == repairCarCheat.Length -1)
+                {
+                    carScript.durability = 100f;
+                    carScript.currentMoveSpeed = 16f;
+                    carScript.brokenParticle.Stop();
+
+                    repairCarCheatIndex = 0;
                 }
             }
         }

@@ -10,7 +10,7 @@ public class HoboWalking : MonoBehaviour
     private GameObject player;
     private GoalManager goalManager;
     private GameManager gm;
-    private Pizzabox pizzabox;
+    public Pizzabox pizzabox;
 
     public enum State
     {
@@ -56,7 +56,6 @@ public class HoboWalking : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         goalManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GoalManager>();
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
-        pizzabox = player.GetComponent<Pizzabox>();
         NavMesh.pathfindingIterationsPerFrame = 2000;
         SetNewPath();
     }
