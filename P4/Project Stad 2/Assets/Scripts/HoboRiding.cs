@@ -6,6 +6,7 @@ public class HoboRiding : MonoBehaviour
 {
 
     private GameManager gm;
+
     public bool waitingAtIntersection;
     public bool ignoringOthers;
     public bool stopped;
@@ -18,10 +19,14 @@ public class HoboRiding : MonoBehaviour
     public bool canTurn;
     public Vector3 position;
 
+    public List<Material> materials = new List<Material>();
+    public Renderer hoboRenderer;
+
     private void Start()
     {
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         myTransform = transform;
+        hoboRenderer.material = materials[Random.Range(0, materials.Count)];
     }
 
     private void FixedUpdate()

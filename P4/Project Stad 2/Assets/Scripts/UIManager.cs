@@ -42,8 +42,11 @@ public class UIManager : MonoBehaviour
     [Header("Pause Menu")]
     public bool gamePaused;
     public bool canPause;
-    public GameObject pausePanel;
     public Animator pauseAnimator;
+
+    [Header("Options Menu")]
+    public bool optionsOpen;
+    public Animator optionsAnimator;
 
     [Header("Game Over")]
     public Text gameOverText;
@@ -255,6 +258,12 @@ public class UIManager : MonoBehaviour
 
             pauseAnimator.SetBool("SetInactive", true);
 
+            if (optionsOpen)
+            {
+                optionsAnimator.SetTrigger("SetInActive");
+                optionsOpen = false;
+            }
+
             yield return new WaitForSeconds(0.3f);
 
             pauseAnimator.SetBool("SetInactive", false);
@@ -282,6 +291,18 @@ public class UIManager : MonoBehaviour
             gm.gameState = GameManager.GameState.Playing;
             canPause = true;
         }
+    }
+
+    public void OpenOptions()
+    {
+        optionsAnimator.SetTrigger("SetActive");
+        optionsOpen = true;
+    }
+
+    public void CloseOptions()
+    {
+        optionsAnimator.SetTrigger("SetInActive");
+        optionsOpen = false;
     }
 
     public IEnumerator GameOver()

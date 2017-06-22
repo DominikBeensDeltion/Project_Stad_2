@@ -20,7 +20,7 @@ public class Pizzabox : MonoBehaviour
 
     public IEnumerator Active()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         pizzabox.SetActive(true);
         Instantiate(getPizzaParticle, particleSpawn.position, particleSpawn.rotation).transform.SetParent(particleSpawn);
     }

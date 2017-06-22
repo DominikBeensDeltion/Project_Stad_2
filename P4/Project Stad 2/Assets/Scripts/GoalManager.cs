@@ -44,6 +44,10 @@ public class GoalManager : MonoBehaviour
         {
             goal1CurrentAmount = int.Parse(uim.scoreText.text);
         }
+        else if (int.Parse(uim.scoreText.text) > goal1AmountToReach)
+        {
+            goal1CurrentAmount = goal1AmountToReach;
+        }
 
         if (int.Parse(uim.scoreText.text) >= goal1AmountToReach && !pizzacar.repaired)
         {
