@@ -5,12 +5,10 @@ using UnityEngine;
 public class GoalList : MonoBehaviour
 {
 
-    private GameManager gm;
     private UIManager uim;
 
     private void Start()
     {
-        gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
         uim = GameObject.FindWithTag("UIM").GetComponent<UIManager>();
     }
 

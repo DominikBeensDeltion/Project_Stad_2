@@ -9,6 +9,7 @@ public class PizzeriaEntrance : MonoBehaviour
     private GameObject player;
     public Pizzeria pizzeriaScript;
 
+    public bool canEnterExit = true;
     public GameObject outsidePizzeriaSpawn;
     public GameObject insidePizzeriaSpawn;
     public GameObject playerCam;
@@ -39,16 +40,20 @@ public class PizzeriaEntrance : MonoBehaviour
         {
             if (Input.GetButtonDown("e"))
             {
-                if (Pizzeria.playerInsidePizzeria)
+                if (Pizzeria.playerInsidePizzeria && canEnterExit)
                 {
                     player.transform.position = outsidePizzeriaSpawn.transform.position;
+                    canEnterExit = false;
+                    StartCoroutine(Cooldown());
                     pizzeriaCam.SetActive(false);
                     playerCam.SetActive(true);
                     Pizzeria.playerInsidePizzeria = false;
                 }
-                else if (!Pizzeria.playerInsidePizzeria)
+                else if (!Pizzeria.playerInsidePizzeria && canEnterExit)
                 {
                     player.transform.position = insidePizzeriaSpawn.transform.position;
+                    canEnterExit = false;
+                    StartCoroutine(Cooldown());
                     pizzeriaCam.SetActive(true);
                     playerCam.SetActive(false);
                     Pizzeria.playerInsidePizzeria = true;
@@ -67,5 +72,11 @@ public class PizzeriaEntrance : MonoBehaviour
                 uim.noticePanelIsActive = false;
             }
         }
+    }
+
+    public IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(1);
+        canEnterExit = true;
     }
 }
