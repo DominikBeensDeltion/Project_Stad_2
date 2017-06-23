@@ -56,7 +56,7 @@ public class HoboWalking : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         goalManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GoalManager>();
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
-        NavMesh.pathfindingIterationsPerFrame = 2000;
+        NavMesh.pathfindingIterationsPerFrame = 7000;
         SetNewPath();
     }
 
