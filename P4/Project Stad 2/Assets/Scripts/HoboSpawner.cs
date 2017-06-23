@@ -8,7 +8,7 @@ public class HoboSpawner : MonoBehaviour
     public GameObject player;
     public GameObject pizzacar;
 
-    public bool canSpawn = true;
+    public bool canSpawn;
     public bool ableToSpawn;
     public int maxSpawnAmount = 5;
     public int currentSpawnAmount;
@@ -51,5 +51,35 @@ public class HoboSpawner : MonoBehaviour
         currentHobos.Add(hobo);
         yield return new WaitForSeconds(spawnInterval);
         canSpawn = true;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" || other.tag == "PlayerCar")
+        {
+            canSpawn = true;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player" || other.tag == "PlayerCar")
+        {
+            canSpawn = false;
+
+            for (int i = 0; i < currentHobos.Count; i++)
+            {
+                if (currentHobos[i].GetComponent<HoboWalking>().hoboState != HoboWalking.State.Wandering)
+                {
+                    currentHobos[i].GetComponent<HoboWalking>().selfDestroyWhenStoppedBacking = true;
+                    currentHobos.Remove(currentHobos[i]);
+                }
+                else
+                {
+                    Destroy(currentHobos[i].gameObject);
+                    currentHobos.Remove(currentHobos[i]);
+                }
+            }
+        }
     }
 }

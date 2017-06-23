@@ -39,6 +39,8 @@ public class HoboWalking : MonoBehaviour
     public bool attackCool;
     public float attackSpeed;
 
+    public bool selfDestroyWhenStoppedBacking;
+
     public AudioSource nom;
     public GameObject deathParticle;
 
@@ -56,7 +58,7 @@ public class HoboWalking : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         goalManager = GameObject.FindGameObjectWithTag("GM").GetComponent<GoalManager>();
         gm = GameObject.FindWithTag("GM").GetComponent<GameManager>();
-        NavMesh.pathfindingIterationsPerFrame = 7000;
+        NavMesh.pathfindingIterationsPerFrame = 5000;
         SetNewPath();
     }
 
@@ -114,7 +116,7 @@ public class HoboWalking : MonoBehaviour
 
         if (chasePlayer)
         {
-            agent.speed = 4.5f;
+            agent.speed = 5f;
             agent.SetDestination(player.transform.position);
         }
 
@@ -146,8 +148,16 @@ public class HoboWalking : MonoBehaviour
 
         if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance <= agent.stoppingDistance)
         {
-            canSetNewPath = true;
-            hoboState = State.Wandering;
+            if (!selfDestroyWhenStoppedBacking)
+            {
+                canSetNewPath = true;
+                hoboState = State.Wandering;
+            }
+            else if (selfDestroyWhenStoppedBacking)
+            {
+                Instantiate(deathParticle, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -226,12 +236,11 @@ public class HoboWalking : MonoBehaviour
             }
         }
 
-        if(col.gameObject.tag == "RidingHobo")
+        if (col.gameObject.tag == "RidingHobo")
         {
                 spawnerISpawnedFrom.GetComponent<HoboSpawner>().currentHobos.Remove(gameObject);
                 Instantiate(deathParticle, transform.position, Quaternion.identity);
                 Destroy(gameObject);
-                //Debug.Log("Hobo died");
         }
     }
 }
