@@ -16,9 +16,13 @@ public class SafetyNet : MonoBehaviour {
 
     public void OnCollisionEnter(Collision col)
     {
-        Debug.Log("Collided");
-        Vector3 up = col.transform.position;
-        up.y = col.transform.position.y + 39;
-        col.transform.position = up;
+        if(col.gameObject.tag == "Player" || col.gameObject.tag == "PlayerCar")
+        {
+            col.transform.position = new Vector3(-2.42F, 0.8F, 6.43F);
+        }
+        else
+        {
+            Destroy(col.gameObject);
+        }
     }
 }
