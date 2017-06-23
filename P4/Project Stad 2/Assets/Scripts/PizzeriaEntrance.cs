@@ -9,7 +9,7 @@ public class PizzeriaEntrance : MonoBehaviour
     private GameObject player;
     public Pizzeria pizzeriaScript;
 
-    public bool canEnterExit = true;
+    public static bool canEnterExit = true;
     public GameObject outsidePizzeriaSpawn;
     public GameObject insidePizzeriaSpawn;
     public GameObject playerCam;
