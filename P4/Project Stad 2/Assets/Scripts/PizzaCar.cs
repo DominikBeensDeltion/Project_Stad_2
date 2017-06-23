@@ -197,7 +197,7 @@ public class PizzaCar : MonoBehaviour
         if(durability > 0)
         {
             durability -= i;
-            Debug.Log("POTVIS");
+            //Debug.Log("POTVIS");
         }
     }
 

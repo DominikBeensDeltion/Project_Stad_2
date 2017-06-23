@@ -225,5 +225,13 @@ public class HoboWalking : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        if(col.gameObject.tag == "RidingHobo")
+        {
+                spawnerISpawnedFrom.GetComponent<HoboSpawner>().currentHobos.Remove(gameObject);
+                Instantiate(deathParticle, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+                //Debug.Log("Hobo died");
+        }
     }
 }
