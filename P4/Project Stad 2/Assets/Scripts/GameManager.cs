@@ -134,8 +134,16 @@ public class GameManager : MonoBehaviour
 
         if (gameState == GameState.Playing)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            if (uim.worldmapActive || uim.goalPanelOpen)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
         else
         {
