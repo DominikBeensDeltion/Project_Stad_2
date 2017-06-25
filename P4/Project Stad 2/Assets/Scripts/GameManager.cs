@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     {
         Intro,
         Playing,
-        InPizzeria,
         Paused,
         Dead
     }
@@ -130,6 +129,18 @@ public class GameManager : MonoBehaviour
                     repairCarCheatIndex = 0;
                 }
             }
+
+        }
+
+        if (gameState == GameState.Playing)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
