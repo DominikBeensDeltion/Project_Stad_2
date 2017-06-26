@@ -32,6 +32,7 @@ public class Pizzabox : MonoBehaviour
 
     public void GetHit()
     {
-        Instantiate(getHitPizzaParticle, particleSpawn.position, particleSpawn.rotation).transform.SetParent(particleSpawn);
+        // error: setting the parent of a transform which resides in a prefab is disabled to prevent data corruption
+        //Instantiate(getHitPizzaParticle, particleSpawn.position, particleSpawn.rotation).transform.SetParent(particleSpawn);
     }
 }
